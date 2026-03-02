@@ -5,15 +5,27 @@ import { useEffect, useRef } from "react"
 import { useInView } from "@/hooks/use-in-view"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { BackgroundBeams } from "@/components/background-beams"
+import { cn } from "@/lib/utils"
 
 const services = [
   {
-    title: "Local Service Ads",
-    description:
-      "Targeted campaigns on Google and Meta that put your business in front of the right customers. Reach your ideal audience with compelling ad campaigns on search, Facebook, and Instagram.",
+    title: "Google Ads",
+    description: "Targeted campaigns that put your business in front of the right customers.",
     link: "#contact",
-    images: ["/gads.jpeg", "/mads.jpg"],
-    colSpan: 2,
+    image: "/gads.jpeg",
+  },
+  {
+    title: "Meta Ads",
+    description: "Reach your ideal audience on Facebook and Instagram with compelling ad campaigns.",
+    link: "#contact",
+    image: "/mads.jpg",
+    imageClassName: "mt-8 h-14 md:h-16",
+  },
+  {
+    title: "Local Service Ads",
+    description: "Get your business to appear when customers search for local services. Capture high-intent leads ready to book.",
+    link: "#contact",
+    image: "/lsa.png",
   },
   {
     title: "Web Development",
@@ -22,7 +34,7 @@ const services = [
     image: "/www.png",
   },
   {
-    title: "SEO",
+    title: "Google SEO",
     description: "Boost your rankings and drive consistent organic traffic with data-driven strategies.",
     link: "#contact",
     image: "/seo-logo.png",
@@ -39,27 +51,21 @@ interface Service3dCardProps {
   title: string
   description: string
   link: string
-  image?: string
-  images?: string[]
-  colSpan?: number
+  image: string
+  imageClassName?: string
 }
 
-function Service3dCard({ title, description, link, image, images, colSpan }: Service3dCardProps) {
+function Service3dCard({ title, description, link, image, imageClassName }: Service3dCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLDivElement>(null)
-  const imageRef2 = useRef<HTMLDivElement>(null)
   const animationFrameRef = useRef<number | undefined>(undefined)
   const lastMousePosition = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
     const card = cardRef.current
-    const imageEls = images
-      ? [imageRef.current, imageRef2.current].filter(Boolean) as HTMLDivElement[]
-      : imageRef.current
-        ? [imageRef.current]
-        : []
+    const imageEl = imageRef.current
 
-    if (!card || imageEls.length === 0) return
+    if (!card || !imageEl) return
 
     let rect: DOMRect
     let centerX: number
@@ -99,8 +105,7 @@ function Service3dCard({ title, description, link, image, images, colSpan }: Ser
       card.style.transform = `perspective(1000px) rotateX(${cardTransform.rotateX}deg) rotateY(${cardTransform.rotateY}deg) scale3d(${cardTransform.scale}, ${cardTransform.scale}, ${cardTransform.scale})`
       card.style.boxShadow = "0 10px 35px rgba(0, 0, 0, 0.2)"
 
-      const transformStr = `perspective(1000px) rotateX(${imageTransform.rotateX}deg) rotateY(${imageTransform.rotateY}deg) scale3d(${imageTransform.scale}, ${imageTransform.scale}, ${imageTransform.scale})`
-      imageEls.forEach((el) => (el.style.transform = transformStr))
+      imageEl.style.transform = `perspective(1000px) rotateX(${imageTransform.rotateX}deg) rotateY(${imageTransform.rotateY}deg) scale3d(${imageTransform.scale}, ${imageTransform.scale}, ${imageTransform.scale})`
 
       animationFrameRef.current = requestAnimationFrame(animate)
     }
@@ -111,7 +116,7 @@ function Service3dCard({ title, description, link, image, images, colSpan }: Ser
 
     const handleMouseEnter = () => {
       card.style.transition = "transform 0.2s ease, box-shadow 0.2s ease"
-      imageEls.forEach((el) => (el.style.transition = "transform 0.2s ease"))
+      imageEl.style.transition = "transform 0.2s ease"
       animate()
     }
 
@@ -125,11 +130,9 @@ function Service3dCard({ title, description, link, image, images, colSpan }: Ser
       card.style.boxShadow = "none"
       card.style.transition = "transform 0.5s ease, box-shadow 0.5s ease"
 
-      const resetTransform = "perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)"
-      imageEls.forEach((el) => {
-        el.style.transform = resetTransform
-        el.style.transition = "transform 0.5s ease"
-      })
+      imageEl.style.transform =
+        "perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)"
+      imageEl.style.transition = "transform 0.5s ease"
     }
 
     card.addEventListener("mouseenter", handleMouseEnter)
@@ -145,7 +148,7 @@ function Service3dCard({ title, description, link, image, images, colSpan }: Ser
       card.removeEventListener("mousemove", handleMouseMove)
       card.removeEventListener("mouseleave", handleMouseLeave)
     }
-  }, [images?.length])
+  }, [])
 
   return (
     <a href={link} className="block h-full">
@@ -162,47 +165,16 @@ function Service3dCard({ title, description, link, image, images, colSpan }: Ser
             Learn more
             <span className="ml-1">→</span>
           </span>
-          <div className="mt-auto flex gap-4">
-            {images ? (
-              <>
-                <div
-                  ref={imageRef}
-                  className="relative h-20 flex-1 overflow-hidden rounded-md md:h-24"
-                >
-                  <Image
-                    src={images[0]}
-                    alt="Google Ads"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div
-                  ref={imageRef2}
-                  className="relative h-20 flex-1 overflow-hidden rounded-md md:h-24"
-                >
-                  <Image
-                    src={images[1]}
-                    alt="Meta Ads"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </>
-            ) : (
-              image && (
-                <div
-                  ref={imageRef}
-                  className="relative h-20 w-full overflow-hidden rounded-md md:h-24"
-                >
-                  <Image
-                    src={image}
-                    alt={title}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              )
-            )}
+          <div
+            ref={imageRef}
+            className={cn("relative mt-auto w-full overflow-hidden rounded-md", imageClassName ?? "h-20 md:h-24")}
+          >
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-contain"
+            />
           </div>
         </CardContent>
       </Card>
@@ -234,15 +206,15 @@ export function Services() {
           </p>
         </div>
 
-        {/* Services grid - 3D hover cards */}
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-          {services.map((service) => (
+        {/* Services grid - 2 cards in first row, 3 in second row */}
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-6">
+          {services.map((service, i) => (
             <div
               key={service.title}
               className={
-                "colSpan" in service && service.colSpan === 2
-                  ? "sm:col-span-2"
-                  : ""
+                i < 2
+                  ? "lg:col-span-3"
+                  : "lg:col-span-2"
               }
             >
               <Service3dCard {...service} />
