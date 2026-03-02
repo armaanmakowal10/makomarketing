@@ -56,7 +56,7 @@ export function Testimonials() {
       >
         {/* Section heading */}
         <div className="border-t border-border px-10 py-16 text-center md:px-12 md:py-20">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          <h2 className="title-gradient text-3xl font-bold tracking-tight md:text-4xl">
             What our clients say.
           </h2>
         </div>

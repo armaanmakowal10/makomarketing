@@ -75,7 +75,7 @@ export function Portfolio() {
       >
         {/* Section heading */}
         <div className="mb-12 md:mb-16">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          <h2 className="title-gradient text-3xl font-bold tracking-tight md:text-4xl">
             Websites & campaigns we’ve built
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">

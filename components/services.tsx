@@ -147,7 +147,7 @@ function Service3dCard({ title, description, link, image }: Service3dCardProps) 
         className="group flex h-full min-h-[280px] flex-col bg-black transition-colors hover:border-border/80 md:min-h-[320px]"
       >
         <CardHeader>
-          <CardTitle className="text-lg">{title}</CardTitle>
+          <CardTitle className="text-lg text-white">{title}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-1 flex-col space-y-4 text-sm">
           <p className="leading-relaxed text-muted-foreground">{description}</p>
@@ -221,7 +221,7 @@ export function Services() {
       >
         {/* Section heading */}
         <div className="max-w-2xl text-left">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          <h2 className="title-gradient text-3xl font-bold tracking-tight md:text-4xl">
             What we do.
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">

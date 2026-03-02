@@ -29,7 +29,7 @@ export function CTABanner() {
 
           {/* Content */}
           <div className="relative z-10 px-10 py-24 text-center md:px-12 md:py-32">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl md:leading-[1.1]">
+            <h2 className="title-gradient text-3xl font-bold tracking-tight md:text-5xl md:leading-[1.1]">
               <span className="text-foreground">Ready to start your project?</span>{" "}
               <span className="text-muted-foreground">
                 Let us build the digital platform your business deserves.

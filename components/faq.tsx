@@ -47,7 +47,7 @@ export function FAQ() {
         <div className="grid grid-cols-1 border-t border-border md:grid-cols-2">
           {/* Left: heading */}
           <div className="border-b border-border px-10 py-14 md:border-b-0 md:border-r md:px-12 md:py-16">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl md:leading-[1.15]">
+            <h2 className="title-gradient text-3xl font-bold tracking-tight md:text-4xl md:leading-[1.15]">
               Frequently asked
               <br />
               questions.
