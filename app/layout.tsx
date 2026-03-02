@@ -9,6 +9,9 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: 'Mako Marketing | Turning Traffic Into Paying Customers',
   description: 'Custom web platforms for service-based businesses ready to expand operational capacity. Web development, Google SEO, and digital strategy.',
+  icons: {
+    icon: '/mako-favicon2.png',
+  },
 }
 
 export const viewport = {
