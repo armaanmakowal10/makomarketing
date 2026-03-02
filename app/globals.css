@@ -3,6 +3,151 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Animation keyframes */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation utility classes */
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Stagger delays for hero */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+
+.service-card-glow {
+  position: relative;
+  overflow: visible;
+}
+
+.service-card-glow::before,
+.service-card-glow::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: inherit;
+  transition: opacity 0.4s ease;
+}
+
+/* Hover: fade out default glow */
+.service-card-glow:hover::before,
+.service-card-glow:hover::after {
+  opacity: 0;
+}
+
+/* Hover overlay: opposite corner, fades in on parent hover */
+.glow-hover {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.service-card-glow:hover .glow-hover {
+  opacity: 1;
+}
+
+/* Top-left corner */
+.service-card-glow.glow-tl::before {
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
+  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
+}
+.service-card-glow.glow-tl::after {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 60%;
+  background: linear-gradient(180deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
+  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
+}
+
+/* Top-right corner */
+.service-card-glow.glow-tr::before {
+  top: 0;
+  right: 0;
+  left: auto;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(270deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
+  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
+}
+.service-card-glow.glow-tr::after {
+  top: 0;
+  right: 0;
+  left: auto;
+  width: 1px;
+  height: 60%;
+  background: linear-gradient(180deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
+  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
+}
+
+/* Bottom-left corner */
+.service-card-glow.glow-bl::before {
+  bottom: 0;
+  left: 0;
+  top: auto;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
+  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
+}
+.service-card-glow.glow-bl::after {
+  bottom: 0;
+  left: 0;
+  top: auto;
+  width: 1px;
+  height: 60%;
+  background: linear-gradient(0deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
+  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
+}
+
+/* Bottom-right corner */
+.service-card-glow.glow-br::before {
+  bottom: 0;
+  right: 0;
+  left: auto;
+  top: auto;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(270deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
+  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
+}
+.service-card-glow.glow-br::after {
+  bottom: 0;
+  right: 0;
+  left: auto;
+  top: auto;
+  width: 1px;
+  height: 60%;
+  background: linear-gradient(0deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
+  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -82,6 +227,7 @@ html {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --animate-marquee: marquee 40s linear infinite;
 }
 
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -37,8 +38,15 @@ export function Navbar() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link href="#home" className="text-lg font-bold tracking-tight text-foreground">
-          Mako Marketing
+        <Link href="#home" className="flex items-center">
+          <Image
+            src="/Mako-Marketing-logo-design.png"
+            alt="Mako Marketing"
+            width={140}
+            height={60}
+            className="h-16 w-auto object-contain"
+            priority
+          />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
