@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect"
+import { StarfieldBackground } from "@/components/starfield-background"
 
 const testimonials = [
   {
@@ -47,20 +48,9 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen flex-col overflow-hidden bg-background"
+      className="relative flex min-h-screen flex-col overflow-hidden"
     >
-      {/* Grid pattern background */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }}
-      />
-
-      {/* Top fade so grid fades out at the very top */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent" />
+      <StarfieldBackground className="absolute inset-0" starColor="#67e8f9" />
 
       {/* Content - two column: text left, image right */}
       <div className="relative z-10 flex flex-1 items-center justify-center">
@@ -68,18 +58,18 @@ export function Hero() {
         {/* Left: text and buttons */}
         <div className="flex flex-1 flex-col text-center md:max-w-xl md:text-left">
           <h1
-            className="text-balance tracking-tighter text-foreground"
+            className="text-balance tracking-tighter text-white"
             style={{ fontSize: "clamp(1.75rem, 4.5vw, 3rem)", lineHeight: 1.05 }}
           >
             <TextGenerateEffect
               words="We Develop The Platform"
-              className="block text-foreground"
+              className="block text-white"
               duration={0.5}
               staggerDelay={0.15}
             />
             <TextGenerateEffect
               words="That Represents You."
-              className="mt-1 block text-foreground"
+              className="mt-1 block text-white"
               duration={0.5}
               staggerDelay={0.15}
             />
@@ -142,45 +132,6 @@ export function Hero() {
           ))}
         </div>
       </div>
-
-      {/* Blue gradient glow at bottom */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%]">
-        {/* Deep blue glow - left */}
-        <div
-          className="absolute bottom-0 left-[10%] h-[80%] w-[40%] rounded-full opacity-60 blur-[80px]"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, #0066ff 0%, #0033aa 40%, transparent 70%)",
-          }}
-        />
-        {/* Light blue glow - center */}
-        <div
-          className="absolute bottom-[10%] left-[35%] h-[60%] w-[30%] rounded-full opacity-50 blur-[60px]"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, #38bdf8 0%, #0ea5e9 40%, transparent 70%)",
-          }}
-        />
-        {/* Navy blue glow - right */}
-        <div
-          className="absolute bottom-0 right-[5%] h-[80%] w-[45%] rounded-full opacity-60 blur-[80px]"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, #1d4ed8 0%, #1e3a8a 40%, transparent 70%)",
-          }}
-        />
-        {/* Cyan accent - center-right */}
-        <div
-          className="absolute bottom-[5%] left-[45%] h-[40%] w-[25%] rounded-full opacity-40 blur-[50px]"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, #22d3ee 0%, #06b6d4 40%, transparent 70%)",
-          }}
-        />
-      </div>
-
-      {/* Bottom fade to clean edge */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent" />
     </section>
   )
 }

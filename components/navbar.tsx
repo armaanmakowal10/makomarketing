@@ -68,7 +68,9 @@ export function Navbar() {
             className="border-foreground/20 bg-transparent text-foreground hover:bg-foreground hover:text-background"
             asChild
           >
-            <Link href="#contact">Book Intro Call</Link>
+            <Link href="https://calendly.com/makomarketing0/30min" target="_blank" rel="noopener noreferrer">
+              Book Intro Call
+            </Link>
           </Button>
         </div>
 
@@ -96,7 +98,12 @@ export function Navbar() {
                 className="mt-4 bg-foreground text-background hover:bg-foreground/90"
                 asChild
               >
-                <Link href="#contact" onClick={() => setOpen(false)}>
+                <Link
+                  href="https://calendly.com/makomarketing0/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                >
                   Book Intro Call
                 </Link>
               </Button>

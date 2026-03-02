@@ -6,7 +6,7 @@ import { useInView } from "@/hooks/use-in-view"
 const stats = [
   { value: "100+", label: "Satisfied Clients" },
   { value: "24/7", label: "Visibility" },
-  { value: "40%", label: "Avg Lead Increase" },
+  { value: "150%", label: "Avg Lead Increase" },
   { value: "3+", label: "Years Experience" },
 ]
 
