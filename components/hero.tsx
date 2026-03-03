@@ -53,8 +53,8 @@ export function Hero() {
       <StarfieldBackground className="absolute inset-0" starColor="#67e8f9" />
 
       {/* Content - two column: text left, image right */}
-      <div className="relative z-10 flex flex-1 items-center justify-center">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 px-6 md:flex-row md:items-center md:gap-16">
+      <div className="relative z-10 flex flex-1 items-center justify-center pt-20 pb-8 md:pt-0 md:pb-0">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-6 md:flex-row md:items-center md:gap-16">
         {/* Left: text and buttons */}
         <div className="flex flex-1 flex-col text-center md:max-w-xl md:text-left">
           <h1
@@ -76,15 +76,15 @@ export function Hero() {
           </h1>
 
           <p
-            className="animate-fade-in-up stagger-1 mt-8 text-pretty leading-relaxed text-muted-foreground opacity-0"
-            style={{ fontSize: "clamp(0.8rem, 1.25vw, 1.1rem)" }}
+            className="animate-fade-in-up stagger-1 mt-6 text-pretty leading-relaxed text-muted-foreground opacity-0 md:mt-8"
+            style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.1rem)" }}
           >
             Custom web platforms for service-based businesses
             <br className="hidden sm:block" />
             ready to expand operational capacity.
           </p>
 
-          <div className="animate-fade-in-up stagger-2 mt-12 flex flex-col items-center gap-4 opacity-0 sm:flex-row sm:gap-5 md:justify-start">
+          <div className="animate-fade-in-up stagger-2 mt-8 flex flex-col items-center gap-4 opacity-0 sm:flex-row sm:gap-5 md:mt-12 md:justify-start">
             <Link
               href="#contact"
               className="inline-flex h-14 items-center gap-3 rounded-full bg-foreground px-8 text-sm md:text-base font-medium text-background transition-opacity hover:opacity-90"
@@ -101,14 +101,15 @@ export function Hero() {
         </div>
 
         {/* Right: hero image */}
-        <div className="animate-fade-in-up stagger-3 relative flex-1 opacity-0">
+        <div className="animate-fade-in-up stagger-3 relative w-full max-w-[280px] flex-1 opacity-0 md:max-w-lg">
           <Image
             src="/hero-image.png"
             alt="Hero"
             width={600}
             height={500}
-            className="w-full max-w-lg object-contain"
+            className="w-full object-contain"
             priority
+            sizes="(max-width: 768px) 280px, 600px"
           />
         </div>
         </div>
