@@ -7,7 +7,7 @@ const stats = [
   { value: "100+", label: "Satisfied Clients" },
   { value: "24/7", label: "Visibility" },
   { value: "150%", label: "Avg Lead Increase" },
-  { value: "3+", label: "Years Experience" },
+  { value: "8+", label: "Years Experience" },
 ]
 
 export function About() {
