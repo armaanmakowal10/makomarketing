@@ -79,9 +79,9 @@ export function Hero() {
             className="animate-fade-in-up stagger-1 mt-6 text-pretty leading-relaxed text-muted-foreground opacity-0 md:mt-8"
             style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.1rem)" }}
           >
-            Custom web platforms for service-based businesses
+            End-to-end digital solutions and strategic advertising
             <br className="hidden sm:block" />
-            ready to expand operational capacity.
+            for service-based businesses seeking to expand operational capacity.
           </p>
 
           <div className="animate-fade-in-up stagger-2 mt-8 flex flex-col items-center gap-4 opacity-0 sm:flex-row sm:gap-5 md:mt-12 md:justify-start">
