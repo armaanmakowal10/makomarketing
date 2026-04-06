@@ -24,7 +24,7 @@ export function Footer() {
                   href="#contact"
                   className="text-sm text-foreground transition-colors hover:text-muted-foreground"
                 >
-                  Web Design
+                  Web design
                 </Link>
               </li>
               <li>
@@ -32,7 +32,15 @@ export function Footer() {
                   href="#contact"
                   className="text-sm text-foreground transition-colors hover:text-muted-foreground"
                 >
-                  Google SEO
+                  Google ads
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#contact"
+                  className="text-sm text-foreground transition-colors hover:text-muted-foreground"
+                >
+                  Meta ads
                 </Link>
               </li>
             </ul>
@@ -43,13 +51,20 @@ export function Footer() {
               Contact
             </h3>
             <ul className="mt-4 flex flex-col gap-3">
-              <li className="text-sm text-foreground">North America</li>
               <li>
                 <a
                   href="mailto:makomarketing0@gmail.com"
                   className="text-sm text-foreground transition-colors hover:text-muted-foreground"
                 >
                   makomarketing0@gmail.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+19062605457"
+                  className="text-sm text-foreground transition-colors hover:text-muted-foreground"
+                >
+                  906-260-5457
                 </a>
               </li>
             </ul>
