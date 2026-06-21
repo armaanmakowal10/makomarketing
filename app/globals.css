@@ -3,205 +3,75 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee {
-  animation: marquee 40s linear infinite;
-}
-
-/* Animation keyframes */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animation utility classes */
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Cyan to white gradient for titles */
-.title-gradient {
-  background: linear-gradient(to right, #06b6d4 0%, #ffffff 100%) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  color: transparent !important;
-}
-
-/* Stagger delays for hero */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-
-.service-card-glow {
-  position: relative;
-  overflow: visible;
-}
-
-.service-card-glow::before,
-.service-card-glow::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  border-radius: inherit;
-  transition: opacity 0.4s ease;
-}
-
-/* Hover: fade out default glow */
-.service-card-glow:hover::before,
-.service-card-glow:hover::after {
-  opacity: 0;
-}
-
-/* Hover overlay: opposite corner, fades in on parent hover */
-.glow-hover {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.service-card-glow:hover .glow-hover {
-  opacity: 1;
-}
-
-/* Top-left corner */
-.service-card-glow.glow-tl::before {
-  top: 0;
-  left: 0;
-  width: 60%;
-  height: 1px;
-  background: linear-gradient(90deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
-  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
-}
-.service-card-glow.glow-tl::after {
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 60%;
-  background: linear-gradient(180deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
-  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
-}
-
-/* Top-right corner */
-.service-card-glow.glow-tr::before {
-  top: 0;
-  right: 0;
-  left: auto;
-  width: 60%;
-  height: 1px;
-  background: linear-gradient(270deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
-  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
-}
-.service-card-glow.glow-tr::after {
-  top: 0;
-  right: 0;
-  left: auto;
-  width: 1px;
-  height: 60%;
-  background: linear-gradient(180deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
-  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
-}
-
-/* Bottom-left corner */
-.service-card-glow.glow-bl::before {
-  bottom: 0;
-  left: 0;
-  top: auto;
-  width: 60%;
-  height: 1px;
-  background: linear-gradient(90deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
-  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
-}
-.service-card-glow.glow-bl::after {
-  bottom: 0;
-  left: 0;
-  top: auto;
-  width: 1px;
-  height: 60%;
-  background: linear-gradient(0deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
-  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
-}
-
-/* Bottom-right corner */
-.service-card-glow.glow-br::before {
-  bottom: 0;
-  right: 0;
-  left: auto;
-  top: auto;
-  width: 60%;
-  height: 1px;
-  background: linear-gradient(270deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
-  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
-}
-.service-card-glow.glow-br::after {
-  bottom: 0;
-  right: 0;
-  left: auto;
-  top: auto;
-  width: 1px;
-  height: 60%;
-  background: linear-gradient(0deg, #22d3ee 0%, rgba(34, 211, 238, 0.4) 50%, transparent 100%);
-  box-shadow: 0 0 8px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.35);
-}
-
-html {
-  scroll-behavior: smooth;
-}
+/* ============================================================
+   MAKO MARKETING — DESIGN SYSTEM
+   Palette pulled from the logo: electric cyan on pure black,
+   with a near-white for legible body copy. No other colors.
+   ============================================================ */
 
 :root {
+  /* Brand core (from logo) */
+  --black: #000000;
+  --cyan: #14e4fe;
+  --cyan-bright: #5cf0ff;
+  --cyan-deep: #0a96b3;
+  --near-white: #f5f5f5;
+
+  /* Surfaces — shades of black only */
+  --surface-1: #060809;
+  --surface-2: #0b0e10;
+  --surface-3: #11161a;
+  --line: rgba(20, 228, 254, 0.14);
+  --line-strong: rgba(20, 228, 254, 0.32);
+
+  /* Semantic tokens */
   --background: #000000;
-  --foreground: #ffffff;
-  --card: #111111;
-  --card-foreground: #ffffff;
-  --popover: #111111;
-  --popover-foreground: #ffffff;
-  --primary: #ffffff;
+  --foreground: #f5f5f5;
+  --muted-foreground: #7d8b91;
+
+  /* Motion system — one easing, consistent durations */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.4s;
+  --dur: 0.7s;
+  --dur-slow: 1.1s;
+
+  /* shadcn/ui legacy tokens (kept so existing primitives render) */
+  --card: #0b0e10;
+  --card-foreground: #f5f5f5;
+  --popover: #0b0e10;
+  --popover-foreground: #f5f5f5;
+  --primary: #14e4fe;
   --primary-foreground: #000000;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #ffffff;
-  --muted: #1a1a1a;
-  --muted-foreground: #888888;
-  --accent: #1a1a1a;
-  --accent-foreground: #ffffff;
-  --destructive: #ff4444;
+  --secondary: #11161a;
+  --secondary-foreground: #f5f5f5;
+  --muted: #11161a;
+  --accent: #11161a;
+  --accent-foreground: #14e4fe;
+  --destructive: #ff4d4d;
   --destructive-foreground: #ffffff;
-  --border: #333333;
-  --input: #333333;
-  --ring: #555555;
-  --chart-1: #ffffff;
-  --chart-2: #888888;
-  --chart-3: #555555;
-  --chart-4: #cccccc;
-  --chart-5: #aaaaaa;
-  --radius: 0.5rem;
-  --sidebar: #0a0a0a;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #ffffff;
-  --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #1a1a1a;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #333333;
-  --sidebar-ring: #555555;
+  --border: rgba(20, 228, 254, 0.14);
+  --input: rgba(20, 228, 254, 0.2);
+  --ring: rgba(20, 228, 254, 0.5);
+  --radius: 0.6rem;
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-display: var(--font-space-grotesk), 'Geist', system-ui, sans-serif;
+  --font-sans: var(--font-inter), 'Geist', system-ui, sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-cyan: var(--cyan);
+  --color-cyan-bright: var(--cyan-bright);
+  --color-cyan-deep: var(--cyan-deep);
+  --color-near-white: var(--near-white);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -219,32 +89,179 @@ html {
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --animate-marquee: marquee 40s linear infinite;
-}
+  --radius-xl: calc(var(--radius) + 6px);
 
+  --ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--cyan);
+    color: #000;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+}
+
+/* ---------- Typography helpers ---------- */
+.font-display {
+  font-family: var(--font-display);
+}
+.text-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+/* Cyan gradient text used for accents */
+.text-cyan-gradient {
+  background: linear-gradient(180deg, var(--cyan-bright) 0%, var(--cyan) 55%, var(--cyan-deep) 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.text-white-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #cfd8dc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ---------- Glows ---------- */
+.glow-cyan {
+  box-shadow: 0 0 0 1px rgba(20, 228, 254, 0.35),
+    0 0 24px rgba(20, 228, 254, 0.25), 0 0 60px rgba(20, 228, 254, 0.12);
+}
+.text-glow {
+  text-shadow: 0 0 22px rgba(20, 228, 254, 0.55), 0 0 60px rgba(20, 228, 254, 0.25);
+}
+.drop-glow {
+  filter: drop-shadow(0 0 18px rgba(20, 228, 254, 0.45));
+}
+
+/* ---------- Film grain + grid backdrops ---------- */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: screen;
+}
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(20, 228, 254, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 228, 254, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.bg-grid-fade {
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+}
+
+/* ---------- Marquee ---------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 38s linear infinite;
+}
+.marquee-slow {
+  animation: marquee 60s linear infinite;
+}
+
+/* ---------- Intro logo draw ---------- */
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 3.5s ease-in-out infinite;
+}
+
+/* ---------- Buttons ---------- */
+.btn-cyan {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--cyan);
+  color: #000;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: box-shadow var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+  box-shadow: 0 0 0 1px rgba(20, 228, 254, 0.4), 0 0 28px rgba(20, 228, 254, 0.35);
+}
+.btn-cyan:hover {
+  box-shadow: 0 0 0 1px rgba(20, 228, 254, 0.7), 0 0 46px rgba(20, 228, 254, 0.6);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border: 1px solid var(--line-strong);
+  color: var(--near-white);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.01);
+  transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.btn-ghost:hover {
+  border-color: var(--cyan);
+  background: rgba(20, 228, 254, 0.06);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee,
+  .marquee-slow {
+    animation: none !important;
   }
 }
