@@ -30,50 +30,53 @@ export function SiteHeader() {
 
   return (
     <>
-      {/* Logo — top left */}
-      <Link
-        href="#home"
-        aria-label="Mako Marketing home"
-        className="fixed left-5 top-5 z-50 flex items-center md:left-8 md:top-6"
-      >
-        <Image
-          src="/Mako-Marketing-logo-design.png"
-          alt="Mako Marketing"
-          width={300}
-          height={120}
-          priority
-          className="h-16 w-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)] md:h-24"
-        />
-      </Link>
+      {/* Frozen header bar */}
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-black/80 backdrop-blur-md">
+        <div className="flex items-center justify-between px-5 py-2.5 md:px-8">
+          <Link
+            href="#home"
+            aria-label="Mako Marketing home"
+            className="flex items-center"
+          >
+            <Image
+              src="/Mako-Marketing-logo-design.png"
+              alt="Mako Marketing"
+              width={300}
+              height={120}
+              priority
+              className="h-14 w-auto object-contain md:h-20"
+            />
+          </Link>
 
-      {/* Action cluster — top right */}
-      <div className="fixed right-5 top-5 z-50 flex items-center gap-2.5 md:right-8 md:top-6 md:gap-3">
-        <a
-          href={PHONE_TEL}
-          aria-label={`Call ${PHONE_DISPLAY}`}
-          className="group flex items-center gap-2 rounded-full text-sm font-medium text-near-white transition-colors hover:text-cyan"
-        >
-          <span className="flex size-9 items-center justify-center rounded-full border border-line-strong bg-black/40 text-cyan transition-colors group-hover:bg-cyan/10">
-            <Phone className="size-4" />
-          </span>
-          <span className="hidden lg:inline">{PHONE_DISPLAY}</span>
-        </a>
+          <div className="flex items-center gap-2.5 md:gap-3">
+            <a
+              href={PHONE_TEL}
+              aria-label={`Call ${PHONE_DISPLAY}`}
+              className="group flex items-center gap-2 rounded-full text-sm font-medium text-near-white transition-colors hover:text-cyan"
+            >
+              <span className="flex size-9 items-center justify-center rounded-full border border-line-strong bg-black/40 text-cyan transition-colors group-hover:bg-cyan/10">
+                <Phone className="size-4" />
+              </span>
+              <span className="hidden lg:inline">{PHONE_DISPLAY}</span>
+            </a>
 
-        <Link
-          href="#contact"
-          className="btn-cyan hidden h-10 px-4 text-sm min-[380px]:inline-flex sm:px-5"
-        >
-          Get Started
-        </Link>
+            <Link
+              href="#contact"
+              className="btn-cyan hidden h-10 px-4 text-sm min-[380px]:inline-flex sm:px-5"
+            >
+              Get Started
+            </Link>
 
-        <button
-          onClick={() => setOpen(true)}
-          aria-label="Open menu"
-          className="flex size-10 items-center justify-center rounded-full border border-line-strong bg-black/40 text-near-white transition-colors hover:border-cyan hover:text-cyan"
-        >
-          <Menu className="size-5" />
-        </button>
-      </div>
+            <button
+              onClick={() => setOpen(true)}
+              aria-label="Open menu"
+              className="flex size-10 items-center justify-center rounded-full border border-line-strong bg-black/40 text-near-white transition-colors hover:border-cyan hover:text-cyan"
+            >
+              <Menu className="size-5" />
+            </button>
+          </div>
+        </div>
+      </header>
 
       {/* Full-screen menu */}
       {open && (
