@@ -1,12 +1,19 @@
 import type { Metadata } from 'next'
-import { Arvo } from 'next/font/google'
+import { Marcellus, Varela } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const arvo = Arvo({
+const marcellus = Marcellus({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-arvo',
+  weight: ['400'],
+  variable: '--font-marcellus',
+  display: 'swap',
+})
+
+const varela = Varela({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-varela',
   display: 'swap',
 })
 
@@ -118,7 +125,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={arvo.variable}>
+    <html lang="en" className={`${marcellus.variable} ${varela.variable}`}>
       <body className="font-sans antialiased">
         <script
           type="application/ld+json"
