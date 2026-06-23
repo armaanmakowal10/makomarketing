@@ -1,19 +1,24 @@
 import type { Metadata } from 'next'
-import { Marcellus, Varela } from 'next/font/google'
+import { Varela, Funnel_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-
-const marcellus = Marcellus({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-marcellus',
-  display: 'swap',
-})
+import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
+import { SmoothScroll } from '@/components/smooth-scroll'
+import { AnimatedBackground } from '@/components/animated-background'
+import { ScrollProgress } from '@/components/scroll-progress'
 
 const varela = Varela({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-varela',
+  display: 'swap',
+})
+
+const funnelDisplay = Funnel_Display({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-funnel-display',
   display: 'swap',
 })
 
@@ -125,13 +130,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${marcellus.variable} ${varela.variable}`}>
+    <html lang="en" className={`${varela.variable} ${funnelDisplay.variable}`}>
       <body className="font-sans antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <AnimatedBackground />
+        <ScrollProgress />
+        <SiteHeader />
+        <SmoothScroll>
+          {children}
+          <SiteFooter />
+        </SmoothScroll>
         <Analytics />
       </body>
     </html>

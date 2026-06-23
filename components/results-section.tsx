@@ -42,7 +42,7 @@ export function ResultsSection() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.25em] text-cyan">
-              03 / Results
+              Results
             </p>
             <h2 className="text-display mt-4 text-[clamp(2rem,5vw,3.6rem)] text-near-white">
               Marketing That{" "}

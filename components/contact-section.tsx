@@ -4,6 +4,7 @@ import { useState } from "react"
 import { ArrowUpRight, Check, Mail, Phone } from "lucide-react"
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
 import { Magnetic } from "@/components/magnetic"
+import { SplitHeading } from "@/components/split-heading"
 
 const services = [
   "Google Ads",
@@ -61,11 +62,13 @@ export function ContactSection() {
         {/* Left: pitch + contact */}
         <Reveal>
           <p className="text-xs uppercase tracking-[0.25em] text-cyan">
-            07 / Let&rsquo;s Talk
+            Let&rsquo;s talk
           </p>
           <h2 className="text-display mt-4 text-[clamp(2.2rem,5.5vw,4rem)] text-near-white">
-            Ready To Turn Traffic Into{" "}
-            <span className="text-cyan-gradient">Paying Customers?</span>
+            <SplitHeading
+              text="Ready To Turn Traffic Into Paying Customers?"
+              accent={["Paying", "Customers?"]}
+            />
           </h2>
           <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
             Tell us about your business and we&rsquo;ll build the digital

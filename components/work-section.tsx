@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image"
+import { motion, useReducedMotion } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 
@@ -49,6 +52,7 @@ const projects: Project[] = [
 ]
 
 export function WorkSection() {
+  const reduce = useReducedMotion()
   return (
     <section
       id="work"
@@ -57,11 +61,11 @@ export function WorkSection() {
       <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
         <Reveal>
           <p className="text-xs uppercase tracking-[0.25em] text-cyan">
-            04 / Selected Work
+            Selected work
           </p>
           <h2 className="text-display mt-4 max-w-3xl text-[clamp(2rem,5vw,3.6rem)] text-near-white">
-            Websites & Campaigns{" "}
-            <span className="text-cyan-gradient">We&rsquo;ve Built</span>
+            Real sites & campaigns{" "}
+            <span className="text-cyan-gradient">that deliver</span>
           </h2>
         </Reveal>
 
@@ -75,18 +79,44 @@ export function WorkSection() {
               className="group relative overflow-hidden rounded-2xl border border-line bg-surface-1 transition-colors hover:border-line-strong"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={`${project.title} website built by Mako Marketing`}
-                  fill
-                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
-                  className="object-cover object-top"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                <motion.div
+                  className="absolute inset-0"
+                  initial={{
+                    clipPath: reduce ? "inset(0 0 0 0)" : "inset(0 0 100% 0)",
+                  }}
+                  whileInView={{ clipPath: "inset(0 0 0 0)" }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{
+                    duration: 0.9,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: (i % 3) * 0.08,
+                  }}
+                >
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} website built by Mako Marketing`}
+                    fill
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
+                    className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                </motion.div>
+
+                {/* hover overlay */}
+                <div className="absolute inset-0 flex items-end bg-cyan/10 p-5 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <div className="translate-y-3 transition-transform duration-500 group-hover:translate-y-0">
+                    <div className="text-display text-lg text-near-white">
+                      {project.title}
+                    </div>
+                    <div className="text-sm text-cyan">{project.description}</div>
+                  </div>
+                </div>
+
                 <span className="absolute left-5 top-5 text-display text-sm text-cyan">
                   0{i + 1}
                 </span>
               </div>
+
               <div className="flex items-end justify-between gap-4 p-6">
                 <div>
                   <h3 className="text-display text-xl text-near-white md:text-2xl">
