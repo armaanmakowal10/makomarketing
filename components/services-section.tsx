@@ -60,10 +60,7 @@ export function ServicesSection() {
     <section id="services" className="relative border-t border-line bg-transparent">
       <div className="mx-auto max-w-7xl px-5 pt-24 md:px-8 md:pt-32">
         <Reveal>
-          <p className="text-xs uppercase tracking-[0.25em] text-cyan">
-            01 / What We Do
-          </p>
-          <h2 className="text-display mt-4 max-w-4xl text-[clamp(2rem,5vw,3.6rem)] text-near-white">
+          <h2 className="text-display max-w-4xl text-[clamp(2rem,5vw,3.6rem)] text-near-white">
             Everything Your Business Needs To{" "}
             <span className="text-cyan-gradient">Grow Online</span>
           </h2>

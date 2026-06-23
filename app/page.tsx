@@ -1,10 +1,8 @@
 import { SiteHeader } from "@/components/site-header"
 import { HeroSection } from "@/components/hero-section"
-import { ManifestoSection } from "@/components/manifesto-section"
 import { ServicesSection } from "@/components/services-section"
 import { IndustriesSection } from "@/components/industries-section"
 import { ResultsSection } from "@/components/results-section"
-import { MarqueeDivider } from "@/components/marquee-divider"
 import { WorkSection } from "@/components/work-section"
 import { ProcessSection } from "@/components/process-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
@@ -17,11 +15,9 @@ export default function Page() {
       <SiteHeader />
       <main>
         <HeroSection />
-        <ManifestoSection />
         <ServicesSection />
         <IndustriesSection />
         <ResultsSection />
-        <MarqueeDivider />
         <WorkSection />
         <ProcessSection />
         <TestimonialsSection />

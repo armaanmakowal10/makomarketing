@@ -20,12 +20,7 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center px-5 text-center md:px-8">
-        <div className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-cyan/5 px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-cyan">
-          <span className="size-1.5 rounded-full bg-cyan" />
-          Digital Marketing Agency
-        </div>
-
-        <h1 className="text-display mt-7 text-balance text-[clamp(3rem,9vw,8rem)] leading-[0.95] text-near-white">
+        <h1 className="text-display text-balance text-[clamp(3rem,9vw,8rem)] leading-[0.95] text-near-white">
           We Develop The <span className="text-cyan-gradient">Platform</span> That
           Represents You
         </h1>
