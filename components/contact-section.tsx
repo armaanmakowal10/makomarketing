@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { ArrowUpRight, Check, Mail, Phone } from "lucide-react"
-import { Reveal } from "@/components/reveal"
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
 import { Magnetic } from "@/components/magnetic"
 
 const services = [
@@ -133,81 +133,90 @@ export function ContactSection() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={onSubmit} className="flex flex-col gap-5">
-                <Field
-                  label="Name"
-                  id="name"
-                  value={form.name}
-                  onChange={update("name")}
-                  required
-                  placeholder="Your full name"
-                />
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                  <Field
-                    label="Email"
-                    id="email"
-                    type="email"
-                    value={form.email}
-                    onChange={update("email")}
-                    required
-                    placeholder="you@business.com"
-                  />
-                  <Field
-                    label="Phone"
-                    id="phone"
-                    type="tel"
-                    value={form.phone}
-                    onChange={update("phone")}
-                    required
-                    placeholder="(905) 000-0000"
-                  />
-                </div>
+              <form onSubmit={onSubmit}>
+                <StaggerGroup className="flex flex-col gap-5">
+                  <StaggerItem>
+                    <Field
+                      label="Name"
+                      id="name"
+                      value={form.name}
+                      onChange={update("name")}
+                      required
+                      placeholder="Your full name"
+                    />
+                  </StaggerItem>
+                  <StaggerItem className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                    <Field
+                      label="Email"
+                      id="email"
+                      type="email"
+                      value={form.email}
+                      onChange={update("email")}
+                      required
+                      placeholder="you@business.com"
+                    />
+                    <Field
+                      label="Phone"
+                      id="phone"
+                      type="tel"
+                      value={form.phone}
+                      onChange={update("phone")}
+                      required
+                      placeholder="(905) 000-0000"
+                    />
+                  </StaggerItem>
 
-                <div className="flex flex-col gap-2">
-                  <label
-                    htmlFor="service"
-                    className="text-xs uppercase tracking-widest text-muted-foreground"
-                  >
-                    Service needed
-                  </label>
-                  <select
-                    id="service"
-                    value={form.service}
-                    onChange={update("service")}
-                    required
-                    className="h-12 rounded-xl border border-line bg-black/40 px-4 text-sm text-near-white outline-none transition-colors focus:border-cyan focus:ring-1 focus:ring-cyan/50"
-                  >
-                    <option value="" disabled>
-                      Select a service
-                    </option>
-                    {services.map((s) => (
-                      <option key={s} value={s} className="bg-black">
-                        {s}
+                  <StaggerItem className="flex flex-col gap-2">
+                    <label
+                      htmlFor="service"
+                      className="text-xs uppercase tracking-widest text-muted-foreground"
+                    >
+                      Service needed
+                    </label>
+                    <select
+                      id="service"
+                      value={form.service}
+                      onChange={update("service")}
+                      required
+                      className="h-12 rounded-xl border border-line bg-black/40 px-4 text-sm text-near-white outline-none transition-colors focus:border-cyan focus:ring-1 focus:ring-cyan/50"
+                    >
+                      <option value="" disabled>
+                        Select a service
                       </option>
-                    ))}
-                  </select>
-                </div>
+                      {services.map((s) => (
+                        <option key={s} value={s} className="bg-black">
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+                  </StaggerItem>
 
-                <div className="flex flex-col gap-2">
-                  <label
-                    htmlFor="message"
-                    className="text-xs uppercase tracking-widest text-muted-foreground"
-                  >
-                    Message <span className="normal-case">(optional)</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    value={form.message}
-                    onChange={update("message")}
-                    rows={4}
-                    placeholder="Tell us about your goals…"
-                    className="resize-none rounded-xl border border-line bg-black/40 px-4 py-3 text-sm text-near-white outline-none transition-colors placeholder:text-near-white/30 focus:border-cyan focus:ring-1 focus:ring-cyan/50"
-                  />
-                </div>
+                  <StaggerItem className="flex flex-col gap-2">
+                    <label
+                      htmlFor="message"
+                      className="text-xs uppercase tracking-widest text-muted-foreground"
+                    >
+                      Message <span className="normal-case">(optional)</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      value={form.message}
+                      onChange={update("message")}
+                      rows={4}
+                      placeholder="Tell us about your goals…"
+                      className="resize-none rounded-xl border border-line bg-black/40 px-4 py-3 text-sm text-near-white outline-none transition-colors placeholder:text-near-white/30 focus:border-cyan focus:ring-1 focus:ring-cyan/50"
+                    />
+                  </StaggerItem>
 
-                <button type="submit" className="btn-cyan mt-2 h-14 px-8 text-base">
-                  Send inquiry <ArrowUpRight className="size-5" />
-                </button>
+                  <StaggerItem>
+                    <button
+                      type="submit"
+                      className="btn-cyan mt-2 h-14 w-full px-8 text-base"
+                    >
+                      Send inquiry <ArrowUpRight className="size-5" />
+                    </button>
+                  </StaggerItem>
+                </StaggerGroup>
               </form>
             )}
           </div>

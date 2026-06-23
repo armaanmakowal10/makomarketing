@@ -22,6 +22,7 @@ const menuLinks = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : ""
@@ -30,8 +31,29 @@ export function SiteHeader() {
     }
   }, [open])
 
+  // Frost the bar once the hero has scrolled past.
+  useEffect(() => {
+    const onScroll = () => {
+      const threshold = window.innerHeight * 0.85
+      setScrolled(window.scrollY > threshold)
+    }
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   return (
     <>
+      {/* Frosted bar — transparent over the hero, blurs in on scroll */}
+      <div
+        aria-hidden
+        className={`fixed inset-x-0 top-0 z-40 h-[68px] border-b transition-all duration-500 md:h-20 ${
+          scrolled
+            ? "border-line bg-black/70 backdrop-blur-xl"
+            : "border-transparent bg-transparent backdrop-blur-0"
+        }`}
+      />
+
       {/* Frozen logo — top left */}
       <Link
         href="#home"

@@ -69,7 +69,7 @@ export function ResultsSection() {
                   <div className="flex items-center gap-2">
                     <TrendingUp className="size-5 text-cyan" />
                     <span className="text-display text-3xl text-cyan-gradient md:text-4xl">
-                      {c.metric}
+                      <AnimatedCounter value={c.metric} />
                     </span>
                   </div>
                 </div>

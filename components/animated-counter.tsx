@@ -22,10 +22,12 @@ export function AnimatedCounter({
   const reduce = useReducedMotion()
   const [display, setDisplay] = useState<string>(value)
 
-  const match = value.match(/^(\d+(?:\.\d+)?)(.*)$/)
-  const target = match ? parseFloat(match[1]) : null
-  const suffix = match ? match[2] : ""
-  const decimals = match && match[1].includes(".") ? 1 : 0
+  // Optional non-digit prefix ("+"), number, then suffix ("x", "%", "+", "/7").
+  const match = value.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/)
+  const prefix = match ? match[1] : ""
+  const target = match ? parseFloat(match[2]) : null
+  const suffix = match ? match[3] : ""
+  const decimals = match && match[2].includes(".") ? 1 : 0
 
   useEffect(() => {
     if (target === null) {
@@ -33,7 +35,7 @@ export function AnimatedCounter({
       return
     }
     if (!inView) {
-      setDisplay(`0${suffix}`)
+      setDisplay(`${prefix}0${suffix}`)
       return
     }
     if (reduce) {
@@ -48,12 +50,12 @@ export function AnimatedCounter({
       // easeOutExpo
       const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p)
       const current = (target * eased).toFixed(decimals)
-      setDisplay(`${current}${suffix}`)
+      setDisplay(`${prefix}${current}${suffix}`)
       if (p < 1) raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [inView, target, suffix, value, duration, decimals, reduce])
+  }, [inView, target, prefix, suffix, value, duration, decimals, reduce])
 
   return (
     <span ref={ref} className={className}>

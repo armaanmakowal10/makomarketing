@@ -2,7 +2,13 @@
 
 import { useRef } from "react"
 import Link from "next/link"
-import { motion, useScroll, useTransform } from "framer-motion"
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useReducedMotion,
+} from "framer-motion"
 import {
   LineChart,
   MapPin,
@@ -121,7 +127,35 @@ function StackCard({
   targetScale: number
 }) {
   const scale = useTransform(progress, range, [1, targetScale])
+  // Index label brightens grey → cyan as the card scrolls into its slot.
+  const indexColor = useTransform(
+    progress,
+    [index / total, Math.min(1, (index + 0.6) / total)],
+    ["#3a474c", "#14e4fe"]
+  )
   const Icon = service.icon
+
+  const cardRef = useRef<HTMLDivElement>(null)
+  const reduce = useReducedMotion()
+  const rx = useSpring(0, { stiffness: 150, damping: 18 })
+  const ry = useSpring(0, { stiffness: 150, damping: 18 })
+
+  const onMove = (e: React.MouseEvent) => {
+    const el = cardRef.current
+    if (!el) return
+    const r = el.getBoundingClientRect()
+    const px = e.clientX - r.left
+    const py = e.clientY - r.top
+    el.style.setProperty("--mx", `${px}px`)
+    el.style.setProperty("--my", `${py}px`)
+    if (reduce) return
+    ry.set((px / r.width - 0.5) * 5)
+    rx.set(-(py / r.height - 0.5) * 5)
+  }
+  const onLeave = () => {
+    rx.set(0)
+    ry.set(0)
+  }
 
   return (
     <div
@@ -129,17 +163,32 @@ function StackCard({
       style={{ top: `${110 + index * 28}px`, marginBottom: "8vh" }}
     >
       <motion.div
-        style={{ scale }}
-        className="relative grid w-full origin-top grid-cols-1 gap-8 overflow-hidden rounded-3xl border border-line-strong bg-surface-1 p-8 md:grid-cols-[1.1fr_0.9fr] md:p-12"
+        ref={cardRef}
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+        style={{ scale, rotateX: rx, rotateY: ry, transformPerspective: 1200 }}
+        className="group relative grid w-full origin-top grid-cols-1 gap-8 overflow-hidden rounded-3xl border border-line-strong bg-surface-1 p-8 transition-colors duration-500 hover:border-cyan/50 md:grid-cols-[1.1fr_0.9fr] md:p-12"
       >
         <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.18),transparent_70%)] blur-2xl" />
+
+        {/* Cursor-follow spotlight */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{
+            background:
+              "radial-gradient(420px circle at var(--mx) var(--my), rgba(20,228,254,0.12), transparent 60%)",
+          }}
+        />
 
         {/* Left */}
         <div className="relative flex flex-col">
           <div className="flex items-center gap-4">
-            <span className="text-display text-sm text-cyan">
+            <motion.span
+              style={{ color: indexColor }}
+              className="text-display text-sm"
+            >
               0{index + 1} / 0{total}
-            </span>
+            </motion.span>
             <span className="h-px flex-1 bg-line" />
           </div>
           <h3 className="text-display mt-6 text-[clamp(2rem,4vw,3.4rem)] text-near-white">

@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 
@@ -141,6 +141,7 @@ function ProjectCard({
   index: number
   horizontal?: boolean
 }) {
+  const reduce = useReducedMotion()
   return (
     <a
       href={project.url}
@@ -153,20 +154,41 @@ function ProjectCard({
       }`}
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden">
-        <Image
-          src={project.image}
-          alt={`${project.title} website built by Mako Marketing`}
-          fill
-          sizes="(max-width: 1024px) 80vw, 42vw"
-          className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+        {/* Image wipes in via clip-path on scroll */}
+        <motion.div
+          className="absolute inset-0"
+          initial={{
+            clipPath: reduce ? "inset(0 0 0 0)" : "inset(0 0 100% 0)",
+          }}
+          whileInView={{ clipPath: "inset(0 0 0 0)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{
+            duration: 0.9,
+            ease: [0.16, 1, 0.3, 1],
+            delay: (index % 3) * 0.08,
+          }}
+        >
+          <Image
+            src={project.image}
+            alt={`${project.title} website built by Mako Marketing`}
+            fill
+            sizes="(max-width: 1024px) 80vw, 42vw"
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+        </motion.div>
         <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(20,228,254,0.22),transparent_60%)]" />
         </div>
         <span className="absolute left-5 top-5 text-display text-sm text-cyan">
           0{index + 1}
         </span>
+        {/* Slide-up label on hover */}
+        <div className="absolute inset-x-0 bottom-0 flex translate-y-3 justify-start p-5 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+          <span className="inline-flex items-center gap-2 rounded-full border border-cyan/50 bg-black/50 px-3 py-1 text-xs font-medium text-cyan backdrop-blur-sm">
+            {project.description}
+          </span>
+        </div>
       </div>
       <div className="flex items-end justify-between gap-4 p-6">
         <div>

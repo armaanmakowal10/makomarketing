@@ -20,6 +20,9 @@ export function SiteBackdrop() {
     if (!ctx) return
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    // On phones, run a lighter constellation: fewer particles, no link pass,
+    // no per-particle shadow blur — keeps the effect alive without draining battery.
+    const mobile = window.matchMedia("(max-width: 768px)").matches
 
     let w = 0
     let h = 0
@@ -33,7 +36,10 @@ export function SiteBackdrop() {
     const LINK_DIST = 130
 
     const build = () => {
-      const count = Math.min(110, Math.floor((w * h) / 16000))
+      const count = Math.min(
+        mobile ? 36 : 110,
+        Math.floor((w * h) / (mobile ? 24000 : 16000))
+      )
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
@@ -127,22 +133,24 @@ export function SiteBackdrop() {
         }
       }
 
-      // links
-      for (let i = 0; i < particles.length; i++) {
-        const a = particles[i]
-        for (let j = i + 1; j < particles.length; j++) {
-          const b = particles[j]
-          const dx = a.x - b.x
-          const dy = a.y - b.y
-          const dist = Math.hypot(dx, dy)
-          if (dist < LINK_DIST) {
-            const alpha = (1 - dist / LINK_DIST) * 0.16 * linkScale
-            ctx.strokeStyle = `rgba(20,228,254,${alpha})`
-            ctx.lineWidth = 1
-            ctx.beginPath()
-            ctx.moveTo(a.x, a.y)
-            ctx.lineTo(b.x, b.y)
-            ctx.stroke()
+      // links (skipped on mobile — this is the O(n²) hot path)
+      if (!mobile) {
+        for (let i = 0; i < particles.length; i++) {
+          const a = particles[i]
+          for (let j = i + 1; j < particles.length; j++) {
+            const b = particles[j]
+            const dx = a.x - b.x
+            const dy = a.y - b.y
+            const dist = Math.hypot(dx, dy)
+            if (dist < LINK_DIST) {
+              const alpha = (1 - dist / LINK_DIST) * 0.16 * linkScale
+              ctx.strokeStyle = `rgba(20,228,254,${alpha})`
+              ctx.lineWidth = 1
+              ctx.beginPath()
+              ctx.moveTo(a.x, a.y)
+              ctx.lineTo(b.x, b.y)
+              ctx.stroke()
+            }
           }
         }
       }
@@ -150,7 +158,7 @@ export function SiteBackdrop() {
       // particles: streak into light-trails while scrolling, dots when idle
       const streak = energy * 3
       ctx.shadowColor = "rgba(20,228,254,0.8)"
-      ctx.shadowBlur = 6
+      ctx.shadowBlur = mobile ? 0 : 6
       ctx.lineCap = "round"
       for (const p of particles) {
         if (streak > 2) {

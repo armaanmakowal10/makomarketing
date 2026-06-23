@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 type Blob = {
   x: number
@@ -15,12 +15,25 @@ type Blob = {
  * Lusion-inspired fluid plasma backdrop.
  * Soft cyan metaball-ish blobs drift and gently react to the cursor.
  * Rendered on a low-res canvas + CSS blur for a performant "fluid" look.
+ *
+ * Perf guardrails:
+ *  - Disabled on mobile and under reduced-motion (static gradient fallback,
+ *    no rAF loop) per the brief.
+ *  - The rAF loop pauses when the hero scrolls out of view (IntersectionObserver).
  */
 export function FluidBackdrop({ className = "" }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  // Start in the SSR-safe "static" mode; promote to "canvas" on capable devices.
+  const [mode, setMode] = useState<"static" | "canvas">("static")
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const mobile = window.matchMedia("(max-width: 768px)").matches
+    setMode(reduce || mobile ? "static" : "canvas")
+  }, [])
+
+  useEffect(() => {
+    if (mode !== "canvas") return
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext("2d")
@@ -59,16 +72,14 @@ export function FluidBackdrop({ className = "" }: { className?: string }) {
       ctx.globalCompositeOperation = "lighter"
       for (let i = 0; i < blobs.length; i++) {
         const b = blobs[i]
-        if (!reduce) {
-          b.x += b.vx
-          b.y += b.vy
-          if (b.x < 0.05 || b.x > 0.95) b.vx *= -1
-          if (b.y < 0.05 || b.y > 0.95) b.vy *= -1
-          // gentle pull toward cursor
-          if (mouse.active) {
-            b.x += (mouse.x - b.x) * 0.0006
-            b.y += (mouse.y - b.y) * 0.0006
-          }
+        b.x += b.vx
+        b.y += b.vy
+        if (b.x < 0.05 || b.x > 0.95) b.vx *= -1
+        if (b.y < 0.05 || b.y > 0.95) b.vy *= -1
+        // gentle pull toward cursor
+        if (mouse.active) {
+          b.x += (mouse.x - b.x) * 0.0006
+          b.y += (mouse.y - b.y) * 0.0006
         }
         const cx = b.x * w
         const cy = b.y * h
@@ -86,25 +97,53 @@ export function FluidBackdrop({ className = "" }: { className?: string }) {
     }
 
     let frame = 0
+    let running = false
     const loop = () => {
       draw()
       frame = requestAnimationFrame(loop)
     }
-
-    if (reduce) {
-      draw()
-    } else {
+    const start = () => {
+      if (running) return
+      running = true
       frame = requestAnimationFrame(loop)
-      window.addEventListener("mousemove", onMove)
     }
+    const stop = () => {
+      running = false
+      cancelAnimationFrame(frame)
+    }
+
+    // Pause the loop while the hero is off-screen.
+    const io = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? start() : stop()),
+      { threshold: 0 }
+    )
+    io.observe(canvas)
+
+    window.addEventListener("mousemove", onMove)
     window.addEventListener("resize", resize)
 
     return () => {
-      cancelAnimationFrame(frame)
+      stop()
+      io.disconnect()
       window.removeEventListener("mousemove", onMove)
       window.removeEventListener("resize", resize)
     }
-  }, [])
+  }, [mode])
+
+  if (mode === "static") {
+    // Static fallback — no animation, no rAF. Matches the canvas palette.
+    return (
+      <div
+        aria-hidden
+        className={`pointer-events-none h-full w-full opacity-70 ${className}`}
+        style={{
+          background:
+            "radial-gradient(60% 50% at 40% 42%, rgba(20,228,254,0.22), transparent 70%), radial-gradient(45% 40% at 70% 60%, rgba(20,228,254,0.16), transparent 72%)",
+          filter: "blur(40px) saturate(1.2)",
+        }}
+      />
+    )
+  }
 
   return (
     <canvas
