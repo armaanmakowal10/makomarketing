@@ -65,9 +65,7 @@ export function ContactSection() {
           </p>
           <h2 className="text-display mt-4 text-[clamp(2.2rem,5.5vw,4rem)] text-near-white">
             Ready To Turn Traffic Into{" "}
-            <span className="text-cyan-gradient text-glow">
-              Paying Customers?
-            </span>
+            <span className="text-cyan-gradient">Paying Customers?</span>
           </h2>
           <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
             Tell us about your business and we&rsquo;ll build the digital
@@ -115,7 +113,7 @@ export function ContactSection() {
           <div className="rounded-3xl border border-line bg-surface-1/70 p-6 backdrop-blur-sm md:p-9">
             {sent ? (
               <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
-                <span className="flex size-16 items-center justify-center rounded-full border border-cyan bg-cyan/10 text-cyan glow-cyan">
+                <span className="flex size-16 items-center justify-center rounded-full border border-cyan bg-cyan/10 text-cyan">
                   <Check className="size-8" />
                 </span>
                 <h3 className="text-display mt-6 text-2xl text-near-white">

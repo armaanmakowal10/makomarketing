@@ -1,6 +1,3 @@
-"use client"
-
-import { useRef } from "react"
 import {
   Wrench,
   HeartPulse,
@@ -50,48 +47,23 @@ export function IndustriesSection() {
         </Reveal>
 
         <StaggerGroup className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {industries.map((ind) => (
-            <StaggerItem key={ind.label}>
-              <IndustryCard industry={ind} />
-            </StaggerItem>
-          ))}
+          {industries.map((ind) => {
+            const Icon = ind.icon
+            return (
+              <StaggerItem key={ind.label}>
+                <div className="group flex h-full flex-col items-start gap-5 rounded-2xl border border-line bg-surface-1/40 p-6 transition-colors hover:border-line-strong md:p-7">
+                  <span className="flex size-12 items-center justify-center rounded-xl border border-line-strong bg-cyan/5 text-cyan transition-colors group-hover:bg-cyan group-hover:text-black">
+                    <Icon className="size-6" />
+                  </span>
+                  <h3 className="text-display text-lg text-near-white md:text-xl">
+                    {ind.label}
+                  </h3>
+                </div>
+              </StaggerItem>
+            )
+          })}
         </StaggerGroup>
       </div>
     </section>
-  )
-}
-
-function IndustryCard({ industry }: { industry: Industry }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const Icon = industry.icon
-
-  const onMove = (e: React.MouseEvent) => {
-    const el = ref.current
-    if (!el) return
-    const r = el.getBoundingClientRect()
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`)
-    el.style.setProperty("--my", `${e.clientY - r.top}px`)
-  }
-
-  return (
-    <div
-      ref={ref}
-      onMouseMove={onMove}
-      className="group relative flex h-full flex-col items-start gap-5 overflow-hidden rounded-2xl border border-line bg-surface-1/40 p-6 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-line-strong md:p-7"
-    >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{
-          background:
-            "radial-gradient(300px circle at var(--mx) var(--my), rgba(20,228,254,0.12), transparent 65%)",
-        }}
-      />
-      <span className="relative flex size-12 items-center justify-center rounded-xl border border-line-strong bg-cyan/5 text-cyan transition-all duration-500 group-hover:bg-cyan group-hover:text-black group-hover:shadow-[0_0_24px_rgba(20,228,254,0.5)]">
-        <Icon className="size-6" />
-      </span>
-      <h3 className="relative text-display text-lg text-near-white md:text-xl">
-        {industry.label}
-      </h3>
-    </div>
   )
 }

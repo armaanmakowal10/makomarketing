@@ -1,21 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Arvo } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-import { SmoothScroll } from '@/components/smooth-scroll'
-import { SiteBackdrop } from '@/components/site-backdrop'
-import { IntroOverlay } from '@/components/intro-overlay'
 
-const inter = Inter({
+const arvo = Arvo({
   subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-space-grotesk',
+  weight: ['400', '700'],
+  variable: '--font-arvo',
   display: 'swap',
 })
 
@@ -127,15 +118,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="font-sans antialiased grain">
+    <html lang="en" className={arvo.variable}>
+      <body className="font-sans antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <IntroOverlay />
-        <SiteBackdrop />
-        <SmoothScroll>{children}</SmoothScroll>
+        {children}
         <Analytics />
       </body>
     </html>

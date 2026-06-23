@@ -4,7 +4,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { Phone, Mail, ArrowUp } from "lucide-react"
 import { StaggerGroup, StaggerItem } from "@/components/reveal"
-import { FooterWordmark } from "@/components/footer-wordmark"
 
 const PHONE_DISPLAY = "905-260-5457"
 const PHONE_TEL = "tel:9052605457"
@@ -105,8 +104,15 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* Oversized watermark wordmark (parallax) */}
-      <FooterWordmark />
+      {/* Oversized watermark wordmark */}
+      <div
+        aria-hidden
+        className="pointer-events-none select-none overflow-hidden px-5 pb-6 md:px-8"
+      >
+        <div className="text-display whitespace-nowrap text-center text-[18vw] leading-none text-near-white/[0.04]">
+          MAKO MARKETING
+        </div>
+      </div>
     </footer>
   )
 }

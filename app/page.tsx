@@ -1,5 +1,4 @@
 import { SiteHeader } from "@/components/site-header"
-import { ScrollProgress } from "@/components/scroll-progress"
 import { HeroSection } from "@/components/hero-section"
 import { ManifestoSection } from "@/components/manifesto-section"
 import { ServicesSection } from "@/components/services-section"
@@ -15,7 +14,6 @@ import { SiteFooter } from "@/components/site-footer"
 export default function Page() {
   return (
     <>
-      <ScrollProgress />
       <SiteHeader />
       <main>
         <HeroSection />

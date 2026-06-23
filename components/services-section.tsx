@@ -1,14 +1,4 @@
-"use client"
-
-import { useRef } from "react"
 import Link from "next/link"
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useReducedMotion,
-} from "framer-motion"
 import {
   LineChart,
   MapPin,
@@ -66,17 +56,8 @@ const services: Service[] = [
 ]
 
 export function ServicesSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  })
-
   return (
-    <section
-      id="services"
-      className="relative border-t border-line bg-transparent"
-    >
+    <section id="services" className="relative border-t border-line bg-transparent">
       <div className="mx-auto max-w-7xl px-5 pt-24 md:px-8 md:pt-32">
         <Reveal>
           <p className="text-xs uppercase tracking-[0.25em] text-cyan">
@@ -89,143 +70,62 @@ export function ServicesSection() {
         </Reveal>
       </div>
 
-      {/* Stacking cards */}
-      <div ref={containerRef} className="relative mx-auto max-w-6xl px-5 md:px-8">
-        {services.map((service, i) => {
-          const targetScale = 1 - (services.length - 1 - i) * 0.04
-          const range: [number, number] = [i * (1 / services.length), 1]
-          return (
-            <StackCard
-              key={service.title}
-              service={service}
-              index={i}
-              total={services.length}
-              progress={scrollYProgress}
-              range={range}
-              targetScale={targetScale}
-            />
-          )
-        })}
+      <div className="mx-auto max-w-6xl px-5 pb-24 md:px-8 md:pb-32">
+        <div className="mt-12 flex flex-col gap-6">
+          {services.map((service, i) => {
+            const Icon = service.icon
+            return (
+              <div
+                key={service.title}
+                className="relative grid w-full grid-cols-1 gap-8 overflow-hidden rounded-3xl border border-line-strong bg-surface-1 p-8 transition-colors hover:border-cyan/50 md:grid-cols-[1.1fr_0.9fr] md:p-12"
+              >
+                {/* Left */}
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-4">
+                    <span className="text-display text-sm text-cyan">
+                      0{i + 1} / 0{services.length}
+                    </span>
+                    <span className="h-px flex-1 bg-line" />
+                  </div>
+                  <h3 className="text-display mt-6 text-[clamp(2rem,4vw,3.4rem)] text-near-white">
+                    {service.title}
+                  </h3>
+                  <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
+                    {service.description}
+                  </p>
+                  <Link
+                    href="#contact"
+                    className="group mt-auto inline-flex w-fit items-center gap-2 pt-8 text-sm font-medium text-near-white transition-colors hover:text-cyan"
+                  >
+                    Start a project
+                    <span className="flex size-9 items-center justify-center rounded-full border border-line-strong text-cyan transition-colors group-hover:bg-cyan group-hover:text-black">
+                      <ArrowUpRight className="size-4" />
+                    </span>
+                  </Link>
+                </div>
+
+                {/* Right */}
+                <div className="flex flex-col justify-between gap-8 rounded-2xl border border-line bg-black/30 p-8">
+                  <span className="flex size-16 items-center justify-center rounded-2xl border border-line-strong bg-cyan/5 text-cyan">
+                    <Icon className="size-8" />
+                  </span>
+                  <ul className="flex flex-col gap-3">
+                    {service.features.map((f) => (
+                      <li
+                        key={f}
+                        className="flex items-center gap-3 text-sm text-near-white/80"
+                      >
+                        <span className="size-1.5 rounded-full bg-cyan" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </section>
-  )
-}
-
-function StackCard({
-  service,
-  index,
-  total,
-  progress,
-  range,
-  targetScale,
-}: {
-  service: Service
-  index: number
-  total: number
-  progress: ReturnType<typeof useScroll>["scrollYProgress"]
-  range: [number, number]
-  targetScale: number
-}) {
-  const scale = useTransform(progress, range, [1, targetScale])
-  // Index label brightens grey → cyan as the card scrolls into its slot.
-  const indexColor = useTransform(
-    progress,
-    [index / total, Math.min(1, (index + 0.6) / total)],
-    ["#3a474c", "#14e4fe"]
-  )
-  const Icon = service.icon
-
-  const cardRef = useRef<HTMLDivElement>(null)
-  const reduce = useReducedMotion()
-  const rx = useSpring(0, { stiffness: 150, damping: 18 })
-  const ry = useSpring(0, { stiffness: 150, damping: 18 })
-
-  const onMove = (e: React.MouseEvent) => {
-    const el = cardRef.current
-    if (!el) return
-    const r = el.getBoundingClientRect()
-    const px = e.clientX - r.left
-    const py = e.clientY - r.top
-    el.style.setProperty("--mx", `${px}px`)
-    el.style.setProperty("--my", `${py}px`)
-    if (reduce) return
-    ry.set((px / r.width - 0.5) * 5)
-    rx.set(-(py / r.height - 0.5) * 5)
-  }
-  const onLeave = () => {
-    rx.set(0)
-    ry.set(0)
-  }
-
-  return (
-    <div
-      className="sticky flex justify-center"
-      style={{ top: `${110 + index * 28}px`, marginBottom: "8vh" }}
-    >
-      <motion.div
-        ref={cardRef}
-        onMouseMove={onMove}
-        onMouseLeave={onLeave}
-        style={{ scale, rotateX: rx, rotateY: ry, transformPerspective: 1200 }}
-        className="group relative grid w-full origin-top grid-cols-1 gap-8 overflow-hidden rounded-3xl border border-line-strong bg-surface-1 p-8 transition-colors duration-500 hover:border-cyan/50 md:grid-cols-[1.1fr_0.9fr] md:p-12"
-      >
-        <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.18),transparent_70%)] blur-2xl" />
-
-        {/* Cursor-follow spotlight */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-          style={{
-            background:
-              "radial-gradient(420px circle at var(--mx) var(--my), rgba(20,228,254,0.12), transparent 60%)",
-          }}
-        />
-
-        {/* Left */}
-        <div className="relative flex flex-col">
-          <div className="flex items-center gap-4">
-            <motion.span
-              style={{ color: indexColor }}
-              className="text-display text-sm"
-            >
-              0{index + 1} / 0{total}
-            </motion.span>
-            <span className="h-px flex-1 bg-line" />
-          </div>
-          <h3 className="text-display mt-6 text-[clamp(2rem,4vw,3.4rem)] text-near-white">
-            {service.title}
-          </h3>
-          <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
-            {service.description}
-          </p>
-          <Link
-            href="#contact"
-            className="group mt-auto inline-flex w-fit items-center gap-2 pt-8 text-sm font-medium text-near-white transition-colors hover:text-cyan"
-          >
-            Start a project
-            <span className="flex size-9 items-center justify-center rounded-full border border-line-strong text-cyan transition-all group-hover:bg-cyan group-hover:text-black">
-              <ArrowUpRight className="size-4" />
-            </span>
-          </Link>
-        </div>
-
-        {/* Right */}
-        <div className="relative flex flex-col justify-between gap-8 rounded-2xl border border-line bg-black/30 p-8">
-          <span className="flex size-16 items-center justify-center rounded-2xl border border-line-strong bg-cyan/5 text-cyan shadow-[0_0_30px_rgba(20,228,254,0.25)]">
-            <Icon className="size-8" />
-          </span>
-          <ul className="flex flex-col gap-3">
-            {service.features.map((f) => (
-              <li
-                key={f}
-                className="flex items-center gap-3 text-sm text-near-white/80"
-              >
-                <span className="size-1.5 rounded-full bg-cyan shadow-[0_0_8px_rgba(20,228,254,0.8)]" />
-                {f}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </motion.div>
-    </div>
   )
 }
