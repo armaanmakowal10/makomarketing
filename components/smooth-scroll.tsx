@@ -4,7 +4,13 @@ import { useEffect } from "react"
 import Lenis from "lenis"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { scrollState, lenisRef } from "@/lib/scroll-state"
+import {
+  scrollState,
+  lenisRef,
+  scrollProgressMV,
+  scrollYMV,
+  scrollVelMV,
+} from "@/lib/scroll-state"
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -28,6 +34,9 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       scrollState.y = e.scroll
       scrollState.velocity = e.velocity
       scrollState.progress = e.progress
+      scrollProgressMV.set(e.progress)
+      scrollYMV.set(e.scroll)
+      scrollVelMV.set(e.velocity)
     })
     const update = (time: number) => lenis.raf(time * 1000)
     gsap.ticker.add(update)

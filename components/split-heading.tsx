@@ -5,9 +5,12 @@ import { motion, useReducedMotion, type Variants } from "framer-motion"
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-const container: Variants = {
+// staggerChildren cascades to direct children. Used on both the outer wrapper
+// (staggers the lines) and each line (staggers its words) so multi-line headings
+// reveal smoothly top-to-bottom, left-to-right.
+const group: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.06, delayChildren: 0.08 } },
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } },
 }
 
 const word: Variants = {
@@ -22,7 +25,8 @@ const word: Variants = {
 
 /**
  * Word-by-word heading reveal (blur-to-focus). Wrap it in your own h1/h2 for
- * semantics. Pass `accent` with the exact word tokens to render in cyan.
+ * semantics. Pass `accent` with the exact word tokens to render in cyan. Use
+ * "\n" in `text` to force stacked lines (each line on its own row).
  */
 export function SplitHeading({
   text,
@@ -34,19 +38,25 @@ export function SplitHeading({
   className?: string
 }) {
   const reduce = useReducedMotion()
-  const words = text.split(" ")
+  const lines = text.split("\n")
+  const multiline = lines.length > 1
   const accentSet = new Set(accent)
   const accentClass = (w: string) =>
     accentSet.has(w) ? "text-cyan-gradient" : undefined
+  const lineStyle = { display: multiline ? "block" : "inline" } as const
 
   if (reduce) {
     return (
       <span className={className}>
-        {words.map((w, i) => (
-          <Fragment key={i}>
-            <span className={accentClass(w)}>{w}</span>
-            {i < words.length - 1 ? " " : ""}
-          </Fragment>
+        {lines.map((line, li) => (
+          <span key={li} style={lineStyle}>
+            {line.split(" ").map((w, i, arr) => (
+              <Fragment key={i}>
+                <span className={accentClass(w)}>{w}</span>
+                {i < arr.length - 1 ? " " : ""}
+              </Fragment>
+            ))}
+          </span>
         ))}
       </span>
     )
@@ -55,23 +65,30 @@ export function SplitHeading({
   return (
     <motion.span
       className={className}
-      variants={container}
+      variants={group}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "-80px" }}
     >
-      {words.map((w, i) => (
-        <Fragment key={i}>
-          <motion.span
-            variants={word}
-            className={accentClass(w)}
-            style={{ display: "inline-block", willChange: "transform, filter" }}
-          >
-            {w}
+      {lines.map((line, li) => {
+        const words = line.split(" ")
+        return (
+          <motion.span key={li} variants={group} style={lineStyle}>
+            {words.map((w, i) => (
+              <Fragment key={i}>
+                <motion.span
+                  variants={word}
+                  className={accentClass(w)}
+                  style={{ display: "inline-block", willChange: "transform, filter" }}
+                >
+                  {w}
+                </motion.span>
+                {i < words.length - 1 ? " " : ""}
+              </Fragment>
+            ))}
           </motion.span>
-          {i < words.length - 1 ? " " : ""}
-        </Fragment>
-      ))}
+        )
+      })}
     </motion.span>
   )
 }

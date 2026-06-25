@@ -1,15 +1,40 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 import { scrollState } from "@/lib/scroll-state"
 
 const COUNT = 3800
 
-function ParticleCurrent() {
+type Pointer = RefObject<{ x: number; y: number }>
+
+/** A soft round point of light (a star in the sky), used as the point sprite. */
+function makeStarTexture() {
+  const size = 64
+  const canvas = document.createElement("canvas")
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext("2d")!
+  const r = size / 2
+  const grad = ctx.createRadialGradient(r, r, 0, r, r, r)
+  grad.addColorStop(0, "rgba(255,255,255,1)")
+  grad.addColorStop(0.18, "rgba(255,255,255,0.85)")
+  grad.addColorStop(0.45, "rgba(255,255,255,0.25)")
+  grad.addColorStop(1, "rgba(255,255,255,0)")
+  ctx.fillStyle = grad
+  ctx.beginPath()
+  ctx.arc(r, r, r, 0, Math.PI * 2)
+  ctx.fill()
+
+  const tex = new THREE.CanvasTexture(canvas)
+  tex.needsUpdate = true
+  return tex
+}
+
+function ParticleCurrent({ pointer }: { pointer: Pointer }) {
   const ref = useRef<THREE.Points>(null!)
-  const pointer = useRef({ x: 0, y: 0 })
+  const starTexture = useMemo(() => makeStarTexture(), [])
 
   const positions = useMemo(() => {
     const arr = new Float32Array(COUNT * 3)
@@ -21,26 +46,14 @@ function ParticleCurrent() {
     return arr
   }, [])
 
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      pointer.current.x = e.clientX / window.innerWidth - 0.5
-      pointer.current.y = e.clientY / window.innerHeight - 0.5
-    }
-    window.addEventListener("mousemove", onMove, { passive: true })
-    return () => window.removeEventListener("mousemove", onMove)
-  }, [])
-
   useFrame((_, delta) => {
     const p = ref.current
     if (!p) return
     const vel = scrollState.velocity || 0
-    // slow base drift; scroll velocity speeds up the current
     p.rotation.y += delta * 0.02 + vel * 0.00012
     p.rotation.z += delta * 0.004
-    // velocity stretches the flow along its axis
     const stretch = THREE.MathUtils.clamp(1 + Math.abs(vel) * 0.0007, 1, 1.5)
     p.scale.y = THREE.MathUtils.lerp(p.scale.y || 1, stretch, 0.08)
-    // pointer parallax + slow drift with scroll position
     p.position.x = THREE.MathUtils.lerp(p.position.x, pointer.current.x * 0.7, 0.04)
     p.position.y = THREE.MathUtils.lerp(
       p.position.y,
@@ -56,15 +69,31 @@ function ParticleCurrent() {
       </bufferGeometry>
       <pointsMaterial
         color="#14e4fe"
-        size={0.028}
+        map={starTexture}
+        size={0.06}
         transparent
-        opacity={0.7}
+        opacity={0.8}
         sizeAttenuation
         depthWrite={false}
         blending={THREE.AdditiveBlending}
       />
     </points>
   )
+}
+
+function Scene() {
+  const pointer = useRef({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      pointer.current.x = e.clientX / window.innerWidth - 0.5
+      pointer.current.y = e.clientY / window.innerHeight - 0.5
+    }
+    window.addEventListener("mousemove", onMove, { passive: true })
+    return () => window.removeEventListener("mousemove", onMove)
+  }, [])
+
+  return <ParticleCurrent pointer={pointer} />
 }
 
 export function AnimatedBackground() {
@@ -96,9 +125,8 @@ export function AnimatedBackground() {
         dpr={[1, 1.5]}
         gl={{ antialias: false, alpha: true }}
       >
-        <ParticleCurrent />
+        <Scene />
       </Canvas>
-      {/* vignette so the field never competes with text */}
       <div
         className="absolute inset-0"
         style={{

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Varela, Funnel_Display } from 'next/font/google'
+import { Pridi, Funnel_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { SiteHeader } from '@/components/site-header'
@@ -7,11 +7,12 @@ import { SiteFooter } from '@/components/site-footer'
 import { SmoothScroll } from '@/components/smooth-scroll'
 import { AnimatedBackground } from '@/components/animated-background'
 import { ScrollProgress } from '@/components/scroll-progress'
+import { IntroOverlay } from '@/components/intro-overlay'
 
-const varela = Varela({
+const pridi = Pridi({
   subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-varela',
+  weight: ['400', '600', '700'],
+  variable: '--font-pridi',
   display: 'swap',
 })
 
@@ -64,10 +65,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
       { url: '/mako-favicon2.png', type: 'image/png' },
     ],
-    apple: '/apple-icon.png',
+    shortcut: '/mako-favicon2.png',
+    apple: '/mako-favicon2.png',
   },
   robots: {
     index: true,
@@ -130,12 +131,27 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${varela.variable} ${funnelDisplay.variable}`}>
+    <html lang="en" className={`${pridi.variable} ${funnelDisplay.variable}`}>
       <body className="font-sans antialiased">
+        {/* Land on the hero on every load/reload — never restore prior scroll. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{history.scrollRestoration='manual'}catch(e){}`,
+          }}
+        />
+        {/* Raw style — bypasses Tailwind/Lightning CSS, which strips this pseudo.
+            Hides the scrollbar up/down arrow buttons so only the thumb shows. */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html:
+              "::-webkit-scrollbar-button{display:none!important;width:0!important;height:0!important}",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <IntroOverlay />
         <AnimatedBackground />
         <ScrollProgress />
         <SiteHeader />

@@ -3,15 +3,16 @@
 import { useState } from "react"
 import { ArrowUpRight, Check, Mail, Phone } from "lucide-react"
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
+import { SectionHeading } from "@/components/section-heading"
 import { Magnetic } from "@/components/magnetic"
 import { SplitHeading } from "@/components/split-heading"
 
-const services = [
-  "Google Ads",
-  "Meta Ads",
-  "Local Service Ads",
-  "Web Development",
-  "Google SEO",
+const budgets = [
+  "Under $1,000 / mo",
+  "$1,000 – $3,000 / mo",
+  "$3,000 – $5,000 / mo",
+  "$5,000 – $10,000 / mo",
+  "$10,000+ / mo",
   "Not sure yet",
 ]
 
@@ -22,9 +23,11 @@ const EMAIL = "makomarketing0@gmail.com"
 export function ContactSection() {
   const [form, setForm] = useState({
     name: "",
+    business: "",
     email: "",
     phone: "",
-    service: "",
+    website: "",
+    budget: "",
     message: "",
   })
   const [sent, setSent] = useState(false)
@@ -41,10 +44,10 @@ export function ContactSection() {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const subject = encodeURIComponent(
-      `New project inquiry — ${form.name || "Website lead"}`
+      `New project inquiry — ${form.business || form.name || "Website lead"}`
     )
     const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nService needed: ${form.service}\n\n${form.message}`
+      `Name: ${form.name}\nBusiness: ${form.business}\nEmail: ${form.email}\nPhone: ${form.phone}\nCurrent website: ${form.website || "—"}\nCurrent monthly ad budget: ${form.budget}\n\n${form.message}`
     )
     window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`
     setSent(true)
@@ -53,29 +56,26 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden border-t border-line bg-transparent py-24 md:py-32"
+      className="relative overflow-hidden border-t-[3px] border-white/80 bg-transparent py-24 md:py-32"
     >
       <div className="bg-grid bg-grid-fade pointer-events-none absolute inset-0 opacity-40" />
       <div className="pointer-events-none absolute left-1/2 top-0 h-[50vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.18),transparent_70%)] blur-[120px]" />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-14 px-5 md:px-8 lg:grid-cols-2 lg:gap-16">
-        {/* Left: pitch + contact */}
-        <Reveal>
-          <p className="text-xs uppercase tracking-[0.25em] text-cyan">
-            Let&rsquo;s talk
-          </p>
-          <h2 className="text-display mt-4 text-[clamp(2.2rem,5.5vw,4rem)] text-near-white">
-            <SplitHeading
-              text="Ready To Turn Traffic Into Paying Customers?"
-              accent={["Paying", "Customers?"]}
-            />
-          </h2>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
-            Tell us about your business and we&rsquo;ll build the digital
-            platform it deserves. Free, no-pressure consultation.
-          </p>
+      <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8">
+        <SectionHeading
+          eyebrow="Let's talk"
+          sub="Tell us about your business and we'll build a custom digital marketing plan — Google Ads, Meta Ads, SEO, and web design — to turn more traffic into paying customers. Free, no-pressure consultation for service businesses across Ontario and Canada."
+        >
+          <SplitHeading
+            text="Ready To Turn Traffic Into Paying Customers?"
+            accent={["Paying", "Customers?"]}
+          />
+        </SectionHeading>
 
-          <div className="mt-10 flex flex-col gap-4">
+        <div className="mt-14 grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16">
+          {/* Left: contact methods + checklist */}
+          <Reveal>
+            <div className="flex flex-col gap-4">
             <Magnetic strength={0.2}>
               <a
                 href={PHONE_TEL}
@@ -109,6 +109,25 @@ export function ContactSection() {
               </span>
             </a>
           </div>
+
+          <ul className="mt-8 flex flex-col gap-3">
+            {[
+              "Free, no-pressure consultation",
+              "A reply within one business day",
+              "A custom plan built around your goals",
+              "No long-term lock-ins",
+            ].map((point) => (
+              <li
+                key={point}
+                className="flex items-center gap-3 text-sm text-near-white/85"
+              >
+                <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-cyan/15 text-cyan">
+                  <Check className="size-3" />
+                </span>
+                {point}
+              </li>
+            ))}
+          </ul>
         </Reveal>
 
         {/* Right: form */}
@@ -136,7 +155,7 @@ export function ContactSection() {
             ) : (
               <form onSubmit={onSubmit}>
                 <StaggerGroup className="flex flex-col gap-5">
-                  <StaggerItem>
+                  <StaggerItem className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                     <Field
                       label="Name"
                       id="name"
@@ -144,6 +163,14 @@ export function ContactSection() {
                       onChange={update("name")}
                       required
                       placeholder="Your full name"
+                    />
+                    <Field
+                      label="Business name"
+                      id="business"
+                      value={form.business}
+                      onChange={update("business")}
+                      required
+                      placeholder="Your company"
                     />
                   </StaggerItem>
                   <StaggerItem className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -167,26 +194,36 @@ export function ContactSection() {
                     />
                   </StaggerItem>
 
+                  <StaggerItem>
+                    <Field
+                      label="Current website (optional)"
+                      id="website"
+                      value={form.website}
+                      onChange={update("website")}
+                      placeholder="yourbusiness.com"
+                    />
+                  </StaggerItem>
+
                   <StaggerItem className="flex flex-col gap-2">
                     <label
-                      htmlFor="service"
+                      htmlFor="budget"
                       className="text-xs uppercase tracking-widest text-muted-foreground"
                     >
-                      Service needed
+                      Current monthly ad budget
                     </label>
                     <select
-                      id="service"
-                      value={form.service}
-                      onChange={update("service")}
+                      id="budget"
+                      value={form.budget}
+                      onChange={update("budget")}
                       required
                       className="h-12 rounded-xl border border-line bg-black/40 px-4 text-sm text-near-white outline-none transition-colors focus:border-cyan focus:ring-1 focus:ring-cyan/50"
                     >
                       <option value="" disabled>
-                        Select a service
+                        Select a range
                       </option>
-                      {services.map((s) => (
-                        <option key={s} value={s} className="bg-black">
-                          {s}
+                      {budgets.map((b) => (
+                        <option key={b} value={b} className="bg-black">
+                          {b}
                         </option>
                       ))}
                     </select>
@@ -222,6 +259,7 @@ export function ContactSection() {
             )}
           </div>
         </Reveal>
+        </div>
       </div>
     </section>
   )

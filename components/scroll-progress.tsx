@@ -1,10 +1,10 @@
 "use client"
 
-import { motion, useScroll, useSpring } from "framer-motion"
+import { motion, useSpring } from "framer-motion"
+import { scrollProgressMV } from "@/lib/scroll-state"
 
 export function ScrollProgress() {
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, {
+  const scaleX = useSpring(scrollProgressMV, {
     stiffness: 140,
     damping: 30,
     restDelta: 0.001,

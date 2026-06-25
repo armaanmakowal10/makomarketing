@@ -4,7 +4,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { Phone, Mail, ArrowUp } from "lucide-react"
 import { StaggerGroup, StaggerItem } from "@/components/reveal"
-import { FooterWordmark } from "@/components/footer-wordmark"
 import { lenisRef } from "@/lib/scroll-state"
 
 const PHONE_DISPLAY = "905-260-5457"
@@ -26,7 +25,7 @@ const cols = [
     links: [
       { label: "About Us", href: "/about-us" },
       { label: "Blog", href: "/blog" },
-      { label: "Work", href: "/#work" },
+      { label: "Results", href: "/#results" },
       { label: "Contact", href: "/#contact" },
     ],
   },
@@ -39,7 +38,7 @@ function backToTop() {
 
 export function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden border-t border-line bg-transparent">
+    <footer className="relative overflow-hidden border-t-[3px] border-white/80 bg-transparent">
       <div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
         <StaggerGroup className="grid grid-cols-2 gap-10 md:grid-cols-4">
           <StaggerItem className="col-span-2">
@@ -109,8 +108,6 @@ export function SiteFooter() {
           </button>
         </div>
       </div>
-
-      <FooterWordmark />
     </footer>
   )
 }
