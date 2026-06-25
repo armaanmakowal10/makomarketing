@@ -5,29 +5,30 @@ import { Target, Gauge, Workflow, LineChart, ArrowUpRight, type LucideIcon } fro
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
 import { AnimatedCounter } from "@/components/animated-counter"
+import { SuccessChart } from "@/components/sections/SuccessChart"
 
 type Reason = { icon: LucideIcon; title: string; body: string }
 
 const reasons: Reason[] = [
   {
     icon: Workflow,
-    title: "An insanely detailed process",
-    body: "Deep market research, conversion-tested creative, airtight tracking, and relentless weekly optimization. Our process is innovative, fully documented, and engineered to win — most agencies can't touch it.",
+    title: "A meticulous, proven process",
+    body: "Thorough market research, conversion-tested creative, precise tracking, and ongoing weekly optimization. Our process is fully documented and engineered to deliver results few agencies can match.",
   },
   {
     icon: Target,
     title: "Revenue, not vanity metrics",
-    body: "We don't chase impressions or likes. Every campaign is built around one number: how much revenue it drops into your pocket.",
+    body: "We don't focus on impressions or likes. Every campaign is built around a single metric: the revenue it generates for your business.",
   },
   {
     icon: Gauge,
-    title: "Built to convert, not just look pretty",
-    body: "Lightning-fast, search-optimized sites and tightly-managed ad accounts. We obsess over Core Web Vitals, tracking, and conversion paths so not a single lead slips through the cracks.",
+    title: "Built to convert, not merely to impress",
+    body: "Fast, search-optimized websites and carefully managed ad accounts. We prioritize Core Web Vitals, tracking, and conversion paths so no qualified lead is lost.",
   },
   {
     icon: LineChart,
     title: "Results that compound",
-    body: "We attack the fastest wins first, then reinvest into what proves out — so your pipeline grows bigger and cheaper every single month.",
+    body: "We prioritize the fastest wins first, then reinvest in what proves effective — so your pipeline grows larger and more efficient each month.",
   },
 ]
 
@@ -35,17 +36,17 @@ export function WhySpecialSection() {
   return (
     <section
       id="why"
-      className="relative overflow-hidden border-t-[3px] border-white/80 bg-gradient-to-b from-cyan/[0.025] to-transparent py-24 md:py-32"
+      className="relative overflow-hidden bg-gradient-to-b from-cyan/[0.025] to-transparent py-24 md:py-32"
     >
       <div className="pointer-events-none absolute left-1/2 top-24 h-[55vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.10),transparent_70%)] blur-[130px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
-          eyebrow="Why Mako"
-          sub="As a results-driven digital marketing agency for service businesses, we don't juggle a hundred random accounts. We specialize in Google Ads, Meta Ads, SEO, and high-converting web design for contractors, home services, and local businesses — obsessing over the metrics that actually move revenue and backing it with a process most agencies can't touch."
+          align="left"
+          sub="As a results-driven digital marketing agency for service businesses, we work with a select group of clients rather than spreading ourselves thin. We specialize in Google Ads, Meta Ads, SEO, and high-converting web design for contractors, home services, and local businesses — concentrating on the metrics that drive revenue and supporting it with a process few agencies can match."
         >
-          Why service businesses{" "}
-          <span className="text-cyan-gradient">choose us</span>
+          Why{" "}
+          <span className="text-cyan-gradient">Mako Marketing?</span>
         </SectionHeading>
 
         {/* ROAS proof banner */}
@@ -56,11 +57,13 @@ export function WhySpecialSection() {
             </span>
             <span className="max-w-md text-base leading-relaxed text-near-white/80 md:text-lg">
               Average return on ad spend across our client campaigns. We
-              don&rsquo;t just spend your budget — we engineer every dollar to
-              come back multiplied.
+              don&rsquo;t simply manage your budget — we engineer every dollar
+              to deliver a measurable return.
             </span>
           </div>
         </Reveal>
+
+        <SuccessChart />
 
         <StaggerGroup className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2">
           {reasons.map((r, i) => {

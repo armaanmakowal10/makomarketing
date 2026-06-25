@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, Menu, X } from "lucide-react"
+import { ArrowUpRight, Menu, Phone, X } from "lucide-react"
+
+const PHONE_TEL = "tel:9052605457"
 
 const menuLinks = [
   { href: "/services", label: "Services" },
@@ -14,7 +16,6 @@ const menuLinks = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : ""
@@ -23,44 +24,42 @@ export function SiteHeader() {
     }
   }, [open])
 
-  // Logo only shows at the very top; hides once scrolled (either direction).
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 120)
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
-
   return (
     <>
-      {/* Logo — top left, hides on scroll */}
-      <Link
-        href="/"
-        aria-label="Mako Marketing home"
-        className={`fixed left-1/2 top-4 z-50 flex -translate-x-1/2 flex-col items-center transition-all duration-300 md:top-6 ${
-          scrolled
-            ? "pointer-events-none -translate-y-4 opacity-0"
-            : "translate-y-0 opacity-100"
-        }`}
-      >
-        <Image
-          src="/Mako-Marketing-logo-design.png"
-          alt="Mako Marketing"
-          width={432}
-          height={173}
-          priority
-          className="mx-auto h-32 w-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)] md:h-44"
-        />
-      </Link>
+      {/* Top-right cluster: home (logo mark) · call · hamburger — anchored to
+          the hero so the header scrolls out of view. */}
+      <div className="absolute right-5 top-5 z-50 flex items-center gap-3.5 md:right-8 md:top-6">
+        <Link
+          href="/"
+          aria-label="Mako Marketing home"
+          className="flex size-14 items-center justify-center overflow-hidden rounded-full border border-line-strong bg-black/40 backdrop-blur-sm transition-colors hover:border-cyan"
+        >
+          <Image
+            src="/Mako-Marketing-logo-design.png"
+            alt="Mako Marketing"
+            width={432}
+            height={173}
+            priority
+            className="w-10 object-contain"
+          />
+        </Link>
 
-      {/* Hamburger — top right, always available */}
-      <button
-        onClick={() => setOpen(true)}
-        aria-label="Open menu"
-        className="fixed right-5 top-5 z-50 flex size-12 items-center justify-center rounded-full border border-line-strong bg-black/40 text-near-white backdrop-blur-sm transition-colors hover:border-cyan hover:text-cyan md:right-8 md:top-6"
-      >
-        <Menu className="size-5" />
-      </button>
+        <a
+          href={PHONE_TEL}
+          aria-label="Call Mako Marketing"
+          className="flex size-14 items-center justify-center rounded-full border border-line-strong bg-black/40 text-near-white backdrop-blur-sm transition-colors hover:border-cyan hover:text-cyan"
+        >
+          <Phone className="size-6" />
+        </a>
+
+        <button
+          onClick={() => setOpen(true)}
+          aria-label="Open menu"
+          className="flex size-14 items-center justify-center rounded-full border border-line-strong bg-black/40 text-near-white backdrop-blur-sm transition-colors hover:border-cyan hover:text-cyan"
+        >
+          <Menu className="size-6" />
+        </button>
+      </div>
 
       {/* Backdrop */}
       <div

@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { ArrowUpRight, Check, Mail, Phone } from "lucide-react"
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
-import { SectionHeading } from "@/components/section-heading"
 import { Magnetic } from "@/components/magnetic"
 import { SplitHeading } from "@/components/split-heading"
 
@@ -56,26 +55,64 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden border-t-[3px] border-white/80 bg-transparent py-24 md:py-32"
+      className="relative overflow-hidden bg-transparent py-24 md:py-32"
     >
       <div className="bg-grid bg-grid-fade pointer-events-none absolute inset-0 opacity-40" />
       <div className="pointer-events-none absolute left-1/2 top-0 h-[50vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.18),transparent_70%)] blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8">
-        <SectionHeading
-          eyebrow="Let's talk"
-          sub="Tell us about your business and we'll build a custom digital marketing plan — Google Ads, Meta Ads, SEO, and web design — to turn more traffic into paying customers. Free, no-pressure consultation for service businesses across Ontario and Canada."
-        >
-          <SplitHeading
-            text="Ready To Turn Traffic Into Paying Customers?"
-            accent={["Paying", "Customers?"]}
-          />
-        </SectionHeading>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
+          {/* Left: pitch + contact methods */}
+          <div>
+            <Reveal className="text-left">
+          <p className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-cyan">
+            Let&rsquo;s Talk
+            <span className="h-px w-8 bg-gradient-to-r from-cyan/60 to-transparent" />
+          </p>
 
-        <div className="mt-14 grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16">
-          {/* Left: contact methods + checklist */}
-          <Reveal>
-            <div className="flex flex-col gap-4">
+          <h2 className="text-display mt-4 text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05] text-near-white">
+            <SplitHeading
+              text={"Get More Customers.\nStarting Now."}
+              accent={["Customers.", "Now."]}
+            />
+          </h2>
+
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            A free audit, a custom growth plan, and real results — no contracts,
+            no fluff.
+          </p>
+
+          {/* Scannable benefit chips */}
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            {["Free audit", "1-day reply", "No contracts"].map((c) => (
+              <span
+                key={c}
+                className="flex items-center gap-1.5 rounded-full border border-cyan/30 bg-cyan/[0.06] px-3.5 py-1.5 text-sm text-near-white/85"
+              >
+                <Check className="size-3.5 text-cyan" />
+                {c}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <Magnetic strength={0.3}>
+              <a href="/free-audit" className="btn-cyan h-14 px-9 text-base">
+                Request your free audit <ArrowUpRight className="size-5" />
+              </a>
+            </Magnetic>
+            <a
+              href={PHONE_TEL}
+              className="group inline-flex items-center gap-2 text-sm font-medium text-near-white transition-colors hover:text-cyan"
+            >
+              <Phone className="size-4 text-cyan" />
+              or call {PHONE_DISPLAY}
+            </a>
+          </div>
+            </Reveal>
+
+            <Reveal className="mt-10">
+              <div className="flex flex-col gap-4">
             <Magnetic strength={0.2}>
               <a
                 href={PHONE_TEL}
@@ -109,29 +146,11 @@ export function ContactSection() {
               </span>
             </a>
           </div>
+            </Reveal>
+          </div>
 
-          <ul className="mt-8 flex flex-col gap-3">
-            {[
-              "Free, no-pressure consultation",
-              "A reply within one business day",
-              "A custom plan built around your goals",
-              "No long-term lock-ins",
-            ].map((point) => (
-              <li
-                key={point}
-                className="flex items-center gap-3 text-sm text-near-white/85"
-              >
-                <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-cyan/15 text-cyan">
-                  <Check className="size-3" />
-                </span>
-                {point}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-
-        {/* Right: form */}
-        <Reveal delay={0.1}>
+          {/* Right: form */}
+          <Reveal delay={0.1}>
           <div className="rounded-3xl border border-line bg-surface-1/70 p-6 backdrop-blur-sm md:p-9">
             {sent ? (
               <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
@@ -288,3 +307,4 @@ function Field({
     </div>
   )
 }
+

@@ -38,7 +38,7 @@ function backToTop() {
 
 export function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden border-t-[3px] border-white/80 bg-transparent">
+    <footer className="relative overflow-hidden bg-transparent">
       <div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
         <StaggerGroup className="grid grid-cols-2 gap-10 md:grid-cols-4">
           <StaggerItem className="col-span-2">

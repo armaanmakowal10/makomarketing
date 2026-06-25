@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Pridi, Funnel_Display } from 'next/font/google'
+import { Inter, IBM_Plex_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { SiteHeader } from '@/components/site-header'
@@ -9,17 +9,19 @@ import { AnimatedBackground } from '@/components/animated-background'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { IntroOverlay } from '@/components/intro-overlay'
 
-const pridi = Pridi({
+// Titles
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-pridi',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-inter',
   display: 'swap',
 })
 
-const funnelDisplay = Funnel_Display({
+// Paragraph / body text
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-funnel-display',
+  variable: '--font-ibm-plex',
   display: 'swap',
 })
 
@@ -131,7 +133,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${pridi.variable} ${funnelDisplay.variable}`}>
+    <html lang="en" className={`${inter.variable} ${ibmPlexSans.variable}`}>
       <body className="font-sans antialiased">
         {/* Land on the hero on every load/reload — never restore prior scroll. */}
         <script
