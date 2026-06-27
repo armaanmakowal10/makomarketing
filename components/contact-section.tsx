@@ -61,7 +61,7 @@ export function ContactSection() {
       <div className="pointer-events-none absolute left-1/2 top-0 h-[50vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.18),transparent_70%)] blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-stretch lg:gap-16">
           {/* Left: pitch + contact methods */}
           <div>
             <Reveal className="text-left">
@@ -72,8 +72,8 @@ export function ContactSection() {
 
           <h2 className="text-display mt-4 text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05] text-near-white">
             <SplitHeading
-              text={"Get More Customers.\nStarting Now."}
-              accent={["Customers.", "Now."]}
+              text={"Let's Grow Your\nBusiness."}
+              accent={["Business."]}
             />
           </h2>
 
@@ -150,8 +150,8 @@ export function ContactSection() {
           </div>
 
           {/* Right: form */}
-          <Reveal delay={0.1}>
-          <div className="rounded-3xl border border-line bg-surface-1/70 p-6 backdrop-blur-sm md:p-9">
+          <Reveal delay={0.1} className="h-full">
+          <div className="flex h-full flex-col rounded-3xl border border-line bg-surface-1/70 p-6 backdrop-blur-sm md:p-9">
             {sent ? (
               <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
                 <span className="flex size-16 items-center justify-center rounded-full border border-cyan bg-cyan/10 text-cyan">
@@ -172,8 +172,8 @@ export function ContactSection() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={onSubmit}>
-                <StaggerGroup className="flex flex-col gap-5">
+              <form onSubmit={onSubmit} className="flex flex-1 flex-col">
+                <StaggerGroup className="flex flex-1 flex-col gap-5">
                   <StaggerItem className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                     <Field
                       label="Name"
@@ -265,7 +265,7 @@ export function ContactSection() {
                     />
                   </StaggerItem>
 
-                  <StaggerItem>
+                  <StaggerItem className="mt-auto">
                     <button
                       type="submit"
                       className="btn-cyan mt-2 h-14 w-full px-8 text-base"

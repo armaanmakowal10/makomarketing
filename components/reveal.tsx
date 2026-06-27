@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion, type Variants } from "framer-motion"
-import type { ReactNode } from "react"
+import { forwardRef, type ReactNode, type UIEventHandler } from "react"
 
 const DURATION = 0.55
 const Y = 30
@@ -64,17 +64,19 @@ const itemReduced: Variants = {
 }
 
 /** Staggered reveal for grids/lists — children cascade in as they enter view. */
-export function StaggerGroup({
-  children,
-  className,
-  amount = 0.25,
-}: {
-  children: ReactNode
-  className?: string
-  amount?: number
-}) {
+export const StaggerGroup = forwardRef<
+  HTMLDivElement,
+  {
+    children: ReactNode
+    className?: string
+    amount?: number
+    onScroll?: UIEventHandler<HTMLDivElement>
+  }
+>(function StaggerGroup({ children, className, amount = 0.25, onScroll }, ref) {
   return (
     <motion.div
+      ref={ref}
+      onScroll={onScroll}
       className={className}
       variants={container}
       initial="hidden"
@@ -84,7 +86,7 @@ export function StaggerGroup({
       {children}
     </motion.div>
   )
-}
+})
 
 export function StaggerItem({
   children,

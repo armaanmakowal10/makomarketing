@@ -1,8 +1,9 @@
 "use client"
 
+import { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react"
 
 // Real service-business websites we've designed and developed.
 const projects: { title: string; url: string; description: string; image: string }[] = [
@@ -13,6 +14,32 @@ const projects: { title: string; url: string; description: string; image: string
 ]
 
 export function ResultsSection() {
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const [atStart, setAtStart] = useState(true)
+  const [atEnd, setAtEnd] = useState(false)
+
+  const updateEdges = useCallback(() => {
+    const el = scrollerRef.current
+    if (!el) return
+    // Small tolerance absorbs scroll-snap's sub-pixel resting offset.
+    setAtStart(el.scrollLeft <= 16)
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 16)
+  }, [])
+
+  useEffect(() => {
+    updateEdges()
+    window.addEventListener("resize", updateEdges)
+    return () => window.removeEventListener("resize", updateEdges)
+  }, [updateEdges])
+
+  const scrollByCard = (dir: 1 | -1) => {
+    const el = scrollerRef.current
+    if (!el) return
+    const card = el.firstElementChild as HTMLElement | null
+    const amount = card ? card.offsetWidth + 20 : el.clientWidth * 0.8
+    el.scrollBy({ left: dir * amount, behavior: "smooth" })
+  }
+
   return (
     <section
       id="results"
@@ -36,10 +63,18 @@ export function ResultsSection() {
           </p>
         </Reveal>
 
-        {/* Websites we've built — horizontal scroll carousel to save vertical space */}
-        <StaggerGroup className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4">
+        {/* Websites we've built — horizontal carousel driven by side arrows */}
+        <div className="relative mt-10">
+          <StaggerGroup
+            ref={scrollerRef}
+            onScroll={updateEdges}
+            className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
           {projects.map((project, i) => (
-            <StaggerItem key={project.url} className="w-[300px] shrink-0 snap-start sm:w-[340px]">
+            <StaggerItem
+              key={project.url}
+              className="w-[300px] shrink-0 snap-start sm:w-[340px]"
+            >
               <a
                 href={project.url}
                 target="_blank"
@@ -75,7 +110,28 @@ export function ResultsSection() {
               </a>
             </StaggerItem>
           ))}
-        </StaggerGroup>
+          </StaggerGroup>
+
+          {/* Prev / next arrows flanking the portfolio block */}
+          <button
+            type="button"
+            aria-label="Previous projects"
+            onClick={() => scrollByCard(-1)}
+            disabled={atStart}
+            className="absolute left-0 top-[34%] z-20 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-line-strong bg-surface-1/80 text-cyan backdrop-blur-sm transition-all hover:bg-cyan hover:text-black disabled:pointer-events-none disabled:opacity-0"
+          >
+            <ChevronLeft className="size-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Next projects"
+            onClick={() => scrollByCard(1)}
+            disabled={atEnd}
+            className="absolute right-0 top-[34%] z-20 flex size-11 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-line-strong bg-surface-1/80 text-cyan backdrop-blur-sm transition-all hover:bg-cyan hover:text-black disabled:pointer-events-none disabled:opacity-0"
+          >
+            <ChevronRight className="size-5" />
+          </button>
+        </div>
       </div>
     </section>
   )

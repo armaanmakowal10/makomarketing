@@ -6,7 +6,6 @@ import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { SmoothScroll } from '@/components/smooth-scroll'
 import { AnimatedBackground } from '@/components/animated-background'
-import { ScrollProgress } from '@/components/scroll-progress'
 import { IntroOverlay } from '@/components/intro-overlay'
 
 // Titles
@@ -146,7 +145,10 @@ export default function RootLayout({
         <style
           dangerouslySetInnerHTML={{
             __html:
-              "::-webkit-scrollbar-button{display:none!important;width:0!important;height:0!important}",
+              "::-webkit-scrollbar-button{display:none!important;width:0!important;height:0!important}" +
+              "@keyframes text-glow{0%,100%{color:#14e4fe;text-shadow:0 0 16px rgba(20,228,254,.35),0 0 38px rgba(20,228,254,.18)}50%{color:#5cf0ff;text-shadow:0 0 26px rgba(20,228,254,.8),0 0 70px rgba(20,228,254,.45)}}" +
+              ".text-cyan-glow{color:#14e4fe;animation:text-glow 2.8s ease-in-out infinite}" +
+              "@media(prefers-reduced-motion:reduce){.text-cyan-glow{animation:none;color:#14e4fe}}",
           }}
         />
         <script
@@ -155,7 +157,6 @@ export default function RootLayout({
         />
         <IntroOverlay />
         <AnimatedBackground />
-        <ScrollProgress />
         <SiteHeader />
         <SmoothScroll>
           {children}

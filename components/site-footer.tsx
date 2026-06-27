@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { Phone, Mail, ArrowUp } from "lucide-react"
 import { StaggerGroup, StaggerItem } from "@/components/reveal"
 import { lenisRef } from "@/lib/scroll-state"
@@ -37,20 +38,25 @@ function backToTop() {
 }
 
 export function SiteFooter() {
+  const pathname = usePathname()
+  const isHome = pathname === "/"
+
   return (
     <footer className="relative overflow-hidden bg-transparent">
       <div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
         <StaggerGroup className="grid grid-cols-2 gap-10 md:grid-cols-4">
           <StaggerItem className="col-span-2">
-            <Link href="/" aria-label="Mako Marketing home">
-              <Image
-                src="/Mako-Marketing-logo-design.png"
-                alt="Mako Marketing"
-                width={180}
-                height={72}
-                className="h-14 w-auto object-contain"
-              />
-            </Link>
+            {!isHome && (
+              <Link href="/" aria-label="Mako Marketing home">
+                <Image
+                  src="/Mako-Marketing-logo-design.png"
+                  alt="Mako Marketing"
+                  width={180}
+                  height={72}
+                  className="h-14 w-auto object-contain"
+                />
+              </Link>
+            )}
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Turning traffic into paying customers for service-based businesses.
             </p>

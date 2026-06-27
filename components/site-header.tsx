@@ -1,13 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, Menu, Phone, X } from "lucide-react"
-
-const PHONE_TEL = "tel:9052605457"
+import { usePathname } from "next/navigation"
 
 const menuLinks = [
+  { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/process", label: "Our Process" },
   { href: "/blog", label: "Blog" },
@@ -15,97 +13,40 @@ const menuLinks = [
 ]
 
 export function SiteHeader() {
-  const [open, setOpen] = useState(false)
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : ""
-    return () => {
-      document.body.style.overflow = ""
-    }
-  }, [open])
+  const pathname = usePathname()
+  const isHome = pathname === "/"
 
   return (
-    <>
-      {/* Top-right cluster: home (logo mark) · call · hamburger — anchored to
-          the hero so the header scrolls out of view. */}
-      <div className="absolute right-5 top-5 z-50 flex items-center gap-3.5 md:right-8 md:top-6">
-        <Link
-          href="/"
-          aria-label="Mako Marketing home"
-          className="flex size-14 items-center justify-center overflow-hidden rounded-full border border-line-strong bg-black/40 backdrop-blur-sm transition-colors hover:border-cyan"
-        >
+    // Absolute (not fixed) so the header is frozen at the top of the page and
+    // scrolls out of view with the hero — it never follows the scroll.
+    <header className="absolute inset-x-0 top-0 z-50">
+      <div className="relative mx-auto flex max-w-7xl items-center px-5 py-5 md:px-8 md:py-6">
+        {/* Logo — top-left on the home page only, vertically centred on the
+            nav row so the two line up. */}
+        {isHome && (
           <Image
             src="/Mako-Marketing-logo-design.png"
             alt="Mako Marketing"
-            width={432}
-            height={173}
+            width={520}
+            height={208}
             priority
-            className="w-10 object-contain"
+            className="absolute -left-3 top-1/2 h-16 w-auto -translate-y-1/2 object-contain md:-left-5 md:h-20"
           />
-        </Link>
+        )}
 
-        <a
-          href={PHONE_TEL}
-          aria-label="Call Mako Marketing"
-          className="flex size-14 items-center justify-center rounded-full border border-line-strong bg-black/40 text-near-white backdrop-blur-sm transition-colors hover:border-cyan hover:text-cyan"
-        >
-          <Phone className="size-6" />
-        </a>
-
-        <button
-          onClick={() => setOpen(true)}
-          aria-label="Open menu"
-          className="flex size-14 items-center justify-center rounded-full border border-line-strong bg-black/40 text-near-white backdrop-blur-sm transition-colors hover:border-cyan hover:text-cyan"
-        >
-          <Menu className="size-6" />
-        </button>
-      </div>
-
-      {/* Backdrop */}
-      <div
-        onClick={() => setOpen(false)}
-        aria-hidden
-        className={`fixed inset-0 z-[55] bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${
-          open ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
-      />
-
-      {/* Slide-in drawer */}
-      <aside
-        aria-hidden={!open}
-        className={`fixed inset-y-0 right-0 z-[60] flex h-full w-full max-w-sm flex-col border-l border-line-strong bg-surface-1 transition-transform duration-300 ease-out ${
-          open ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex items-center justify-between px-6 py-5 md:px-8">
-          <span className="text-xs uppercase tracking-[0.3em] text-cyan">
-            Menu
-          </span>
-          <button
-            onClick={() => setOpen(false)}
-            aria-label="Close menu"
-            className="flex size-10 items-center justify-center rounded-full border border-line-strong text-near-white transition-colors hover:border-cyan hover:text-cyan"
-          >
-            <X className="size-5" />
-          </button>
-        </div>
-
-        <nav className="flex flex-1 flex-col px-6 pb-10 md:px-8">
+        {/* Page titles — centred across the page and spread out */}
+        <nav className="flex w-full flex-wrap items-center justify-center gap-x-14 gap-y-2 md:gap-x-24">
           {menuLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              onClick={() => setOpen(false)}
-              className="group flex items-center justify-between border-b border-line py-5"
+              className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-cyan"
             >
-              <span className="text-display text-2xl text-near-white transition-colors group-hover:text-cyan">
-                {link.label}
-              </span>
-              <ArrowUpRight className="size-5 -translate-x-1 text-cyan opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+              {link.label}
             </Link>
           ))}
         </nav>
-      </aside>
-    </>
+      </div>
+    </header>
   )
 }

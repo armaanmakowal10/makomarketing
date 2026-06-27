@@ -1,14 +1,19 @@
 "use client"
 
 import { motion, useSpring } from "framer-motion"
+import { usePathname } from "next/navigation"
 import { scrollProgressMV } from "@/lib/scroll-state"
 
 export function ScrollProgress() {
+  const pathname = usePathname()
   const scaleX = useSpring(scrollProgressMV, {
     stiffness: 140,
     damping: 30,
     restDelta: 0.001,
   })
+
+  // Only show the scroll-progress bar on the home page.
+  if (pathname !== "/") return null
 
   return (
     <motion.div

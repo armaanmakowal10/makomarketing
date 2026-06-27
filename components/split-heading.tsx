@@ -31,10 +31,12 @@ const word: Variants = {
 export function SplitHeading({
   text,
   accent = [],
+  accentClassName = "text-cyan-gradient",
   className,
 }: {
   text: string
   accent?: string[]
+  accentClassName?: string
   className?: string
 }) {
   const reduce = useReducedMotion()
@@ -42,7 +44,7 @@ export function SplitHeading({
   const multiline = lines.length > 1
   const accentSet = new Set(accent)
   const accentClass = (w: string) =>
-    accentSet.has(w) ? "text-cyan-gradient" : undefined
+    accentSet.has(w) ? accentClassName : undefined
   const lineStyle = { display: multiline ? "block" : "inline" } as const
 
   if (reduce) {
