@@ -27,7 +27,7 @@ export function HeroSection() {
               re-centers smoothly via the word's animated width. */}
           <span aria-hidden="true" className="inline-block whitespace-nowrap">
             More{" "}
-            <RotatingWord words={["Leads.", "Profit.", "Freedom."]} />
+            <RotatingWord words={["Leads.", "Profit.", "Freedom."]} interval={2000} />
           </span>
         </h1>
 
