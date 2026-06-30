@@ -62,65 +62,51 @@ export function WhySpecialSection() {
       <div className="pointer-events-none absolute left-1/2 top-24 h-[55vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.10),transparent_70%)] blur-[130px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14">
-          <SectionHeading
-            align="left"
-            sub={
-              <>
-                Most agencies hand you a pretty website and disappear. We
-                engineer{" "}
-                <span className="font-medium text-near-white">
-                  Google Ads, Meta Ads, SEO, and conversion-built sites
-                </span>{" "}
-                around one thing —{" "}
-                <span className="font-medium text-near-white">
-                  the revenue they actually generate
-                </span>
-                . We take on a select few businesses and treat their numbers
-                like our own.
-              </>
-            }
-          >
-            Why{" "}
-            <span className="text-cyan-gradient">Mako Marketing?</span>
-          </SectionHeading>
+        {/* Intro — centred so the section opens with one clear focal point. */}
+        <SectionHeading
+          sub={
+            <>
+              Most agencies hand you a pretty website and disappear. We engineer{" "}
+              <span className="font-medium text-near-white">
+                Google Ads, Meta Ads, SEO, and conversion-built sites
+              </span>{" "}
+              around one thing —{" "}
+              <span className="font-medium text-near-white">
+                the revenue they actually generate
+              </span>
+              . We take on a select few businesses and treat their numbers like
+              our own.
+            </>
+          }
+        >
+          Why <span className="text-cyan-gradient">Mako Marketing?</span>
+        </SectionHeading>
 
-          {/* Right-hand "results-first" card — fills the space and hammers home
-              that we chase revenue, not awards. */}
-          <Reveal delay={0.1}>
-            <div className="relative overflow-hidden rounded-3xl border border-cyan/25 bg-gradient-to-br from-cyan/[0.07] to-surface-1/30 p-8 backdrop-blur-sm">
-              <motion.div
-                aria-hidden
-                className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-cyan/15 blur-[70px]"
-                animate={{ opacity: [0.45, 0.85, 0.45], scale: [1, 1.15, 1] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <div className="relative">
-                <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.28em] text-cyan/75">
-                  <TrendingUp className="size-4" /> What we obsess over
+        {/* "What we obsess over" — the three principles broken out into equal
+            cards so each one is easy to scan instead of buried in a list. */}
+        <Reveal className="mx-auto mt-16 max-w-2xl text-center">
+          <p className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.28em] text-cyan/75">
+            <TrendingUp className="size-4" /> What we obsess over
+          </p>
+          <p className="text-display mt-4 text-2xl leading-snug text-near-white md:text-3xl">
+            Revenue First. <span className="text-cyan-gradient">Always.</span>
+          </p>
+        </Reveal>
+
+        <StaggerGroup className="mt-10 grid gap-5 sm:grid-cols-3 sm:gap-6">
+          {OBSESS_POINTS.map((p) => (
+            <StaggerItem key={p}>
+              <div className="group h-full rounded-3xl border border-cyan/20 bg-gradient-to-br from-cyan/[0.06] to-surface-1/30 p-7 backdrop-blur-sm transition-colors hover:border-cyan/40">
+                <span className="flex size-11 items-center justify-center rounded-2xl border border-line-strong bg-cyan/10 text-cyan transition-colors group-hover:bg-cyan group-hover:text-black">
+                  <Check className="size-5" />
                 </span>
-                <p className="text-display mt-4 text-2xl leading-snug text-near-white md:text-3xl">
-                  Revenue First.{" "}
-                  <span className="text-cyan-gradient">Always.</span>
+                <p className="mt-5 text-sm leading-relaxed text-near-white/85 md:text-base">
+                  {p}
                 </p>
-                <StaggerGroup className="mt-7 flex flex-col gap-4">
-                  {OBSESS_POINTS.map((p) => (
-                    <StaggerItem key={p}>
-                      <div className="flex items-start gap-3">
-                        <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-cyan/15 text-cyan">
-                          <Check className="size-3.5" />
-                        </span>
-                        <span className="text-sm leading-relaxed text-near-white/85">
-                          {p}
-                        </span>
-                      </div>
-                    </StaggerItem>
-                  ))}
-                </StaggerGroup>
               </div>
-            </div>
-          </Reveal>
-        </div>
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
 
         {/* ROAS proof banner */}
         <Reveal className="mt-12">
