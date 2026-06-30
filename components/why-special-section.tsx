@@ -65,7 +65,21 @@ export function WhySpecialSection() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14">
           <SectionHeading
             align="left"
-            sub="Most agencies hand you a pretty website and disappear. We're not most agencies. We care about one thing above all else — the revenue your marketing actually generates. Design that doesn't convert is dead weight, so we engineer Google Ads, Meta Ads, SEO, and conversion-built websites around the metrics that grow your bottom line. We take on a select few service businesses and treat their numbers like our own."
+            sub={
+              <>
+                Most agencies hand you a pretty website and disappear. We
+                engineer{" "}
+                <span className="font-medium text-near-white">
+                  Google Ads, Meta Ads, SEO, and conversion-built sites
+                </span>{" "}
+                around one thing —{" "}
+                <span className="font-medium text-near-white">
+                  the revenue they actually generate
+                </span>
+                . We take on a select few businesses and treat their numbers
+                like our own.
+              </>
+            }
           >
             Why{" "}
             <span className="text-cyan-gradient">Mako Marketing?</span>
@@ -86,7 +100,7 @@ export function WhySpecialSection() {
                   <TrendingUp className="size-4" /> What we obsess over
                 </span>
                 <p className="text-display mt-4 text-2xl leading-snug text-near-white md:text-3xl">
-                  Revenue first.{" "}
+                  Revenue First.{" "}
                   <span className="text-cyan-gradient">Always.</span>
                 </p>
                 <StaggerGroup className="mt-7 flex flex-col gap-4">

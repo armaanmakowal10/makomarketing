@@ -47,7 +47,11 @@ export function SiteFooter() {
         <StaggerGroup className="grid grid-cols-2 gap-10 md:grid-cols-4">
           <StaggerItem className="col-span-2">
             {!isHome && (
-              <Link href="/" aria-label="Mako Marketing home">
+              <Link
+                href="/"
+                aria-label="Mako Marketing home"
+                className="-ml-3 inline-block md:-ml-6"
+              >
                 <Image
                   src="/Mako-Marketing-logo-design.png"
                   alt="Mako Marketing"

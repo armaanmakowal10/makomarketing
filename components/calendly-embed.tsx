@@ -23,7 +23,10 @@ export function CalendlyEmbed() {
     <div
       className="calendly-inline-widget w-full"
       data-url={THEMED_URL}
-      style={{ minWidth: "320px", height: "720px" }}
+      // minWidth kept below the smallest phone width so the widget never
+      // overflows its panel on narrow screens; height is tall enough for the
+      // month/time picker on mobile.
+      style={{ minWidth: "260px", height: "720px" }}
     />
   )
 }

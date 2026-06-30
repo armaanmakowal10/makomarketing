@@ -29,17 +29,38 @@ export function RotatingWord({
 }) {
   const reduce = useReducedMotion()
   const [index, setIndex] = useState(0)
+  const [started, setStarted] = useState(false)
   const sizerRef = useRef<HTMLSpanElement>(null)
   const [width, setWidth] = useState<number | undefined>(undefined)
 
+  // Don't cycle while the intro overlay is still covering the hero — otherwise the
+  // reel advances behind it and the hero reveals mid-sequence (e.g. on "Profit"
+  // instead of the first word). Wait for the intro's "done" event. If the intro is
+  // skipped (already seen this session, or reduced motion), start immediately.
   useEffect(() => {
-    if (reduce || words.length <= 1) return
+    const introSeen =
+      typeof sessionStorage !== "undefined" &&
+      sessionStorage.getItem("mako-intro-seen") === "1"
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    if (introSeen || reduceMotion) {
+      setStarted(true)
+      return
+    }
+    const onDone = () => setStarted(true)
+    window.addEventListener("mako-intro-done", onDone)
+    return () => window.removeEventListener("mako-intro-done", onDone)
+  }, [])
+
+  useEffect(() => {
+    if (reduce || words.length <= 1 || !started) return
     const id = setInterval(
       () => setIndex((i) => (i + 1) % words.length),
       interval
     )
     return () => clearInterval(id)
-  }, [reduce, words.length, interval])
+  }, [reduce, words.length, interval, started])
 
   // Measure the active word's natural width so the box can animate to it.
   useIsoLayoutEffect(() => {

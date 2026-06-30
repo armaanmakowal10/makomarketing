@@ -127,7 +127,7 @@ export function ServicesBrief() {
               className="group relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-2xl border border-cyan/40 bg-cyan/[0.06] p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-cyan/[0.1] hover:shadow-[0_0_50px_-12px_rgba(20,228,254,0.7)]"
             >
               <span className="text-display text-xl leading-tight text-near-white">
-                See everything we do
+                See Everything We Do
               </span>
               <span className="flex items-center gap-2 text-sm font-medium text-cyan">
                 View all services

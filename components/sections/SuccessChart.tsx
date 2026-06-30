@@ -1,8 +1,11 @@
 "use client"
 
 import { useId, useMemo, useState } from "react"
+import Link from "next/link"
 import { motion, useReducedMotion, type Variants } from "framer-motion"
-import { MoveHorizontal } from "lucide-react"
+import { MoveHorizontal, ArrowUpRight } from "lucide-react"
+import { Magnetic } from "@/components/magnetic"
+import { Reveal } from "@/components/reveal"
 
 // ── Projection model ─────────────────────────────────────────────────────────
 // Illustrative, not a guarantee. ROAS ramps 18x → 26x as spend scales (returns
@@ -54,13 +57,6 @@ export function SuccessChart() {
   return (
     <div className="mt-16 md:mt-20">
       <div className="mx-auto max-w-xl text-center">
-        <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan/30 bg-cyan/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-cyan">
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan/70" />
-            <span className="relative inline-flex size-2 rounded-full bg-cyan" />
-          </span>
-          Interactive — drag to explore
-        </span>
         <h3 className="text-display text-[clamp(1.6rem,3.6vw,2.5rem)] leading-tight text-near-white">
           What Could Your Ad Spend{" "}
           <span className="text-cyan-gradient">Return?</span>
@@ -73,7 +69,7 @@ export function SuccessChart() {
       <div className="mt-8 rounded-2xl border border-line bg-surface-1/30 p-4 sm:p-6 md:p-8">
         {/* ── Live results ── */}
         <p className="text-display mb-5 text-center text-2xl font-bold uppercase tracking-wide text-near-white/65 sm:text-3xl">
-          Your projected results at {fmtSpend(spend)}/mo
+          Your Projected Results at {fmtSpend(spend)}/mo in Ad Spend
         </p>
         <div className="mb-8 grid grid-cols-3 gap-3 sm:gap-4">
           <Stat label="Revenue / mo" value={fmtMoney(revenue)} accent big />
@@ -208,6 +204,33 @@ export function SuccessChart() {
           results will vary — book a free audit for real numbers.
         </p>
       </div>
+
+      {/* Closing CTA — convert the projection into a booking right where the
+          number is fresh in mind. */}
+      <Reveal className="mt-8 flex flex-col items-center gap-5 text-center">
+        <p className="text-display text-xl text-near-white sm:text-2xl">
+          Stop Guessing.{" "}
+          <span className="text-cyan-gradient">Start Scaling.</span>
+        </p>
+        <Magnetic strength={0.35}>
+          <div className="relative">
+            {/* Breathing halo behind the button to draw the eye. */}
+            <motion.span
+              aria-hidden
+              className="pointer-events-none absolute -inset-1.5 rounded-full bg-cyan/40 blur-lg"
+              animate={{ opacity: [0.4, 0.85, 0.4], scale: [0.97, 1.05, 0.97] }}
+              transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <Link
+              href="/free-audit"
+              className="btn-cyan group relative h-14 px-10 text-base font-semibold uppercase tracking-[0.12em] shadow-[0_0_30px_-4px_rgba(20,228,254,0.8)] transition-transform duration-200 hover:scale-[1.04] sm:text-lg"
+            >
+              Claim My Free Audit
+              <ArrowUpRight className="size-5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+          </div>
+        </Magnetic>
+      </Reveal>
     </div>
   )
 }

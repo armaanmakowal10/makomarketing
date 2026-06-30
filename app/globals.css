@@ -216,15 +216,25 @@ html {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: var(--cyan);
-  color: #000;
+  /* Title typeface (Inter) to match the headline. Clean vertical cyan gradient
+     with an inner top highlight for a glassy, premium pill — restrained glow
+     rather than neon, so it reads professional and sleek. */
+  background: linear-gradient(180deg, var(--cyan-bright) 0%, var(--cyan) 100%);
+  color: #001014;
+  font-family: var(--font-display);
   font-weight: 600;
+  letter-spacing: 0.04em;
   border-radius: 9999px;
-  transition: box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
-  box-shadow: 0 0 0 1px rgba(20, 228, 254, 0.4);
+  transition: box-shadow var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 1px 2px rgba(0, 0, 0, 0.35), 0 6px 20px -8px rgba(20, 228, 254, 0.5);
 }
 .btn-cyan:hover {
-  background: var(--cyan-bright);
+  background: linear-gradient(180deg, #b6f7ff 0%, var(--cyan-bright) 100%);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 26px -8px rgba(20, 228, 254, 0.65);
 }
 .btn-ghost {
   display: inline-flex;

@@ -46,7 +46,7 @@ export function ResultsSection() {
       className="relative overflow-hidden bg-transparent py-24 md:py-32"
     >
       {/* Cyan divider line marking the boundary between the hero and this section */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-cyan/20 via-cyan to-cyan/20 shadow-[0_0_22px_3px_rgba(20,228,254,0.6)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-cyan/0 via-cyan/50 to-cyan/0 shadow-[0_0_12px_1px_rgba(20,228,254,0.25)]" />
 
       <div className="pointer-events-none absolute right-0 top-0 h-[60vh] w-[60vh] rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.16),transparent_70%)] blur-[120px]" />
       <div className="pointer-events-none absolute -left-20 bottom-0 h-[45vh] w-[45vh] rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.10),transparent_70%)] blur-[120px]" />
