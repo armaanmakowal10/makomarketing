@@ -27,6 +27,9 @@ export function IntroOverlay() {
   // below releases the scroll lock and resumes Lenis when `show` flips false.
   const finishIntro = useCallback(() => {
     sessionStorage.setItem("mako-intro-seen", "1")
+    // Tell the hero the overlay has cleared so deferred animations (the rotating
+    // headline word) start from the top instead of staying frozen on word one.
+    window.dispatchEvent(new Event("mako-intro-done"))
     setShow(false)
   }, [])
 
