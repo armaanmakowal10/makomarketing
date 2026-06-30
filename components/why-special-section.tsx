@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { TrendingUp, Check } from "lucide-react"
+import { TrendingUp, Target, LineChart, Heart } from "lucide-react"
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
 import { AnimatedCounter } from "@/components/animated-counter"
@@ -46,11 +46,23 @@ function GrowthBars() {
   )
 }
 
-// Reinforces the results-over-design message in the right-hand card.
+// The three principles, each with a short title so the cards scan at a glance.
 const OBSESS_POINTS = [
-  "Results over aesthetics — every site is engineered to convert, not just to impress.",
-  "Every dollar is tracked straight to the revenue it brings back.",
-  "We take on a select few clients and obsess over them like you're our only one.",
+  {
+    icon: Target,
+    title: "Results Over Aesthetics",
+    desc: "Every site is engineered to convert, not just to impress.",
+  },
+  {
+    icon: LineChart,
+    title: "Every Dollar Tracked",
+    desc: "We trace every dollar straight to the revenue it brings back.",
+  },
+  {
+    icon: Heart,
+    title: "A Select Few Clients",
+    desc: "We obsess over a handful of clients like you're our only one.",
+  },
 ]
 
 export function WhySpecialSection() {
@@ -95,14 +107,19 @@ export function WhySpecialSection() {
         </Reveal>
 
         <StaggerGroup className="mt-10 grid gap-5 sm:grid-cols-3 sm:gap-6">
-          {OBSESS_POINTS.map((p) => (
-            <StaggerItem key={p}>
-              <div className="group h-full rounded-3xl border border-cyan/20 bg-gradient-to-br from-cyan/[0.06] to-surface-1/30 p-7 backdrop-blur-sm transition-colors hover:border-cyan/40">
-                <span className="flex size-11 items-center justify-center rounded-2xl border border-line-strong bg-cyan/10 text-cyan transition-colors group-hover:bg-cyan group-hover:text-black">
-                  <Check className="size-5" />
+          {OBSESS_POINTS.map((point) => (
+            <StaggerItem key={point.title}>
+              <div className="group relative h-full overflow-hidden rounded-3xl border border-cyan/15 bg-gradient-to-b from-cyan/[0.06] to-surface-1/20 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan/40 hover:shadow-[0_18px_40px_-22px_rgba(20,228,254,0.55)]">
+                {/* Thin accent line that lights up on hover. */}
+                <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="flex size-12 items-center justify-center rounded-2xl border border-cyan/25 bg-cyan/10 text-cyan transition-colors duration-300 group-hover:bg-cyan group-hover:text-black">
+                  <point.icon className="size-5" />
                 </span>
-                <p className="mt-5 text-sm leading-relaxed text-near-white/85 md:text-base">
-                  {p}
+                <h4 className="text-display mt-5 text-lg text-near-white">
+                  {point.title}
+                </h4>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-[15px]">
+                  {point.desc}
                 </p>
               </div>
             </StaggerItem>
