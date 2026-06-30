@@ -66,16 +66,17 @@ export function WhySpecialSection() {
         <SectionHeading
           sub={
             <>
-              Most agencies hand you a pretty website and disappear. We engineer{" "}
+              Most agencies hand you a pretty website and vanish. We don&rsquo;t.
+              We engineer{" "}
               <span className="font-medium text-near-white">
-                Google Ads, Meta Ads, SEO, and conversion-built sites
+                Google Ads, Meta Ads, SEO, and high converting websites
               </span>{" "}
-              around one thing —{" "}
+              built to do one thing:{" "}
               <span className="font-medium text-near-white">
-                the revenue they actually generate
+                generate revenue you can actually count
               </span>
-              . We take on a select few businesses and treat their numbers like
-              our own.
+              . We take on a select few businesses and attack their growth like
+              our own money is on the line.
             </>
           }
         >
