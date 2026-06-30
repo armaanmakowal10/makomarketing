@@ -49,7 +49,7 @@ export function SiteHeader() {
           href="/"
           aria-label="Mako Marketing — home"
           onClick={() => setOpen(false)}
-          className="absolute left-4 top-1/2 -translate-y-1/2 md:-left-7"
+          className="absolute left-4 top-1/2 -translate-y-1/2 md:-left-11"
         >
           <BrandMark className="h-8 sm:h-9" />
         </Link>
