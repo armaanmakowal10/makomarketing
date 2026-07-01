@@ -55,15 +55,12 @@ export function SuccessChart() {
   )
 
   return (
-    <div className="mt-16 md:mt-20">
+    <div className="mt-40 md:mt-56">
       <div className="mx-auto max-w-xl text-center">
         <h3 className="text-display text-[clamp(1.6rem,3.6vw,2.5rem)] leading-tight text-near-white">
           What Could Your Ad Spend{" "}
           <span className="text-cyan-gradient">Return?</span>
         </h3>
-        <p className="mt-3 text-base leading-relaxed text-muted-foreground md:text-lg">
-          Pick a monthly budget and see the revenue it could generate.
-        </p>
       </div>
 
       <div className="mt-8 rounded-2xl border border-line bg-surface-1/30 p-4 sm:p-6 md:p-8">
@@ -208,10 +205,6 @@ export function SuccessChart() {
       {/* Closing CTA — convert the projection into a booking right where the
           number is fresh in mind. */}
       <Reveal className="mt-8 flex flex-col items-center gap-5 text-center">
-        <p className="text-display text-xl text-near-white sm:text-2xl">
-          Stop Guessing.{" "}
-          <span className="text-cyan-gradient">Start Scaling.</span>
-        </p>
         <Magnetic strength={0.35}>
           <div className="relative">
             {/* Breathing halo behind the button to draw the eye. */}

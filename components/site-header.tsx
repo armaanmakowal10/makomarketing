@@ -2,13 +2,22 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { AnimatePresence, motion } from "framer-motion"
+import { X, Phone } from "lucide-react"
+
+const EASE = [0.16, 1, 0.3, 1] as const
+
+const PHONE_DISPLAY = "905-260-5457"
+const PHONE_TEL = "tel:9052605457"
 
 const menuLinks = [
+  { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/process", label: "Our Process" },
   { href: "/blog", label: "Blog" },
   { href: "/about-us", label: "About Us" },
+  { href: "/privacy-policy", label: "Privacy & Terms" },
 ]
 
 function BrandMark({ className }: { className?: string }) {
@@ -35,65 +44,144 @@ function BrandMark({ className }: { className?: string }) {
   )
 }
 
+// Three bars morphing to convey the menu button.
+function HamburgerIcon() {
+  const bar =
+    "absolute left-1/2 h-[2px] w-6 -translate-x-1/2 rounded-full bg-current"
+  return (
+    <span className="relative block h-4 w-6">
+      <span className={bar} style={{ top: 0 }} />
+      <span className={bar} style={{ top: 7 }} />
+      <span className={bar} style={{ top: 14 }} />
+    </span>
+  )
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
     // Absolute (not fixed) so the header is frozen at the top of the page and
     // scrolls out of view with the hero — it never follows the scroll.
     <header className="absolute inset-x-0 top-0 z-50">
-      <div className="relative mx-auto flex max-w-7xl items-center px-5 py-5 md:px-8 md:py-8">
-        {/* Brand mark (mountain icon only), linking home. Fully visible and
-            inset on mobile; pulled to the page edge from md up. */}
+      {/* Full-width row so the logo hugs the left edge and the hamburger hugs
+          the right edge of the page. */}
+      <div className="flex w-full items-center px-6 py-5 md:px-10 md:py-8">
+        {/* Brand mark (mountain icon only), linking home. */}
         <Link
           href="/"
           aria-label="Mako Marketing — home"
           onClick={() => setOpen(false)}
-          className="absolute left-4 top-1/2 -translate-y-1/2 md:-left-11"
+          className="relative z-50 shrink-0"
         >
           <BrandMark className="h-8 sm:h-9" />
         </Link>
 
-        {/* Desktop nav — centred across the page and spread out. */}
-        <nav className="hidden w-full flex-wrap items-center justify-center gap-x-10 lg:gap-x-20 xl:gap-x-44 md:flex">
-          {menuLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-cyan md:text-base"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Mobile menu toggle — pinned right. */}
-        <button
+        {/* Hamburger — glassy, glowing pill hugging the right edge. */}
+        <motion.button
           type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
+          onClick={() => setOpen(true)}
+          aria-label="Open menu"
           aria-expanded={open}
-          className="ml-auto inline-flex size-10 items-center justify-center rounded-full border border-line-strong text-near-white transition-colors hover:text-cyan md:hidden"
+          whileTap={{ scale: 0.94 }}
+          animate={{ opacity: open ? 0 : 1 }}
+          style={{ pointerEvents: open ? "none" : "auto" }}
+          className="group relative z-50 ml-auto inline-flex size-14 items-center justify-center rounded-full border border-cyan/40 bg-gradient-to-br from-white/[0.08] to-cyan/[0.05] text-near-white shadow-[0_0_26px_-8px_rgba(20,228,254,0.6)] backdrop-blur-md transition-colors duration-300 hover:border-cyan/70 hover:text-cyan"
         >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-full bg-cyan/25 blur-lg"
+            animate={{ opacity: [0.25, 0.5, 0.25], scale: [0.9, 1.05, 0.9] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <span className="relative">
+            <HamburgerIcon />
+          </span>
+        </motion.button>
       </div>
 
-      {/* Mobile dropdown panel. */}
-      {open && (
-        <nav className="mx-4 mt-1 flex flex-col overflow-hidden rounded-2xl border border-line bg-black/90 backdrop-blur-md md:hidden">
-          {menuLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
+      {/* Slide-in drawer menu. */}
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* Dim backdrop */}
+            <motion.div
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
               onClick={() => setOpen(false)}
-              className="border-b border-line/60 px-5 py-4 text-center font-display text-sm font-semibold uppercase tracking-[0.14em] text-near-white transition-colors last:border-b-0 hover:text-cyan"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+
+            <motion.nav
+              className="fixed inset-y-0 right-0 z-50 flex w-[86%] max-w-sm flex-col overflow-y-auto border-l border-line bg-gradient-to-b from-[#0a0e12] to-black shadow-[0_0_80px_rgba(0,0,0,0.7)]"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.4, ease: EASE }}
             >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      )}
+              {/* ambient top glow */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,rgba(20,228,254,0.12),transparent_70%)]" />
+
+              {/* MENU label + close */}
+              <div className="relative flex items-center justify-between border-b border-line px-6 py-6">
+                <span className="text-xs font-semibold uppercase tracking-[0.35em] text-cyan">
+                  Menu
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close menu"
+                  className="inline-flex size-9 items-center justify-center rounded-full border border-line-strong text-near-white transition-colors hover:border-cyan/60 hover:text-cyan"
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+
+              {/* Links */}
+              <div className="relative flex flex-col">
+                {menuLinks.map((link, i) => {
+                  const active = pathname === link.href
+                  return (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: -18 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + i * 0.05, duration: 0.35, ease: EASE }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className={`relative flex items-center border-b border-line/50 px-6 py-4 font-display text-lg transition-colors ${
+                          active
+                            ? "bg-cyan/[0.07] text-near-white"
+                            : "text-near-white/70 hover:bg-white/[0.03] hover:text-cyan"
+                        }`}
+                      >
+                        {active && (
+                          <span className="absolute left-0 top-0 h-full w-0.5 bg-cyan shadow-[0_0_10px_rgba(20,228,254,0.9)]" />
+                        )}
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  )
+                })}
+              </div>
+
+              {/* Phone at the bottom */}
+              <a
+                href={PHONE_TEL}
+                className="relative mt-auto flex items-center gap-3 border-t border-line px-6 py-6 text-near-white transition-colors hover:text-cyan"
+              >
+                <Phone className="size-4 text-cyan" />
+                <span className="text-display text-base">{PHONE_DISPLAY}</span>
+              </a>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

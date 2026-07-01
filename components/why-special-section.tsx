@@ -95,18 +95,9 @@ export function WhySpecialSection() {
           Why <span className="text-cyan-gradient">Mako Marketing?</span>
         </SectionHeading>
 
-        {/* "What we obsess over" — the three principles broken out into equal
-            cards so each one is easy to scan instead of buried in a list. */}
-        <Reveal className="mx-auto mt-16 max-w-2xl text-center">
-          <p className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.28em] text-cyan/75">
-            <TrendingUp className="size-4" /> What we obsess over
-          </p>
-          <p className="text-display mt-4 text-2xl leading-snug text-near-white md:text-3xl">
-            Revenue First. <span className="text-cyan-gradient">Always.</span>
-          </p>
-        </Reveal>
-
-        <StaggerGroup className="mt-10 grid gap-5 sm:grid-cols-3 sm:gap-6">
+        {/* The three principles, broken out into equal cards so each one is
+            easy to scan instead of buried in a list. */}
+        <StaggerGroup className="mt-16 grid gap-5 sm:grid-cols-3 sm:gap-6">
           {OBSESS_POINTS.map((point) => (
             <StaggerItem key={point.title}>
               <div className="group relative h-full overflow-hidden rounded-3xl border border-cyan/15 bg-gradient-to-b from-cyan/[0.06] to-surface-1/20 p-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan/40 hover:shadow-[0_18px_40px_-22px_rgba(20,228,254,0.55)]">

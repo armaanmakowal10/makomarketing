@@ -2,8 +2,6 @@
 
 import {
   Check,
-  Phone,
-  Mail,
   Star,
   Clock,
   ShieldCheck,
@@ -15,15 +13,10 @@ import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
 import { SplitHeading } from "@/components/split-heading"
 import { CalendlyEmbed } from "@/components/calendly-embed"
 
-const PHONE_DISPLAY = "905-260-5457"
-const PHONE_TEL = "tel:9052605457"
-const EMAIL = "makomarketing0@gmail.com"
-
-const perks = [
-  "A no-cost teardown of your website, Google Ads, Meta Ads, and SEO",
-  "Exactly where you're leaking leads — and how to plug it fast",
-  "A clear, custom plan to turn more traffic into booked customers",
-  "Zero pressure, zero obligation",
+const auditBullets = [
+  "See where your ad spend is being wasted",
+  "Get a clear plan to double qualified leads",
+  "Know if we're a fit. If not, you keep the plan anyway",
 ]
 
 const stats = [
@@ -126,58 +119,49 @@ export function FreeAuditSection() {
         </StaggerGroup>
 
         {/* ── Value props + booking ─────────────────────────────── */}
-        <div className="mt-12 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-12">
-          {/* What you get + contact */}
-          <Reveal>
-            <h2 className="text-display text-xl text-near-white md:text-2xl">
-              Here&rsquo;s what you&rsquo;ll get
+        <div className="mt-12 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-14">
+          {/* Left column — scarcity, pitch, and what they get */}
+          <Reveal className="w-full max-w-[500px]">
+            {/* Scarcity badge */}
+            <span className="inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-cyan/[0.06] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan shadow-[0_0_22px_-10px_rgba(20,228,254,0.8)]">
+              <span className="relative flex size-1.5">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan/70" />
+                <span className="relative inline-flex size-1.5 rounded-full bg-cyan" />
+              </span>
+              Only 2 New Clients Per Month
+            </span>
+
+            {/* Heading */}
+            <h2 className="text-display mt-6 text-3xl leading-[1.1] text-near-white md:text-4xl">
+              Book Your Free Growth Audit
             </h2>
-            <ul className="mt-6 flex flex-col gap-4">
-              {perks.map((p) => (
+
+            {/* Subheading */}
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              15 minutes. No pitch deck. No fluff. We look at your ads, your site,
+              and your lead flow, then tell you exactly what&rsquo;s leaking money.
+            </p>
+
+            {/* Bullets */}
+            <ul className="mt-8 flex flex-col gap-4">
+              {auditBullets.map((b) => (
                 <li
-                  key={p}
-                  className="flex items-start gap-3 text-sm leading-relaxed text-near-white/85 md:text-base"
+                  key={b}
+                  className="flex items-start gap-3 text-sm leading-relaxed text-near-white/85 md:text-[15px]"
                 >
                   <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-cyan/15 text-cyan">
                     <Check className="size-3.5" />
                   </span>
-                  {p}
+                  {b}
                 </li>
               ))}
             </ul>
 
-            <div className="mt-9 flex flex-col gap-3">
-              <a
-                href={PHONE_TEL}
-                className="group flex items-center gap-4 rounded-2xl border border-line bg-surface-1/60 p-4 transition-colors hover:border-line-strong"
-              >
-                <span className="flex size-11 items-center justify-center rounded-xl border border-line-strong bg-cyan/5 text-cyan transition-all group-hover:bg-cyan group-hover:text-black">
-                  <Phone className="size-5" />
-                </span>
-                <span>
-                  <span className="block text-xs uppercase tracking-widest text-muted-foreground">
-                    Prefer to call?
-                  </span>
-                  <span className="text-display text-lg text-near-white">
-                    {PHONE_DISPLAY}
-                  </span>
-                </span>
-              </a>
-              <a
-                href={`mailto:${EMAIL}`}
-                className="group flex items-center gap-4 rounded-2xl border border-line bg-surface-1/60 p-4 transition-colors hover:border-line-strong"
-              >
-                <span className="flex size-11 items-center justify-center rounded-xl border border-line-strong bg-cyan/5 text-cyan transition-all group-hover:bg-cyan group-hover:text-black">
-                  <Mail className="size-5" />
-                </span>
-                <span>
-                  <span className="block text-xs uppercase tracking-widest text-muted-foreground">
-                    Or email us
-                  </span>
-                  <span className="text-near-white">{EMAIL}</span>
-                </span>
-              </a>
-            </div>
+            {/* Scarcity supporting text */}
+            <p className="mt-8 border-l-2 border-cyan/50 pl-4 text-sm leading-relaxed text-muted-foreground">
+              We cap onboarding at 2 new clients per month so every account gets
+              full attention. When the spots are gone, the calendar closes.
+            </p>
           </Reveal>
 
           {/* Calendly booking */}

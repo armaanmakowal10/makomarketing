@@ -8,8 +8,11 @@ import { scrollState } from "@/lib/scroll-state"
 
 const COUNT = 3800
 
+// Routes that render no global background at all (they supply their own).
+const HIDDEN_BG_ROUTES = new Set(["/free-audit"])
+
 // Routes that get a calm, frozen background instead of the live WebGL starfield.
-const STATIC_BG_ROUTES = new Set(["/process"])
+const STATIC_BG_ROUTES = new Set(["/privacy-policy", "/terms"])
 
 // Routes that keep the live WebGL starfield but run it slower / calmer.
 const SLOW_BG_ROUTES = new Set(["/services"])
@@ -145,6 +148,7 @@ function Scene({ speed = 1 }: { speed?: number }) {
 
 export function AnimatedBackground() {
   const pathname = usePathname()
+  const hidden = HIDDEN_BG_ROUTES.has(pathname)
   const forceStatic = STATIC_BG_ROUTES.has(pathname)
   const speed = SLOW_BG_ROUTES.has(pathname) ? SLOW_FACTOR : 1
   const [mode, setMode] = useState<"static" | "webgl">("static")
@@ -154,6 +158,9 @@ export function AnimatedBackground() {
     const mobile = window.matchMedia("(max-width: 768px)").matches
     setMode(reduce || mobile ? "static" : "webgl")
   }, [])
+
+  // Routes that supply their own background render nothing here.
+  if (hidden) return null
 
   // Our Process: a calm, frozen background — no WebGL canvas at all.
   if (forceStatic) {

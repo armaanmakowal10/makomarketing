@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowUpRight } from "lucide-react"
 import { RotatingWord } from "@/components/rotating-word"
 import { Magnetic } from "@/components/magnetic"
 
@@ -14,10 +13,10 @@ export function HeroSection() {
       id="home"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-16 text-center"
     >
-      <div className="relative z-10 mx-auto mt-[9vh] flex w-full max-w-3xl flex-col items-center gap-8">
+      <div className="relative z-10 mx-auto mt-[9vh] flex w-full max-w-4xl flex-col items-center gap-10">
         <h1
-          className="text-display text-[clamp(2.75rem,6.75vw,5.75rem)] text-near-white"
-          style={{ lineHeight: 1.08 }}
+          className="text-display text-[clamp(2.75rem,7.6vw,6.75rem)] text-near-white"
+          style={{ lineHeight: 1.06 }}
         >
           {/* Full headline for screen readers */}
           <span className="sr-only">
@@ -40,9 +39,14 @@ export function HeroSection() {
           <Magnetic strength={0.35}>
             <Link
               href="/free-audit"
-              className="btn-cyan h-12 px-8 text-sm uppercase tracking-[0.12em]"
+              className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full border border-cyan/70 px-10 font-display text-base font-semibold uppercase tracking-[0.12em] text-cyan shadow-[0_0_24px_-10px_rgba(20,228,254,0.6)] transition-[color,box-shadow] duration-300 hover:text-black hover:shadow-[0_0_36px_-6px_rgba(20,228,254,0.85)]"
             >
-              Request a Free Audit Now <ArrowUpRight className="size-5" />
+              {/* cyan fill sweeps in from the left on hover */}
+              <span
+                aria-hidden
+                className="absolute inset-0 origin-left scale-x-0 bg-gradient-to-r from-cyan-bright to-cyan transition-transform duration-300 ease-out group-hover:scale-x-100"
+              />
+              <span className="relative">Request a Free Audit Now</span>
             </Link>
           </Magnetic>
         </motion.div>
