@@ -69,7 +69,7 @@ export function WhySpecialSection() {
   return (
     <section
       id="why"
-      className="relative overflow-hidden bg-gradient-to-b from-cyan/[0.025] to-transparent py-24 md:py-32"
+      className="relative overflow-hidden bg-transparent py-24 md:py-32"
     >
       <div className="pointer-events-none absolute left-1/2 top-24 h-[55vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.10),transparent_70%)] blur-[130px]" />
 

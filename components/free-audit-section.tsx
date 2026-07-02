@@ -8,10 +8,12 @@ import {
   CalendarCheck,
   Search,
   Rocket,
+  Send,
 } from "lucide-react"
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
 import { SplitHeading } from "@/components/split-heading"
 import { CalendlyEmbed } from "@/components/calendly-embed"
+import { InquiryForm } from "@/components/inquiry-form"
 
 const auditBullets = [
   "See where your ad spend is being wasted",
@@ -118,10 +120,9 @@ export function FreeAuditSection() {
           ))}
         </StaggerGroup>
 
-        {/* ── Value props + booking ─────────────────────────────── */}
-        <div className="mt-12 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-14">
-          {/* Left column — scarcity, pitch, and what they get */}
-          <Reveal className="w-full max-w-[500px]">
+        {/* ── Pitch intro ───────────────────────────────────────── */}
+        <div className="mx-auto mt-14 max-w-3xl text-center">
+          <Reveal>
             {/* Scarcity badge */}
             <span className="inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-cyan/[0.06] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan shadow-[0_0_22px_-10px_rgba(20,228,254,0.8)]">
               <span className="relative flex size-1.5">
@@ -131,45 +132,36 @@ export function FreeAuditSection() {
               Only 2 New Clients Per Month
             </span>
 
-            {/* Heading */}
             <h2 className="text-display mt-6 text-3xl leading-[1.1] text-near-white md:text-4xl">
               Book Your Free Growth Audit
             </h2>
-
-            {/* Subheading */}
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
               15 minutes. No pitch deck. No fluff. We look at your ads, your site,
               and your lead flow, then tell you exactly what&rsquo;s leaking money.
             </p>
-
-            {/* Bullets */}
-            <ul className="mt-8 flex flex-col gap-4">
-              {auditBullets.map((b) => (
-                <li
-                  key={b}
-                  className="flex items-start gap-3 text-sm leading-relaxed text-near-white/85 md:text-[15px]"
-                >
-                  <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-cyan/15 text-cyan">
-                    <Check className="size-3.5" />
-                  </span>
-                  {b}
-                </li>
-              ))}
-            </ul>
-
-            {/* Scarcity supporting text */}
-            <p className="mt-8 border-l-2 border-cyan/50 pl-4 text-sm leading-relaxed text-muted-foreground">
-              We cap onboarding at 2 new clients per month so every account gets
-              full attention. When the spots are gone, the calendar closes.
-            </p>
           </Reveal>
 
+          {/* Value props as compact chips */}
+          <StaggerGroup className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
+            {auditBullets.map((b) => (
+              <StaggerItem key={b}>
+                <span className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface-1/50 px-3.5 py-1.5 text-[13px] text-near-white/85">
+                  <Check className="size-3.5 shrink-0 text-cyan" />
+                  {b}
+                </span>
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
+        </div>
+
+        {/* ── Booking + inquiry form, side by side and equal height ─ */}
+        <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:items-stretch">
           {/* Calendly booking */}
-          <Reveal delay={0.1}>
-            <div className="relative">
+          <Reveal className="h-full">
+            <div className="relative h-full">
               {/* Glow halo behind the booking panel */}
               <div className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-[radial-gradient(circle_at_50%_0%,rgba(20,228,254,0.18),transparent_70%)] blur-2xl" />
-              <div className="relative overflow-hidden rounded-2xl border border-line-strong bg-surface-1/70 shadow-[0_0_60px_-15px_rgba(20,228,254,0.3)] backdrop-blur-sm">
+              <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-line-strong bg-surface-1/70 shadow-[0_0_60px_-15px_rgba(20,228,254,0.3)] backdrop-blur-sm">
                 {/* Panel header */}
                 <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-4">
                   <div className="flex items-center gap-2.5">
@@ -186,8 +178,33 @@ export function FreeAuditSection() {
                     Slots open this week
                   </span>
                 </div>
-                <div className="p-2">
+                <div className="flex-1 p-2">
                   <CalendlyEmbed />
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Inquiry form */}
+          <Reveal delay={0.1} className="h-full">
+            <div className="relative h-full">
+              {/* Glow halo to match the booking panel */}
+              <div className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-[radial-gradient(circle_at_50%_0%,rgba(20,228,254,0.12),transparent_70%)] blur-2xl" />
+              <div className="relative flex h-full flex-col rounded-2xl border border-line-strong bg-surface-1/70 shadow-[0_0_60px_-15px_rgba(20,228,254,0.3)] backdrop-blur-sm">
+                {/* Panel header — mirrors the booking panel */}
+                <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-4">
+                  <div className="flex items-center gap-2.5">
+                    <Send className="size-5 text-cyan" />
+                    <span className="text-display text-sm text-near-white md:text-base">
+                      Prefer we reach out?
+                    </span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">
+                    1-day reply
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col p-6 md:p-7">
+                  <InquiryForm />
                 </div>
               </div>
             </div>

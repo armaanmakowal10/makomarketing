@@ -125,33 +125,37 @@
   }
 }
 
-/* ---------- Branded scrollbar (cyan-on-black) ---------- */
+/* ---------- Scroll thumb only — the cyan "bubble", no visible track/bar ---------- */
 /* Firefox */
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--cyan-deep) transparent;
 }
-/* WebKit / Chromium */
+/* WebKit / Chromium — transparent track so only the rounded thumb shows */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
+  background: transparent;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--cyan-bright) 0%, var(--cyan) 45%, var(--cyan-deep) 100%);
   border-radius: 9999px;
-  /* transparent border + padding-box clip = slim, inset, rounded thumb */
-  border: 3px solid transparent;
+  /* transparent border + padding-box clip = slim, inset, rounded thumb (the "bubble") */
+  border: 2px solid transparent;
   background-clip: padding-box;
   box-shadow: 0 0 10px rgba(20, 228, 254, 0.35);
   transition: background 0.3s var(--ease);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #aef6ff 0%, var(--cyan-bright) 50%, var(--cyan) 100%);
-  border: 2px solid transparent;
-  background-clip: padding-box;
   box-shadow: 0 0 16px rgba(20, 228, 254, 0.6);
 }
 ::-webkit-scrollbar-corner {

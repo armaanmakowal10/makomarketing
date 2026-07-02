@@ -19,7 +19,10 @@ import { SectionHeading } from "@/components/section-heading"
 // `logo` points at an official brand asset in /public/logos. When the file
 // exists it replaces the fallback icon; otherwise the icon shows. Drop the
 // real Google / Meta logos there (from their brand resource centers) to enable.
+// `id` matches the corresponding ServiceRow id on the /services page, so each
+// card deep-links to that section (cross-page hash scroll handled in SmoothScroll).
 type Item = {
+  id: string
   label: string
   line: string
   tag: string
@@ -28,13 +31,13 @@ type Item = {
 }
 
 const items: Item[] = [
-  { label: "Google Ads", line: "Capture high-intent searches and convert them into booked appointments.", tag: "High intent", icon: Target, logo: "/logos/google-ads.png" },
-  { label: "Meta Ads", line: "Reach new customers on Facebook and Instagram and keep your calendar full.", tag: "Demand gen", icon: Megaphone, logo: "/logos/meta.png" },
-  { label: "Google SEO", line: "Earn lasting page-one rankings and compounding organic traffic month over month.", tag: "Compounding", icon: Search, logo: "/logos/google.png" },
-  { label: "Google LSAs", line: "Appear at the top of local search with the Google Guaranteed badge.", tag: "Local leads", icon: ShieldCheck, logo: "/logos/google-lsa.png" },
-  { label: "Web Design", line: "Fast, conversion-focused websites engineered to turn visitors into customers.", tag: "Conversion", icon: MonitorSmartphone },
-  { label: "CRM Development", line: "Custom pipelines that capture every lead and help you close more deals.", tag: "Automation", icon: Database },
-  { label: "Client LTV Development", line: "Convert one-time buyers into repeat clients and maximize lifetime value.", tag: "Retention", icon: Repeat },
+  { id: "google-ads", label: "Google Ads", line: "Capture high-intent searches and convert them into booked appointments.", tag: "High intent", icon: Target, logo: "/logos/google-ads.png" },
+  { id: "meta-ads", label: "Meta Ads", line: "Reach new customers on Facebook and Instagram and keep your calendar full.", tag: "Demand gen", icon: Megaphone, logo: "/logos/meta.png" },
+  { id: "google-seo", label: "Google SEO", line: "Earn lasting page-one rankings and compounding organic traffic month over month.", tag: "Compounding", icon: Search, logo: "/logos/google.png" },
+  { id: "google-lsas", label: "Google LSAs", line: "Appear at the top of local search with the Google Guaranteed badge.", tag: "Local leads", icon: ShieldCheck, logo: "/logos/google-lsa.png" },
+  { id: "web-design", label: "Web Design", line: "Fast, conversion-focused websites engineered to turn visitors into customers.", tag: "Conversion", icon: MonitorSmartphone },
+  { id: "crm-development", label: "CRM Development", line: "Custom pipelines that capture every lead and help you close more deals.", tag: "Automation", icon: Database },
+  { id: "client-ltv", label: "Client LTV Development", line: "Convert one-time buyers into repeat clients and maximize lifetime value.", tag: "Retention", icon: Repeat },
 ]
 
 /**
@@ -59,6 +62,10 @@ function ServiceMark({
         src={logo}
         alt={`${label} logo`}
         onError={() => setFailed(true)}
+        loading="lazy"
+        decoding="async"
+        width={36}
+        height={36}
         className="size-9 object-contain"
       />
     )
@@ -88,7 +95,7 @@ export function ServicesBrief() {
             return (
               <StaggerItem key={item.label}>
                 <Link
-                  href="/services"
+                  href={`/services#${item.id}`}
                   className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl border border-line bg-surface-1/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan/50 hover:bg-surface-1/70 hover:shadow-[0_0_40px_-12px_rgba(20,228,254,0.5)]"
                 >
                   {/* top accent line lights up on hover */}

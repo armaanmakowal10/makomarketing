@@ -1,12 +1,16 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState, type RefObject } from "react"
+import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import { Canvas, useFrame } from "@react-three/fiber"
-import * as THREE from "three"
-import { scrollState } from "@/lib/scroll-state"
+import dynamic from "next/dynamic"
 
-const COUNT = 3800
+// The starfield pulls in Three.js + React Three Fiber (~150KB). Load it only when
+// we actually render the live background — never on mobile, reduced-motion, or
+// the static/hidden routes — so it stays out of the initial bundle everywhere.
+const WebGLBackground = dynamic(
+  () => import("@/components/animated-background-webgl"),
+  { ssr: false }
+)
 
 // Routes that render no global background at all (they supply their own).
 const HIDDEN_BG_ROUTES = new Set(["/free-audit"])
@@ -45,119 +49,31 @@ const STATIC_STARS = (() => {
   }))
 })()
 
-type Pointer = RefObject<{ x: number; y: number }>
-
-/** A soft round point of light (a star in the sky), used as the point sprite. */
-function makeStarTexture() {
-  const size = 64
-  const canvas = document.createElement("canvas")
-  canvas.width = size
-  canvas.height = size
-  const ctx = canvas.getContext("2d")!
-  const r = size / 2
-  const grad = ctx.createRadialGradient(r, r, 0, r, r, r)
-  grad.addColorStop(0, "rgba(255,255,255,1)")
-  grad.addColorStop(0.18, "rgba(255,255,255,0.85)")
-  grad.addColorStop(0.45, "rgba(255,255,255,0.25)")
-  grad.addColorStop(1, "rgba(255,255,255,0)")
-  ctx.fillStyle = grad
-  ctx.beginPath()
-  ctx.arc(r, r, r, 0, Math.PI * 2)
-  ctx.fill()
-
-  const tex = new THREE.CanvasTexture(canvas)
-  tex.needsUpdate = true
-  return tex
-}
-
-function ParticleCurrent({
-  pointer,
-  speed = 1,
-}: {
-  pointer: Pointer
-  speed?: number
-}) {
-  const ref = useRef<THREE.Points>(null!)
-  const starTexture = useMemo(() => makeStarTexture(), [])
-
-  const positions = useMemo(() => {
-    const arr = new Float32Array(COUNT * 3)
-    for (let i = 0; i < COUNT; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 16
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 16
-      arr[i * 3 + 2] = (Math.random() - 0.5) * 10
-    }
-    return arr
-  }, [])
-
-  useFrame((_, delta) => {
-    const p = ref.current
-    if (!p) return
-    const vel = scrollState.velocity || 0
-    // `speed` scales the ambient drift (and how strongly scroll velocity tugs the
-    // field) so a route can run the same starfield at a calmer pace.
-    p.rotation.y += (delta * 0.02 + vel * 0.00012) * speed
-    p.rotation.z += delta * 0.004 * speed
-    const stretch = THREE.MathUtils.clamp(1 + Math.abs(vel) * 0.0007 * speed, 1, 1.5)
-    p.scale.y = THREE.MathUtils.lerp(p.scale.y || 1, stretch, 0.08)
-    p.position.x = THREE.MathUtils.lerp(
-      p.position.x,
-      pointer.current.x * 0.7,
-      0.04 * speed
-    )
-    p.position.y = THREE.MathUtils.lerp(
-      p.position.y,
-      -pointer.current.y * 0.7 - scrollState.progress * 1.4,
-      0.04 * speed
-    )
-  })
-
-  return (
-    <points ref={ref}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
-      <pointsMaterial
-        color="#14e4fe"
-        map={starTexture}
-        size={0.06}
-        transparent
-        opacity={0.8}
-        sizeAttenuation
-        depthWrite={false}
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
-  )
-}
-
-function Scene({ speed = 1 }: { speed?: number }) {
-  const pointer = useRef({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      pointer.current.x = e.clientX / window.innerWidth - 0.5
-      pointer.current.y = e.clientY / window.innerHeight - 0.5
-    }
-    window.addEventListener("mousemove", onMove, { passive: true })
-    return () => window.removeEventListener("mousemove", onMove)
-  }, [])
-
-  return <ParticleCurrent pointer={pointer} speed={speed} />
-}
-
 export function AnimatedBackground() {
   const pathname = usePathname()
   const hidden = HIDDEN_BG_ROUTES.has(pathname)
   const forceStatic = STATIC_BG_ROUTES.has(pathname)
   const speed = SLOW_BG_ROUTES.has(pathname) ? SLOW_FACTOR : 1
   const [mode, setMode] = useState<"static" | "webgl">("static")
+  const [lite, setLite] = useState(false)
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     const mobile = window.matchMedia("(max-width: 768px)").matches
-    setMode(reduce || mobile ? "static" : "webgl")
-  }, [])
+    setLite(mobile)
+    if (reduce) {
+      setMode("static")
+      return
+    }
+    // Mobile keeps the live starfield on the homepage only — and in a lighter
+    // form for smoothness. Every other route falls back to the calm static
+    // background so phones aren't running WebGL where it isn't needed.
+    if (mobile) {
+      setMode(pathname === "/" ? "webgl" : "static")
+      return
+    }
+    setMode("webgl")
+  }, [pathname])
 
   // Routes that supply their own background render nothing here.
   if (hidden) return null
@@ -202,21 +118,17 @@ export function AnimatedBackground() {
   }
 
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
-      <Canvas
-        camera={{ position: [0, 0, 6], fov: 60 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: false, alpha: true }}
-      >
-        <Scene speed={speed} />
-      </Canvas>
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(120% 120% at 50% 50%, transparent 35%, rgba(0,0,0,0.55) 100%)",
-        }}
-      />
+    <div
+      aria-hidden
+      className="pointer-events-none fixed inset-0 -z-10"
+      // Base gradient shows instantly and underneath, so there's never a black
+      // flash while the WebGL chunk streams in.
+      style={{
+        background:
+          "radial-gradient(60% 50% at 50% 30%, rgba(20,228,254,0.10), transparent 70%), #000",
+      }}
+    >
+      <WebGLBackground speed={speed} lite={lite} />
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion"
 import { MoveHorizontal, ArrowUpRight } from "lucide-react"
 import { Magnetic } from "@/components/magnetic"
 import { Reveal } from "@/components/reveal"
+import { UrgencyPill } from "@/components/urgency-pill"
 
 // ── Projection model ─────────────────────────────────────────────────────────
 // Illustrative, not a guarantee. ROAS ramps 18x → 26x as spend scales (returns
@@ -205,6 +206,7 @@ export function SuccessChart() {
       {/* Closing CTA — convert the projection into a booking right where the
           number is fresh in mind. */}
       <Reveal className="mt-8 flex flex-col items-center gap-5 text-center">
+        <UrgencyPill />
         <Magnetic strength={0.35}>
           <div className="relative">
             {/* Breathing halo behind the button to draw the eye. */}

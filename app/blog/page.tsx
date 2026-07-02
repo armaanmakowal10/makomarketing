@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { blogPosts } from "@/content/blog-posts"
+import { UrgencyPill } from "@/components/urgency-pill"
 
 const SITE_URL = "https://www.makomarketing.ca"
 
@@ -84,12 +85,15 @@ export default function BlogPage() {
           <h2 className="text-display max-w-2xl text-[clamp(1.6rem,3.5vw,2.6rem)] leading-tight text-near-white">
             Want results now instead of reading about them?
           </h2>
-          <Link
-            href="/free-audit"
-            className="btn-cyan h-12 shrink-0 px-7 text-base"
-          >
-            Get Started <ArrowUpRight className="size-5" />
-          </Link>
+          <div className="flex shrink-0 flex-col items-start gap-3">
+            <UrgencyPill />
+            <Link
+              href="/free-audit"
+              className="btn-cyan h-12 px-7 text-base"
+            >
+              Get Started <ArrowUpRight className="size-5" />
+            </Link>
+          </div>
         </div>
       </section>
     </main>

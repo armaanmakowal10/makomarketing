@@ -13,6 +13,7 @@ export default function TermsPage() {
   return (
     <LegalLayout
       title="Terms & Conditions"
+      active="terms"
       updated="February 1, 2026"
       intro="These Terms and Conditions (“Terms”) govern your access to and use of the website and services provided by Mako Marketing (“Mako Marketing,” “we,” “us,” or “our”). By accessing our website or engaging our services, you agree to be bound by these Terms. If you do not agree, please do not use our website or services."
     >

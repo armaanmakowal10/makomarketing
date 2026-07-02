@@ -27,6 +27,7 @@ import {
   type LucideIcon,
 } from "lucide-react"
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
+import { UrgencyPill } from "@/components/urgency-pill"
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -188,8 +189,7 @@ function GoogleAdsVisual() {
               className="flex-1 rounded-t-md bg-gradient-to-t from-cyan-deep via-cyan to-cyan-bright shadow-[0_0_14px_rgba(20,228,254,0.4)]"
               style={{ height: `${h}%`, transformOrigin: "bottom" }}
               initial={{ scaleY: 0, opacity: 0.4 }}
-              whileInView={{ scaleY: 1, opacity: 1 }}
-              viewport={{ once: false, amount: 0.5 }}
+              animate={{ scaleY: 1, opacity: 1 }}
               transition={{ duration: 0.7, delay: i * 0.09, ease: EASE }}
             />
           ))}
@@ -425,8 +425,7 @@ function SeoVisual() {
             d="M2,30 L14,26 L26,27 L38,19 L50,14 L62,8 L78,3 L78,32 L2,32 Z"
             fill="url(#seo-area)"
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: false, amount: 0.5 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.4 }}
           />
           <motion.path
@@ -438,8 +437,7 @@ function SeoVisual() {
             strokeLinejoin="round"
             style={{ filter: "drop-shadow(0 0 4px rgba(20,228,254,0.6))" }}
             initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: false, amount: 0.5 }}
+            animate={{ pathLength: 1 }}
             transition={{ duration: 1.4, ease: "easeInOut" }}
           />
           <motion.circle
@@ -529,9 +527,8 @@ function LsaVisual() {
           />
         ))}
         <motion.div
-          initial={{ y: -28, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: false, amount: 0.5 }}
+          initial={{ y: -28 }}
+          animate={{ y: 0 }}
           transition={{ type: "spring", stiffness: 220, damping: 12 }}
         >
           <MapPin
@@ -604,10 +601,9 @@ function LsaVisual() {
       {/* Google Guaranteed badge with shine sweep */}
       <motion.div
         className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-1.5 overflow-hidden rounded-full border border-emerald-400/40 bg-black/60 px-3 py-1 text-[11px] font-semibold text-emerald-300"
-        initial={{ opacity: 0, y: 8 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.5 }}
-        transition={{ delay: 0.4 }}
+        initial={{ y: 8 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
       >
         <motion.span
           aria-hidden
@@ -1446,36 +1442,7 @@ export function ServicesSection() {
         <div className="pointer-events-none absolute left-1/2 top-0 h-[60vh] w-[90vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.14),transparent_70%)] blur-[120px]" />
         <Reveal className="relative mx-auto max-w-2xl">
           {/* Urgency pill */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative mb-7 inline-flex items-center gap-2 overflow-hidden rounded-full border border-cyan/40 bg-cyan/[0.08] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-cyan"
-          >
-            {/* Breathing glow */}
-            <motion.span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-full"
-              animate={{ boxShadow: [
-                "0 0 0 0 rgba(20,228,254,0)",
-                "0 0 20px -2px rgba(20,228,254,0.55)",
-                "0 0 0 0 rgba(20,228,254,0)",
-              ] }}
-              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Shimmer sweep */}
-            <motion.span
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 w-10 -skew-x-[20deg] bg-gradient-to-r from-transparent via-white/25 to-transparent"
-              animate={{ left: ["-20%", "120%"] }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 1.4, ease: "easeInOut" }}
-            />
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-cyan opacity-70" />
-              <span className="relative inline-flex size-2 rounded-full bg-cyan" />
-            </span>
-            <span className="relative">Only 3 spots left — lock yours in</span>
-          </motion.div>
+          <UrgencyPill className="mb-7" />
 
           <h2 className="text-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.02] text-near-white">
             Let's build your{" "}

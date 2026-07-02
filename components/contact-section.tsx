@@ -1,57 +1,16 @@
 "use client"
 
-import { useState } from "react"
 import { ArrowUpRight, Check, Mail, Phone } from "lucide-react"
-import { Reveal, StaggerGroup, StaggerItem } from "@/components/reveal"
+import { Reveal } from "@/components/reveal"
 import { Magnetic } from "@/components/magnetic"
 import { SplitHeading } from "@/components/split-heading"
-
-const budgets = [
-  "Under $1,000 / mo",
-  "$1,000 – $3,000 / mo",
-  "$3,000 – $5,000 / mo",
-  "$5,000 – $10,000 / mo",
-  "$10,000+ / mo",
-  "Not sure yet",
-]
+import { InquiryForm } from "@/components/inquiry-form"
 
 const PHONE_DISPLAY = "905-260-5457"
 const PHONE_TEL = "tel:9052605457"
 const EMAIL = "makomarketing0@gmail.com"
 
 export function ContactSection() {
-  const [form, setForm] = useState({
-    name: "",
-    business: "",
-    email: "",
-    phone: "",
-    website: "",
-    budget: "",
-    message: "",
-  })
-  const [sent, setSent] = useState(false)
-
-  const update =
-    (key: keyof typeof form) =>
-    (
-      e: React.ChangeEvent<
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >
-    ) =>
-      setForm((f) => ({ ...f, [key]: e.target.value }))
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const subject = encodeURIComponent(
-      `New project inquiry — ${form.business || form.name || "Website lead"}`
-    )
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nBusiness: ${form.business}\nEmail: ${form.email}\nPhone: ${form.phone}\nCurrent website: ${form.website || "—"}\nCurrent monthly ad budget: ${form.budget}\n\n${form.message}`
-    )
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`
-    setSent(true)
-  }
-
   return (
     <section
       id="contact"
@@ -151,160 +110,13 @@ export function ContactSection() {
 
           {/* Right: form */}
           <Reveal delay={0.1} className="h-full">
-          <div className="flex h-full flex-col rounded-3xl border border-line bg-surface-1/70 p-6 backdrop-blur-sm md:p-9">
-            {sent ? (
-              <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
-                <span className="flex size-16 items-center justify-center rounded-full border border-cyan bg-cyan/10 text-cyan">
-                  <Check className="size-8" />
-                </span>
-                <h3 className="text-display mt-6 text-2xl text-near-white">
-                  Thank you!
-                </h3>
-                <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-                  Your email app should have opened with your details ready to
-                  send. Prefer to talk now? Call us at {PHONE_DISPLAY}.
-                </p>
-                <button
-                  onClick={() => setSent(false)}
-                  className="mt-6 text-sm text-cyan hover:underline"
-                >
-                  Send another →
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={onSubmit} className="flex flex-1 flex-col">
-                <StaggerGroup className="flex flex-1 flex-col gap-5">
-                  <StaggerItem className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                    <Field
-                      label="Name"
-                      id="name"
-                      value={form.name}
-                      onChange={update("name")}
-                      required
-                      placeholder="Your full name"
-                    />
-                    <Field
-                      label="Business name"
-                      id="business"
-                      value={form.business}
-                      onChange={update("business")}
-                      required
-                      placeholder="Your company"
-                    />
-                  </StaggerItem>
-                  <StaggerItem className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                    <Field
-                      label="Email"
-                      id="email"
-                      type="email"
-                      value={form.email}
-                      onChange={update("email")}
-                      required
-                      placeholder="you@business.com"
-                    />
-                    <Field
-                      label="Phone"
-                      id="phone"
-                      type="tel"
-                      value={form.phone}
-                      onChange={update("phone")}
-                      required
-                      placeholder="(905) 000-0000"
-                    />
-                  </StaggerItem>
-
-                  <StaggerItem>
-                    <Field
-                      label="Current website (optional)"
-                      id="website"
-                      value={form.website}
-                      onChange={update("website")}
-                      placeholder="yourbusiness.com"
-                    />
-                  </StaggerItem>
-
-                  <StaggerItem className="flex flex-col gap-2">
-                    <label
-                      htmlFor="budget"
-                      className="text-xs uppercase tracking-widest text-muted-foreground"
-                    >
-                      Current monthly ad budget
-                    </label>
-                    <select
-                      id="budget"
-                      value={form.budget}
-                      onChange={update("budget")}
-                      required
-                      className="h-12 rounded-xl border border-line bg-black/40 px-4 text-sm text-near-white outline-none transition-colors focus:border-cyan focus:ring-1 focus:ring-cyan/50"
-                    >
-                      <option value="" disabled>
-                        Select a range
-                      </option>
-                      {budgets.map((b) => (
-                        <option key={b} value={b} className="bg-black">
-                          {b}
-                        </option>
-                      ))}
-                    </select>
-                  </StaggerItem>
-
-                  <StaggerItem className="flex flex-col gap-2">
-                    <label
-                      htmlFor="message"
-                      className="text-xs uppercase tracking-widest text-muted-foreground"
-                    >
-                      Message <span className="normal-case">(optional)</span>
-                    </label>
-                    <textarea
-                      id="message"
-                      value={form.message}
-                      onChange={update("message")}
-                      rows={4}
-                      placeholder="Tell us about your goals…"
-                      className="resize-none rounded-xl border border-line bg-black/40 px-4 py-3 text-sm text-near-white outline-none transition-colors placeholder:text-near-white/30 focus:border-cyan focus:ring-1 focus:ring-cyan/50"
-                    />
-                  </StaggerItem>
-
-                  <StaggerItem className="mt-auto">
-                    <button
-                      type="submit"
-                      className="btn-cyan mt-2 h-14 w-full px-8 text-base"
-                    >
-                      Send inquiry <ArrowUpRight className="size-5" />
-                    </button>
-                  </StaggerItem>
-                </StaggerGroup>
-              </form>
-            )}
-          </div>
-        </Reveal>
+            <div className="flex h-full flex-col rounded-3xl border border-line bg-surface-1/70 p-6 backdrop-blur-sm md:p-9">
+              <InquiryForm />
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
-  )
-}
-
-function Field({
-  label,
-  id,
-  ...props
-}: {
-  label: string
-} & React.InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <div className="flex flex-col gap-2">
-      <label
-        htmlFor={id}
-        className="text-xs uppercase tracking-widest text-muted-foreground"
-      >
-        {label}
-      </label>
-      <input
-        id={id}
-        {...props}
-        className="h-12 rounded-xl border border-line bg-black/40 px-4 text-sm text-near-white outline-none transition-colors placeholder:text-near-white/30 focus:border-cyan focus:ring-1 focus:ring-cyan/50"
-      />
-    </div>
   )
 }
 

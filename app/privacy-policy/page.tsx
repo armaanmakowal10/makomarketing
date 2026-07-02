@@ -14,6 +14,7 @@ export default function PrivacyPolicyPage() {
   return (
     <LegalLayout
       title="Privacy Policy"
+      active="privacy"
       updated="February 1, 2026"
       intro="Mako Marketing (“Mako Marketing,” “we,” “us,” or “our”) respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information in accordance with the Personal Information Protection and Electronic Documents Act (PIPEDA), Canada's Anti-Spam Legislation (CASL), and applicable provincial privacy laws."
     >

@@ -5,6 +5,7 @@ import Link from "next/link"
 import { motion, useScroll, useSpring, useTransform } from "framer-motion"
 import { Check, X, TrendingUp, ArrowUpRight } from "lucide-react"
 import { Reveal } from "@/components/reveal"
+import { UrgencyPill } from "@/components/urgency-pill"
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -406,14 +407,7 @@ function ScaleVisual() {
             stroke="rgba(255,255,255,0.05)"
           />
         ))}
-        <motion.path
-          d={`${SCALE_PATH} L192,112 L8,112 Z`}
-          fill="url(#scaleGrad)"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ duration: 1, delay: 0.3 }}
-        />
+        <path d={`${SCALE_PATH} L192,112 L8,112 Z`} fill="url(#scaleGrad)" />
         <motion.path
           d={SCALE_PATH}
           fill="none"
@@ -422,8 +416,7 @@ function ScaleVisual() {
           strokeLinecap="round"
           style={{ filter: "drop-shadow(0 0 6px rgba(20,228,254,0.6))" }}
           initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: false, amount: 0.4 }}
+          animate={{ pathLength: 1 }}
           transition={{ duration: 1.6, ease: "easeInOut" }}
         />
         <circle r="3.4" fill="#ffffff" style={{ filter: "drop-shadow(0 0 5px rgba(20,228,254,1))" }}>
@@ -676,7 +669,10 @@ export function ProcessSection() {
             Book a free audit and we will show you exactly where step one begins
             for your business.
           </p>
-          <motion.div whileHover={{ y: -2 }} className="mt-8 inline-block">
+          <div className="mt-8">
+            <UrgencyPill />
+          </div>
+          <motion.div whileHover={{ y: -2 }} className="mt-5 inline-block">
             <Link
               href="/free-audit"
               className="btn-cyan h-12 px-9 text-sm uppercase tracking-[0.12em]"

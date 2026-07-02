@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 
 // Smooth easing shared across the reel + width glide.
 const EASE = [0.22, 1, 0.36, 1] as const
-const DUR = 0.7
+const DUR = 0.9
 
 // useLayoutEffect on the client, useEffect on the server (avoids SSR warning).
 const useIsoLayoutEffect =

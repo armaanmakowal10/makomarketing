@@ -3,6 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, ArrowUpRight } from "lucide-react"
 import { blogPosts, getPostBySlug } from "@/content/blog-posts"
+import { UrgencyPill } from "@/components/urgency-pill"
 
 const SITE_URL = "https://www.makomarketing.ca"
 
@@ -173,12 +174,15 @@ export default async function BlogPostPage({
               hiding.
             </p>
           </div>
-          <Link
-            href="/free-audit"
-            className="btn-cyan h-12 shrink-0 px-8 text-sm uppercase tracking-[0.1em]"
-          >
-            Get a Free Audit <ArrowUpRight className="size-5" />
-          </Link>
+          <div className="flex shrink-0 flex-col items-start gap-3">
+            <UrgencyPill />
+            <Link
+              href="/free-audit"
+              className="btn-cyan h-12 px-8 text-sm uppercase tracking-[0.1em]"
+            >
+              Get a Free Audit <ArrowUpRight className="size-5" />
+            </Link>
+          </div>
         </div>
       </article>
     </main>

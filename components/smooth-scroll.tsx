@@ -60,8 +60,39 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     }
     document.addEventListener("click", onClick)
 
+    // Cross-page anchors (e.g. "/#contact" clicked from /about-us) are handled by
+    // Next's router, not the click handler above. After navigation the URL carries
+    // a hash but Lenis + manual scroll restoration means nothing scrolls on its
+    // own — so scroll to the target ourselves once the element is in the DOM.
+    const scrollToHash = () => {
+      const hash = window.location.hash
+      if (!hash || hash === "#") return
+      const el = document.querySelector(hash)
+      if (el) lenis.scrollTo(el as HTMLElement, { offset: -90 })
+    }
+    // Retry a few times: on a cold load the intro overlay locks scroll (lenis.stop)
+    // and the target section may still be mounting, so a single attempt gets lost.
+    const scrollToHashPersistent = () => {
+      if (!window.location.hash || window.location.hash === "#") return
+      let tries = 0
+      const attempt = () => {
+        scrollToHash()
+        if (++tries < 8) setTimeout(attempt, 150)
+      }
+      attempt()
+    }
+    if (window.location.hash) {
+      requestAnimationFrame(() => requestAnimationFrame(scrollToHashPersistent))
+    }
+    window.addEventListener("hashchange", scrollToHash)
+    // The intro overlay holds scroll locked while it plays, then fires this event
+    // once it clears — re-run the hash scroll so deep links survive the intro.
+    window.addEventListener("mako-intro-done", scrollToHashPersistent)
+
     return () => {
       document.removeEventListener("click", onClick)
+      window.removeEventListener("hashchange", scrollToHash)
+      window.removeEventListener("mako-intro-done", scrollToHashPersistent)
       gsap.ticker.remove(update)
       lenis.destroy()
       lenisRef.current = null
