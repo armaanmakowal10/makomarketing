@@ -32,7 +32,7 @@ function GrowthBars() {
       variants={barsContainer}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.4 }}
     >
       {BAR_HEIGHTS.map((h, i) => (
         <motion.span
