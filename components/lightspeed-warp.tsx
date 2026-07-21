@@ -18,9 +18,10 @@ const FOCAL_LENGTH = 320
 const Z_NEAR = 1
 const Z_FAR = 1400
 const DRIFT_SPEED = 30 // z-units/sec — calm starfield drifts behind the held logo
-const PEAK_SPEED = 2600 // z-units/sec — full radial streaks
+const PEAK_SPEED = 4200 // z-units/sec — harder, faster radial streaks at full warp
 const DRIFT_MS = 750 // gentle lead-in so the warp grows out of the logo
-const JUMP_MS = 2900 // longer, cinematic acceleration deep into hyperspace
+const RAMP_MS = 1900 // quick climb to full speed — the jump hits hard and early
+const CRUISE_MS = 1400 // held at full warp — the ride through hyperspace
 const BLOOM_MS = 1000 // soft cyan light-bloom climax (replaces the white flash)
 const CANVAS_FADE_MS = 480 // starfield materialises behind the logo (no pop)
 const LOGO_SCALE_TO = 1.15
@@ -191,25 +192,27 @@ export function LightspeedWarp({
     startWarpRef.current = () => {
       if (accelTl) return
       const logo = logoRef.current
-      const ACCEL_S = (DRIFT_MS + JUMP_MS) / 1000
+      const RAMP_S = (DRIFT_MS + RAMP_MS) / 1000 // climb from drift to full warp
+      const TOTAL_S = RAMP_S + CRUISE_MS / 1000 // ramp + held-at-peak cruise
       accelTl = gsap.timeline({ onComplete })
 
-      // ONE continuous curve from the current drift speed to peak (power3.in):
-      // stays slow early then builds into the jump, with no ease seam to hitch on.
-      accelTl.to(state, { speed: PEAK_SPEED, duration: ACCEL_S, ease: "power3.in" }, 0)
+      // ONE continuous curve from drift speed to peak (power2.in): reaches full
+      // warp early, then the timeline simply holds there for the cruise — a
+      // longer ride that spends most of its time at maximum streak speed.
+      accelTl.to(state, { speed: PEAK_SPEED, duration: RAMP_S, ease: "power2.in" }, 0)
 
-      // Logo flies through. Scale eases in from rest (power2.in starts at zero
-      // velocity → no jump out of the static hold) across the whole acceleration;
-      // opacity holds through the early drift then dissolves smoothly (sine.in).
+      // Logo flies through during the ramp. Scale eases in from rest (power2.in
+      // starts at zero velocity → no jump out of the static hold); opacity holds
+      // through the early drift then dissolves smoothly (sine.in).
       if (logo) {
-        accelTl.to(logo, { scale: LOGO_SCALE_TO, duration: ACCEL_S, ease: "power2.in" }, 0)
-        accelTl.to(logo, { opacity: 0, duration: ACCEL_S * 0.6, ease: "sine.in" }, ACCEL_S * 0.4)
+        accelTl.to(logo, { scale: LOGO_SCALE_TO, duration: RAMP_S, ease: "power2.in" }, 0)
+        accelTl.to(logo, { opacity: 0, duration: RAMP_S * 0.6, ease: "sine.in" }, RAMP_S * 0.4)
       }
 
-      // Climax — a soft cyan light-bloom swells out of the vanishing point as
-      // the streaks max out, then dissipates via the overlay's crossfade exit
+      // Climax — a soft cyan light-bloom swells out of the vanishing point at
+      // the end of the cruise, then dissipates via the overlay's crossfade exit
       // (IntroOverlay). A gentle inOut swell reads as light, not a camera flash.
-      accelTl.to(state, { flash: 1, duration: BLOOM_MS / 1000, ease: "power2.inOut" }, ACCEL_S - 0.45)
+      accelTl.to(state, { flash: 1, duration: BLOOM_MS / 1000, ease: "power2.inOut" }, TOTAL_S - 0.45)
       accelTl.to({}, { duration: 0.18 }) // brief hold at full bloom before handoff
     }
 

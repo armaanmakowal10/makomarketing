@@ -13,7 +13,7 @@ const EASE_SOFT = [0.16, 1, 0.3, 1] as const // expo-out — smooth & graceful
 // the acceleration at WARP_SPLICE_MS. By the splice the field is already present
 // and drifting, so the logo→hyperspace handoff is a pure acceleration — seamless.
 const PREWARM_MS = 2050
-const WARP_SPLICE_MS = 2700
+const WARP_SPLICE_MS = 2400
 
 type Phase = "logo" | "prewarm" | "warp"
 
