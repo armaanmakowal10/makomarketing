@@ -142,45 +142,6 @@ export function InquiryForm() {
       />
 
       <StaggerGroup className="flex flex-1 flex-col gap-5">
-        <StaggerItem className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <Field
-            label="Name"
-            id="name"
-            value={form.name}
-            onChange={update("name")}
-            required
-            placeholder="Your full name"
-          />
-          <Field
-            label="Business name"
-            id="business"
-            value={form.business}
-            onChange={update("business")}
-            required
-            placeholder="Your company"
-          />
-        </StaggerItem>
-        <StaggerItem className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <Field
-            label="Email"
-            id="email"
-            type="email"
-            value={form.email}
-            onChange={update("email")}
-            required
-            placeholder="you@business.com"
-          />
-          <Field
-            label="Phone"
-            id="phone"
-            type="tel"
-            value={form.phone}
-            onChange={update("phone")}
-            required
-            placeholder="(905) 000-0000"
-          />
-        </StaggerItem>
-
         <StaggerItem>
           <QuestionField
             label="What is the main issue you are trying to solve currently with your online presence?"
@@ -237,6 +198,45 @@ export function InquiryForm() {
               </option>
             ))}
           </select>
+        </StaggerItem>
+
+        <StaggerItem className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <Field
+            label="Name"
+            id="name"
+            value={form.name}
+            onChange={update("name")}
+            required
+            placeholder="Your full name"
+          />
+          <Field
+            label="Business name"
+            id="business"
+            value={form.business}
+            onChange={update("business")}
+            required
+            placeholder="Your company"
+          />
+        </StaggerItem>
+        <StaggerItem className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <Field
+            label="Email"
+            id="email"
+            type="email"
+            value={form.email}
+            onChange={update("email")}
+            required
+            placeholder="you@business.com"
+          />
+          <Field
+            label="Phone"
+            id="phone"
+            type="tel"
+            value={form.phone}
+            onChange={update("phone")}
+            required
+            placeholder="(905) 000-0000"
+          />
         </StaggerItem>
 
         <StaggerItem className="mt-auto">
