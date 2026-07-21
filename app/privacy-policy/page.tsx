@@ -106,7 +106,7 @@ export default function PrivacyPolicyPage() {
         <p>We use personal information for purposes that a reasonable person would consider appropriate in the circumstances, including to:</p>
         <LegalList
           items={[
-            "Respond to your enquiries and provide the audits, proposals, and services you request",
+            "Respond to your inquiries and provide the audits, proposals, and services you request",
             "Provide, manage, and improve our marketing and advertising services",
             "Communicate with you about your account, our services, and relevant offers",
             "Process payments and administer our client relationships",

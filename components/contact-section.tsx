@@ -16,13 +16,12 @@ export function ContactSection() {
       id="contact"
       className="relative overflow-hidden bg-transparent py-24 md:py-32"
     >
-      <div className="bg-grid bg-grid-fade pointer-events-none absolute inset-0 opacity-40" />
       <div className="pointer-events-none absolute left-1/2 top-0 h-[50vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.18),transparent_70%)] blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-stretch lg:gap-16">
           {/* Left: pitch + contact methods */}
-          <div>
+          <div className="flex h-full flex-col">
             <Reveal className="text-left">
           <p className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-cyan">
             Let&rsquo;s Talk
@@ -105,6 +104,30 @@ export function ContactSection() {
               </span>
             </a>
           </div>
+            </Reveal>
+
+            {/* Filler panel — stretches so the column bottom lines up with the
+                form beside it. */}
+            <Reveal className="mt-4 flex-1">
+              <div className="flex h-full flex-col justify-center gap-5 rounded-2xl border border-line bg-surface-1/60 p-6">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan">
+                  What happens next
+                </span>
+                {[
+                  "We review your info and audit your online presence",
+                  "You hear back from us within one business day",
+                  "We map out exactly where your growth is hiding — free",
+                ].map((step, i) => (
+                  <div key={step} className="flex items-start gap-3.5">
+                    <span className="text-display mt-0.5 text-lg leading-none text-cyan/70">
+                      0{i + 1}
+                    </span>
+                    <p className="text-sm leading-relaxed text-near-white/80">
+                      {step}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </Reveal>
           </div>
 

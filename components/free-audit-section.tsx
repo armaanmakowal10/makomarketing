@@ -136,7 +136,7 @@ export function FreeAuditSection() {
               Book Your Free Growth Audit
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              15 minutes. No pitch deck. No fluff. We look at your ads, your site,
+              30 minutes. No pitch deck. No fluff. We look at your ads, your site,
               and your lead flow, then tell you exactly what&rsquo;s leaking money.
             </p>
           </Reveal>

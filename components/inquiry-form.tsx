@@ -10,7 +10,7 @@ const budgets = [
   "$3,000 – $5,000 / mo",
   "$5,000 – $10,000 / mo",
   "$10,000+ / mo",
-  "Not sure yet",
+  "Nothing at the moment",
 ]
 
 const PHONE_DISPLAY = "905-260-5457"
@@ -27,9 +27,10 @@ const emptyForm = {
   business: "",
   email: "",
   phone: "",
-  website: "",
   budget: "",
-  message: "",
+  mainIssue: "",
+  triedMarketing: "",
+  whyNow: "",
 }
 
 export function InquiryForm() {
@@ -81,9 +82,10 @@ export function InquiryForm() {
           Business: form.business,
           Email: form.email,
           Phone: form.phone,
-          "Current website": form.website || "—",
+          "Main issue with online presence": form.mainIssue,
+          "Marketing already tried": form.triedMarketing,
+          "What growth would mean right now": form.whyNow,
           "Monthly ad budget": form.budget,
-          Message: form.message || "—",
         }),
       })
       const data = await res.json()
@@ -180,12 +182,35 @@ export function InquiryForm() {
         </StaggerItem>
 
         <StaggerItem>
-          <Field
-            label="Current website (optional)"
-            id="website"
-            value={form.website}
-            onChange={update("website")}
-            placeholder="yourbusiness.com"
+          <QuestionField
+            label="What is the main issue you are trying to solve currently with your online presence?"
+            id="mainIssue"
+            value={form.mainIssue}
+            onChange={update("mainIssue")}
+            required
+            placeholder="e.g. not enough leads, ads not converting, website underperforming…"
+          />
+        </StaggerItem>
+
+        <StaggerItem>
+          <QuestionField
+            label="What forms of marketing have you already tried?"
+            id="triedMarketing"
+            value={form.triedMarketing}
+            onChange={update("triedMarketing")}
+            required
+            placeholder="e.g. Google Ads, social media, flyers, word of mouth, nothing yet…"
+          />
+        </StaggerItem>
+
+        <StaggerItem>
+          <QuestionField
+            label="What makes now the right time to invest in growing your business?"
+            id="whyNow"
+            value={form.whyNow}
+            onChange={update("whyNow")}
+            required
+            placeholder="Tell us what's changed and what you're aiming for…"
           />
         </StaggerItem>
 
@@ -214,23 +239,6 @@ export function InquiryForm() {
           </select>
         </StaggerItem>
 
-        <StaggerItem className="flex flex-col gap-2">
-          <label
-            htmlFor="message"
-            className="text-xs uppercase tracking-widest text-muted-foreground"
-          >
-            Message <span className="normal-case">(optional)</span>
-          </label>
-          <textarea
-            id="message"
-            value={form.message}
-            onChange={update("message")}
-            rows={4}
-            placeholder="Tell us about your goals…"
-            className="resize-none rounded-xl border border-line bg-black/40 px-4 py-3 text-sm text-near-white outline-none transition-colors placeholder:text-near-white/30 focus:border-cyan focus:ring-1 focus:ring-cyan/50"
-          />
-        </StaggerItem>
-
         <StaggerItem className="mt-auto">
           {status === "error" && (
             <p className="mb-3 rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
@@ -256,6 +264,29 @@ export function InquiryForm() {
         </StaggerItem>
       </StaggerGroup>
     </form>
+  )
+}
+
+// Longer qualifying questions — sentence-case label over a compact textarea.
+function QuestionField({
+  label,
+  id,
+  ...props
+}: {
+  label: string
+} & React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label htmlFor={id} className="text-[13px] font-medium text-near-white/75">
+        {label}
+      </label>
+      <textarea
+        id={id}
+        rows={2}
+        {...props}
+        className="resize-none rounded-xl border border-line bg-black/40 px-4 py-3 text-sm text-near-white outline-none transition-colors placeholder:text-near-white/30 focus:border-cyan focus:ring-1 focus:ring-cyan/50"
+      />
+    </div>
   )
 }
 

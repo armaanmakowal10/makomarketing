@@ -87,7 +87,7 @@ export function IntroOverlay() {
           className="pointer-events-none fixed inset-0 z-[200] overflow-hidden"
           style={{ background: "#000000" }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
         >
           {/* Starfield warp sits behind the logo (canvas z0, flash z20). Mounted
               at prewarm so it dawns in ahead of the splice; `started` flips at the

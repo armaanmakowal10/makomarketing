@@ -51,6 +51,22 @@ export function HeroSection() {
           </Magnetic>
         </motion.div>
       </div>
+
+      {/* Divider — a glowing hairline that separates the hero from the next
+          section: gradient line, soft bloom, and a bright centre point. */}
+      <motion.div
+        initial={{ opacity: 0, scaleX: 0.6 }}
+        animate={{ opacity: 1, scaleX: 1 }}
+        transition={{ duration: 1.1, delay: 1.1, ease: EASE }}
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex justify-center"
+      >
+        <div className="relative h-[3px] w-[97vw]">
+          {/* the line itself */}
+          <span className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-cyan/80 to-transparent" />
+          {/* soft bloom above the line */}
+          <span className="absolute inset-x-[12%] -top-[3px] h-[8px] rounded-full bg-cyan/25 blur-[10px]" />
+        </div>
+      </motion.div>
     </section>
   )
 }

@@ -7,10 +7,45 @@ import { UrgencyPill } from "@/components/urgency-pill"
 const SITE_URL = "https://www.makomarketing.ca"
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Blog | Marketing Guides for Service Businesses",
   description:
-    "Practical guides on Google Ads, Meta Ads, Google SEO, Local Service Ads, and web design for service-based businesses, from the Mako Marketing team.",
+    "Practical guides on Google Ads, Meta Ads, local SEO, Local Service Ads, lead follow-up, and web design for service-based businesses, from the Mako Marketing team.",
+  keywords: [
+    "marketing blog for service businesses",
+    "Google Ads guides",
+    "local SEO tips",
+    "Meta Ads guides",
+    "lead generation tips",
+    "contractor marketing",
+  ],
   alternates: { canonical: `${SITE_URL}/blog` },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}/blog`,
+    title: "The Mako Marketing Blog | Guides for Service Businesses",
+    description:
+      "Practical, no fluff guides on paid ads, SEO, and web design for service-based businesses.",
+  },
+}
+
+// Blog + ItemList structured data — helps search engines understand the blog
+// as a collection and index every article from the listing page.
+const blogJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": `${SITE_URL}/blog`,
+  name: "The Mako Marketing Blog",
+  description:
+    "Practical guides on Google Ads, Meta Ads, local SEO, and web design for service-based businesses.",
+  url: `${SITE_URL}/blog`,
+  publisher: { "@type": "Organization", name: "Mako Marketing", url: SITE_URL },
+  blogPost: blogPosts.map((post) => ({
+    "@type": "BlogPosting",
+    headline: post.title,
+    url: `${SITE_URL}/blog/${post.slug}`,
+    datePublished: post.date,
+    articleSection: post.category,
+  })),
 }
 
 function formatDate(iso: string) {
@@ -26,6 +61,10 @@ export default function BlogPage() {
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      />
       {/* Header */}
       <section className="relative overflow-hidden px-5 pt-32 md:px-8 md:pt-44">
         <div

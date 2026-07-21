@@ -194,7 +194,7 @@ export const blogPosts: BlogPost[] = [
       },
       { h2: "Why the map pack matters more than anything" },
       {
-        p: "Local search intent is about as high as it gets. A person searching electrician near me is not researching for fun. They need help and they are choosing from the options Google puts in front of them first. Studies consistently show that the top three map results earn the lion share of clicks and calls, and most people never scroll past them. That means ranking fourth is almost invisible. The goal of local SEO is not vague visibility. It is landing in those three spots for the searches that bring you paying customers, then defending that position against competitors who want it just as badly.",
+        p: "Local search intent is about as high as it gets. A person searching electrician near me is not researching for fun. They need help and they are choosing from the options Google puts in front of them first. Studies consistently show that the top three map results earn the lion’s share of clicks and calls, and most people never scroll past them. That means ranking fourth is almost invisible. The goal of local SEO is not vague visibility. It is landing in those three spots for the searches that bring you paying customers, then defending that position against competitors who want it just as badly.",
       },
       { h2: "Optimize your Google Business Profile relentlessly" },
       {
@@ -438,6 +438,296 @@ export const blogPosts: BlogPost[] = [
       { h2: "Build the system, not just the tactics" },
       {
         p: "Marketing that works is not a lucky channel or a clever tactic. It is a system where awareness, capture, conversion, and retention all reinforce each other, glued together by tracking that ties every dollar to revenue. Build that and your growth stops being random and starts becoming predictable and repeatable. Stop buying disconnected pieces and start building an engine. If you want a team to architect and run that entire system for your business, book a free audit and we will show you exactly where your funnel is leaking and how much more it could be producing.",
+      },
+    ],
+  },
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    slug: "how-much-does-google-ads-cost-canada",
+    category: "Google Ads",
+    title: "How Much Does Google Ads Cost in Canada? A Real-World Breakdown",
+    description:
+      "What Google Ads actually costs Canadian service businesses in 2026. Average cost per click by industry, realistic monthly budgets, management fees, and how to lower your cost per lead.",
+    excerpt:
+      "Every owner asks the same first question: what will this cost me? Here is a straight answer, with realistic budgets, cost per click ranges, and the levers that decide whether Google Ads is cheap or expensive for you.",
+    keywords: [
+      "Google Ads cost Canada",
+      "how much does Google Ads cost",
+      "Google Ads budget",
+      "cost per click Canada",
+      "Google Ads management fees",
+      "PPC cost for small business",
+    ],
+    date: "2026-03-18",
+    readMinutes: 8,
+    body: [
+      {
+        p: "Ask ten agencies what Google Ads costs and you will get ten vague answers. That is because the honest answer is that it depends, but it depends on things you can actually understand and control. Google Ads is an auction. You bid against other businesses for the same searches, so your cost is set by your market, your service, and how well your account is built. This guide gives Canadian service businesses a straight breakdown of what to expect: what a click costs, what a lead costs, what a sensible monthly budget looks like, and the levers that decide whether Google Ads is a bargain or a money pit for your business.",
+      },
+      { h2: "The auction decides your cost per click" },
+      {
+        p: "Every time someone searches, Google runs an instant auction between the advertisers who want that click. Your cost per click depends on how many competitors are bidding, how much a customer is worth in that industry, and how relevant Google judges your ad and landing page to be. That last part matters more than most owners realize. Google gives better placement at lower prices to advertisers whose ads actually answer the search, which is why two companies bidding on the same keyword can pay wildly different amounts for the same position. A well built account does not just perform better. It is literally charged less per click.",
+      },
+      { h2: "What clicks cost Canadian service businesses" },
+      {
+        p: "For most local service industries in Canada, clicks on high intent searches land somewhere between four and thirty dollars. Competitive, high ticket trades sit at the top of that range because a single job is worth thousands, so advertisers can afford to bid aggressively. Lower ticket services sit near the bottom. As a rough guide, plumbing, HVAC, roofing, and legal services tend to run expensive, electrical and renovation work sits in the middle, and cleaning or smaller repair services run cheaper. Big cities like Toronto and Vancouver cost more than smaller markets because more businesses are fighting over the same searches. None of these numbers should scare you on their own, because the click price only matters relative to what a customer is worth to you.",
+      },
+      {
+        ul: [
+          "High ticket trades: expect clicks in the teens to thirties",
+          "Mid range services: expect clicks in the single digits to low teens",
+          "Smaller markets cost less than Toronto and Vancouver",
+          "Better built accounts pay less for the same position",
+        ],
+      },
+      { h2: "Cost per lead is the number that actually matters" },
+      {
+        p: "Clicks do not pay your bills, leads do. The real question is what it costs to make your phone ring. If your landing page converts one visitor in ten and your clicks cost ten dollars, a lead costs you a hundred dollars. If your page converts one in four, that same lead costs forty. This is why two businesses spending the same budget see completely different results. The math also shows why the landing page is the cheapest place to fix an expensive account. Doubling your conversion rate cuts your cost per lead in half without changing a single bid. Judge every campaign by cost per booked job, not by what a click costs.",
+      },
+      { h2: "A realistic monthly budget to start with" },
+      {
+        p: "A budget has to be big enough to generate real data and real leads, or you learn nothing and book nothing. For most local service businesses in Canada, a sensible starting point is one to three thousand dollars per month in ad spend. Below that, expensive clicks eat the budget before patterns emerge, and the campaign never gets enough conversions for Google's bidding to optimize. Start at a level you can hold steady for ninety days, measure cost per lead honestly, then scale the campaigns that produce booked work. Businesses in cheaper markets or lower cost industries can start smaller, but if you cannot commit at least a thousand a month, fix your website and reviews first and come to ads later.",
+      },
+      { h2: "Management fees and what you get for them" },
+      {
+        p: "If you hire help, expect either a flat monthly fee or a percentage of ad spend, commonly ten to twenty percent. Good management pays for itself several times over, because the difference between a tuned account and a neglected one is routinely a two to three times difference in cost per lead. The warning signs are agencies that lock you into long contracts, hide the account from you, or report on clicks and impressions instead of leads and revenue. You should own your account, see every dollar of spend, and get reporting that ties ad spend to booked jobs. Pay for expertise, not for a monthly PDF of vanity metrics.",
+      },
+      { h2: "How to lower your cost per lead" },
+      {
+        p: "You cannot control the auction, but you control almost everything else. Tighten your keywords to high intent searches and pile up negative keywords so you stop paying for junk clicks. Improve your ad relevance so Google charges you less per click. Send traffic to a dedicated landing page instead of your homepage so more clicks become calls. Track every conversion so budget flows to the keywords that produce jobs rather than the ones that just produce traffic. Each of these levers compounds with the others, which is why a disciplined account can pay half as much per lead as a sloppy one in the exact same market, bidding on the exact same searches.",
+      },
+      {
+        ul: [
+          "Cut junk spend with tight keywords and a growing negative list",
+          "Raise ad relevance so Google charges you less per click",
+          "Send clicks to a focused landing page, never the homepage",
+          "Move budget to the keywords that produce booked jobs",
+        ],
+      },
+      { h2: "When Google Ads is worth it and when it is not" },
+      {
+        p: "Google Ads is worth it when the math works: when the value of a new customer comfortably exceeds what it costs to win one. For a business where an average job is worth six hundred dollars and a lead costs sixty, with half of leads booking, the account prints money. It is not worth it when your website cannot convert the traffic, when you cannot answer the phone fast enough to win the jobs, or when the budget is too small to gather data. Ads amplify what you already have. If the foundation converts, ads scale it. If the foundation leaks, ads just make the leak more expensive.",
+      },
+      { h2: "The bottom line on cost" },
+      {
+        p: "Expect four to thirty dollars per click depending on your trade and city, a starting budget of one to three thousand dollars a month, and a cost per lead that is decided mostly by the quality of your account and landing page rather than by the auction. Run the numbers against what a customer is worth to you and the decision usually makes itself. If you want to know exactly what your market costs and what your current setup would produce, book a free audit and we will pull the real numbers for your industry and your area, no guesswork involved.",
+      },
+    ],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    slug: "seo-vs-google-ads-service-businesses",
+    category: "Strategy",
+    title: "SEO vs Google Ads: Which Should a Service Business Invest In First?",
+    description:
+      "SEO or Google Ads for a service business? A practical comparison of speed, cost, durability, and intent, plus a simple framework for deciding where your next marketing dollar should go.",
+    excerpt:
+      "One brings leads this week and stops the moment you stop paying. The other takes months and then compounds for years. Here is how to decide where your next dollar goes.",
+    keywords: [
+      "SEO vs Google Ads",
+      "SEO or PPC",
+      "paid ads vs organic search",
+      "marketing budget allocation",
+      "SEO vs paid advertising for small business",
+      "when to invest in SEO",
+    ],
+    date: "2026-03-25",
+    readMinutes: 8,
+    body: [
+      {
+        p: "Every service business owner eventually faces the same fork in the road. There is a limited marketing budget, and two credible ways to spend it: Google Ads, which promises leads this week, or SEO, which promises a compounding stream of free leads somewhere down the line. Agencies that sell ads will tell you ads are the answer. Agencies that sell SEO will tell you the opposite. Both are being honest about the strengths of their product and quiet about its weaknesses. This guide lays out the real trade-offs, then gives you a simple framework for deciding which to fund first based on where your business actually is.",
+      },
+      { h2: "The core difference: renting attention vs owning it" },
+      {
+        p: "Google Ads is rented attention. You pay for every click, you appear at the top the day your campaign goes live, and the moment you pause the budget, the leads stop. SEO is owned attention. You invest months of work before results show, but once you rank, the clicks are free and they keep coming while you sleep. Neither model is better in the abstract. Renting is fast and flexible, owning is slow and durable. The mistake is treating them as rivals, because the businesses that dominate their local market almost always end up doing both. The real question is sequencing: which one deserves your next dollar today.",
+      },
+      { h2: "Speed: ads win, and it is not close" },
+      {
+        p: "If you need booked jobs this month, Google Ads is the only honest answer. A well built campaign can be live within days and generating calls within the first week. SEO cannot do that. Even aggressive local SEO usually takes three to six months before rankings move meaningfully, and competitive markets take longer. This is not a flaw in SEO, it is just how trust is built with a search engine. But it means SEO is a terrible tool for solving a cash flow problem. When the pipeline is empty and payroll is due, you rent attention first and build equity later.",
+      },
+      { h2: "Cost over time: SEO wins the long game" },
+      {
+        p: "Ads scale linearly. Twice the leads costs roughly twice the spend, forever. SEO front-loads its cost: you pay in content, optimization, and patience up front, and then each additional lead costs you almost nothing. Over a three year horizon, a strong map pack position and a set of ranking service pages will usually deliver the cheapest leads your business has ever seen. The compounding is real, and it also protects your margins: while competitors' ad costs creep up every year as auctions get more crowded, your organic leads stay free. If ads are a treadmill, SEO is a flywheel. Slow to spin up, expensive to stop once it is moving.",
+      },
+      {
+        ul: [
+          "Ads: cost per lead stays flat or rises as competition grows",
+          "SEO: cost per lead falls toward zero once rankings hold",
+          "Ads stop producing the day the budget stops",
+          "SEO keeps producing long after the work is done",
+        ],
+      },
+      { h2: "Intent and coverage: they catch different customers" },
+      {
+        p: "Here is what the either-or framing misses. Paid and organic results catch different people. Some searchers click the ads at the top. Many others deliberately skip them and trust only the map pack and organic listings. If you run ads alone, that second group never sees you. If you rank organically but run no ads, the first group books your competitor before scrolling down. Occupying both positions also compounds trust: seeing the same company in the ads, the map pack, and the organic results reads as market leadership, and click-through rates on all three rise together. Full coverage is not redundancy, it is dominance.",
+      },
+      { h2: "The framework: fund the stage you are in" },
+      {
+        p: "Sequencing comes down to your situation. If your pipeline is thin and you need revenue now, put your budget into Google Ads with a conversion focused landing page, and win booked jobs this month. If your pipeline is steady and you can invest with a six month horizon, start layering in local SEO, because every month you delay is a month your competitors' flywheel spins without you. If you are established and profitable, run both aggressively: use ads to defend the top of the page and to test which offers convert, then feed those learnings into the pages you rank organically. The channels teach each other.",
+      },
+      {
+        ul: [
+          "Empty pipeline: ads first, SEO when revenue stabilizes",
+          "Steady pipeline: keep ads running, start SEO now",
+          "Established: run both and let each sharpen the other",
+        ],
+      },
+      { h2: "The mistakes that waste money in both channels" },
+      {
+        p: "The most expensive mistake in ads is impatience with structure: throwing a broad campaign at a homepage and concluding ads do not work when the account was never built to convert. The most expensive mistake in SEO is impatience with time: paying for three months, seeing nothing move, and quitting exactly when the compounding was about to start. Both channels punish dabbling. Whichever you fund, commit to doing it properly for at least a quarter with real tracking in place, so the decision to continue or cut is based on cost per booked job rather than on feelings.",
+      },
+      { h2: "The answer is a sequence, not a side" },
+      {
+        p: "SEO versus Google Ads is the wrong question. The right question is which one your business needs first, and the answer follows from your pipeline: ads for speed, SEO for compounding, and eventually both for coverage that crowds competitors off the page. Fund the stage you are in, track everything back to booked revenue, and reinvest what works. If you want a straight answer for your specific market, book a free audit and we will show you what your competitors are spending, where they rank, and exactly which gap is cheapest for you to attack first.",
+      },
+    ],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    slug: "how-to-get-more-google-reviews",
+    category: "SEO",
+    title: "How to Get More Google Reviews: A System for Service Businesses",
+    description:
+      "A repeatable system for getting more 5-star Google reviews. When to ask, how to make it effortless, responding to negative reviews, and the tactics that get businesses penalized.",
+    excerpt:
+      "Reviews decide who gets the call before your phone ever rings. Here is a repeatable system for earning a steady stream of 5-star Google reviews without begging, bribing, or breaking the rules.",
+    keywords: [
+      "how to get more Google reviews",
+      "Google review strategy",
+      "get 5 star reviews",
+      "respond to negative reviews",
+      "review generation for service businesses",
+      "Google Business Profile reviews",
+    ],
+    date: "2026-04-01",
+    readMinutes: 8,
+    body: [
+      {
+        p: "Before a potential customer ever calls you, they have already judged you. They searched, they saw three or four local companies, and they compared two numbers: your star rating and your review count. That comparison decides who gets the call, and it happens hundreds of times a month whether you participate or not. Reviews are also one of the strongest ranking signals in local search, which means the business with the best review engine gets seen more and chosen more at the same time. The good news is that a steady stream of five star reviews is not luck. It is a system, and this guide shows you how to build it.",
+      },
+      { h2: "Why reviews are your highest leverage marketing asset" },
+      {
+        p: "Reviews do two jobs at once. First, they move rankings: Google openly factors review quantity, quality, and recency into who appears in the map pack, so a business collecting reviews every week steadily climbs above one whose newest review is eight months old. Second, they close deals before you ever speak: a 4.9 rating with two hundred reviews does not just look better than a 4.4 with thirty, it removes the fear that stops a homeowner from calling a company they have never heard of. No ad budget can buy that trust. Every review you earn works for you around the clock, for free, forever.",
+      },
+      { h2: "Ask at the moment of peak happiness" },
+      {
+        p: "Timing beats technique. The best moment to ask for a review is the moment the customer is happiest, which is almost always right when the job wraps up and they are looking at the result. Ask in person, on site, while the relief and gratitude are real. A simple script works: mention that reviews are how a small business like yours gets found, and ask if they would mind sharing their experience. Most happy customers say yes and then forget, which is why the in person ask must be followed by a link within the hour. Ask a week later by email and the moment, and the review, is gone.",
+      },
+      { h2: "Make leaving a review effortless" },
+      {
+        p: "Every step between wanting to leave a review and actually publishing one loses people. Your job is to remove all of them. Google provides a direct review link for your Business Profile that opens straight to the five star prompt. Put that link in a text message you send before you leave the driveway. Put it behind a QR code on your invoice, your business card, and the sticker you leave on the furnace. The customer should go from tapping your link to a published review in under a minute, on their phone, without searching for your business or creating anything.",
+      },
+      {
+        ul: [
+          "Text the direct review link before you leave the job site",
+          "Put a QR code on invoices, cards, and leave-behinds",
+          "One tap to the review box, no searching required",
+          "Follow up once, two days later, if nothing was posted",
+        ],
+      },
+      { h2: "Build it into the job, not onto it" },
+      {
+        p: "Systems beat intentions. If reviews depend on someone remembering to ask, they stop the first busy week. Make the review request a standard step of closing every job, the same as collecting payment. Whoever finishes the work sends the review text before marking the job complete. If you use job management software, automate the message so it fires when the invoice is paid. Then track it weekly: jobs completed versus reviews requested versus reviews received. When the numbers are visible, the habit sticks, and a business finishing forty jobs a month turns into a business adding ten or more reviews a month, every month, on autopilot.",
+      },
+      { h2: "Respond to every review, especially the bad ones" },
+      {
+        p: "A review page where the owner responds thoughtfully to everything reads as a business that cares. Thank people specifically, mention the job, and keep it short. Negative reviews deserve extra care, because you are not really writing to the angry customer, you are writing to the hundred future customers who will read the exchange. Stay calm, acknowledge the experience, state what you did or will do to fix it, and take the details offline. A professional response to a bad review often builds more trust than another five star rating, because it shows how you behave when something goes wrong, which is exactly what a nervous homeowner wants to know.",
+      },
+      { h2: "The shortcuts that get you penalized" },
+      {
+        p: "Some tactics feel clever and end in disaster. Buying reviews, having staff and family post as customers, or setting up a kiosk that filters unhappy customers away from Google are all against Google's policies, and enforcement has real teeth: filtered reviews, warning banners on your profile, or removal from the map pack entirely. Review gating, where you survey customers first and only ask the happy ones for a public review, is specifically prohibited. The irony is that the honest system outperforms the shortcuts anyway. A natural flow of real reviews, including the occasional imperfect one, ranks better and converts better than a suspiciously flawless wall of five stars.",
+      },
+      {
+        ul: [
+          "Never buy reviews or post them from staff accounts",
+          "Never gate: ask every customer, not just the happy ones",
+          "Never offer discounts or gifts in exchange for reviews",
+          "Do report fake competitor reviews through your profile",
+        ],
+      },
+      { h2: "Turn reviews into marketing everywhere else" },
+      {
+        p: "A great review is an asset that should not live only on your profile. Pull your best quotes onto your website next to your calls to action, where they answer objections at the exact moment of decision. Turn detailed reviews into social posts and ad creative, because a customer's words outsell your own every time. Mention your rating and count in your ads: five stars from two hundred customers is a headline that stops a scroll. The review engine you build feeds every other channel you run, which is what makes it the single highest leverage habit a local service business can develop.",
+      },
+      { h2: "Start this week" },
+      {
+        p: "You do not need software or a consultant to start. This week: generate your direct review link, save the request text on every technician's phone, add the QR code to your invoice template, and make the ask a required step of job completion. Do that consistently and in six months your profile will out-rank and out-convert competitors who have been in business twice as long. If you want the whole local engine built for you, from reviews to rankings to the website that converts them, book a free audit and we will show you exactly where you stand against your market today.",
+      },
+    ],
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    slug: "speed-to-lead-follow-up-system",
+    category: "Lead Generation",
+    title: "Speed to Lead: Why Fast Follow-Up Wins Jobs and Slow Replies Lose Them",
+    description:
+      "Most service businesses lose jobs in the gap between the lead coming in and the first reply. How to respond in minutes, rescue missed calls, and build a follow-up system that books more of the leads you already pay for.",
+    excerpt:
+      "The most expensive leak in your marketing is not the ad account, it is the hour that passes before someone answers the lead. Here is how to build follow-up that wins the job by being first.",
+    keywords: [
+      "speed to lead",
+      "lead follow up system",
+      "lead response time",
+      "missed call text back",
+      "convert more leads",
+      "sales follow up for service businesses",
+    ],
+    date: "2026-04-08",
+    readMinutes: 8,
+    body: [
+      {
+        p: "Here is an uncomfortable experiment. Fill out the contact form on your own website, or call your own business line on a busy weekday afternoon, and time how long it takes to get a response. For most service businesses the honest answer is hours, sometimes days, occasionally never. Now consider what you paid to generate that lead: the ad spend, the website, the SEO. All of it gets burned in the gap between the lead arriving and a human replying. Speed to lead is the least glamorous part of marketing and the single fastest way most businesses can book more jobs without spending another dollar on ads.",
+      },
+      { h2: "The brutal math of response time" },
+      {
+        p: "When a homeowner submits a form or calls about a job, they are at their moment of maximum motivation. The tap is leaking now, the panel is buzzing now. Research on lead response has shown the same pattern for years: contacting a lead within five minutes makes you dramatically more likely to reach them and win the work than responding even thirty minutes later, and the odds keep collapsing with every hour that passes. The reason is simple. They did not only contact you. The average homeowner contacts two or three companies, and in most cases the job goes to whoever answers first, not whoever is best.",
+      },
+      { h2: "You are not competing on quality yet, only on presence" },
+      {
+        p: "Owners hate hearing this, but at the moment of first contact the customer cannot judge your workmanship. They can only judge who picked up, who sounded professional, and who could come look at the job. Being the best electrician in the city means nothing if the customer booked the third best one an hour before you called back. The encouraging flip side: a disciplined follow-up system lets a good company consistently beat better known competitors, because presence at the moment of intent beats reputation that arrives late. First to respond frames the conversation, sets the expectation, and usually takes the booking off the market.",
+      },
+      { h2: "Answer the phone, and rescue the calls you miss" },
+      {
+        p: "For service businesses the phone is still where the money is, and every missed call during business hours is a lead you already paid for slipping away. Track your missed call rate for one week and most owners are shocked. You cannot answer everything from a job site, which is why the missed call text back is the highest value automation in the industry: the moment a call goes unanswered, the caller instantly receives a text saying you saw their call and asking about the job. That one message keeps you in the running, because the customer now has a live conversation with you instead of a dial tone and a reason to call the next company on the list.",
+      },
+      {
+        ul: [
+          "Track your missed call rate for one honest week",
+          "Auto-text every missed call within seconds",
+          "Ask one question about the job to start the conversation",
+          "Route after-hours calls to a text flow, not voicemail",
+        ],
+      },
+      { h2: "Reply to forms in minutes, not business days" },
+      {
+        p: "Web form leads deserve the same urgency as calls, and they almost never get it. The fix is a two part response. First, an instant automated text and email confirming you received the request and telling them a human is on it, which stops them from immediately filling out a competitor's form. Second, a real call or text from your team within minutes during business hours. Put form notifications somewhere someone actually watches, not in an inbox that gets checked at dinner. If you take one action from this article, make it this: measure the time from form submission to first human touch, and get that number under five minutes.",
+      },
+      { h2: "Most jobs are won in the follow-up, not the first touch" },
+      {
+        p: "Even with a fast first response, many leads will not answer, and this is where most businesses quietly give up. One voicemail, then silence. But a lead that does not answer is not a dead lead, it is a busy homeowner. The businesses that book the most work follow a simple cadence over the following week: a call and a text the first day, another touch the next day, then spaced attempts mixing calls, texts, and a short email. Persistence does not feel pushy when each message is short, helpful, and easy to reply to. Half the battle is simply still being there when the customer finally has a free moment.",
+      },
+      {
+        ul: [
+          "Day one: call, then text if no answer",
+          "Day two: second call at a different time of day",
+          "Days three to seven: spaced texts and one short email",
+          "Always reference the specific job they asked about",
+        ],
+      },
+      { h2: "Automate the safety net, keep the human touch" },
+      {
+        p: "The goal of automation is not to remove people from your sales process, it is to guarantee that no lead ever falls through a crack while everyone is busy. Instant acknowledgments, missed call text backs, and scheduled follow-up reminders are the safety net. The actual selling, the quote, the reassurance, the scheduling, still comes from a human who knows the trade. Businesses that automate everything sound like robots and lose trust. Businesses that automate nothing lose leads every single day to simple forgetfulness. The winning setup is automated speed wrapped around genuine human conversation.",
+      },
+      { h2: "Measure it like you measure your ad spend" },
+      {
+        p: "You track what your leads cost. Track what happens to them with the same seriousness. Three numbers tell the whole story: average time to first response, the percentage of leads that get a conversation, and the percentage that book. Review them weekly. When owners see that leads answered in five minutes book at multiples of the rate of leads answered in three hours, the culture around the phone changes fast. This is also the lens for judging your marketing fairly: an ad campaign is not underperforming if half its leads were never called back.",
+      },
+      { h2: "The cheapest growth you will ever buy" },
+      {
+        p: "Before you spend another dollar generating more leads, tighten your grip on the ones you already get. Answer in minutes, rescue missed calls automatically, follow up for a full week, and measure all of it. For most service businesses this is worth more booked jobs than a budget increase, because it converts spend you have already committed. If you want us to find exactly where your leads are leaking, book a free audit and we will trace the full journey from click to booked job and show you what fixing the gaps is worth in real revenue.",
       },
     ],
   },

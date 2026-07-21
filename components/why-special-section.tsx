@@ -69,29 +69,13 @@ export function WhySpecialSection() {
   return (
     <section
       id="why"
-      className="relative overflow-hidden bg-transparent py-24 md:py-32"
+      className="relative overflow-hidden bg-transparent py-32 md:py-44"
     >
       <div className="pointer-events-none absolute left-1/2 top-24 h-[55vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(20,228,254,0.10),transparent_70%)] blur-[130px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8">
         {/* Intro — centred so the section opens with one clear focal point. */}
-        <SectionHeading
-          sub={
-            <>
-              Most agencies hand you a pretty website and vanish. We don&rsquo;t.
-              We engineer{" "}
-              <span className="font-medium text-near-white">
-                Google Ads, Meta Ads, SEO, and high converting websites
-              </span>{" "}
-              built to do one thing:{" "}
-              <span className="font-medium text-near-white">
-                generate revenue you can actually count
-              </span>
-              . We take on a select few businesses and attack their growth like
-              our own money is on the line.
-            </>
-          }
-        >
+        <SectionHeading>
           Why <span className="text-cyan-gradient">Mako Marketing?</span>
         </SectionHeading>
 

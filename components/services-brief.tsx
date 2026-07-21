@@ -77,7 +77,7 @@ export function ServicesBrief() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden bg-transparent py-24 md:py-32"
+      className="relative overflow-hidden bg-transparent pb-24 pt-32 md:pb-32 md:pt-44"
     >
       <div className="bg-grid bg-grid-fade pointer-events-none absolute inset-0 opacity-50" />
 

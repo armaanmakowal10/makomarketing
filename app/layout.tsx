@@ -134,6 +134,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${ibmPlexSans.variable}`}>
       <body className="font-sans antialiased">
+        {/* The intro overlay and header brand paint this via CSS background-image,
+            which the preload scanner can't see — preload it so the logo reveal
+            never flashes in late. */}
+        <link rel="preload" as="image" href="/mako-logo-equal.png" />
         {/* Land on the hero on every load/reload — never restore prior scroll. */}
         <script
           dangerouslySetInnerHTML={{

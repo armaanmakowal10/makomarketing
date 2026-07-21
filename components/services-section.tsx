@@ -1285,7 +1285,7 @@ const services: Service[] = [
     tag: "Automation",
     headline: "Capture every lead and close more on autopilot",
     description:
-      "Most businesses quietly bleed money from leads that slip through the cracks. We build custom pipelines and automations that catch every enquiry, follow up in seconds, and drag more deals over the line without you lifting a finger. Nothing gets forgotten, nothing gets lost, everything gets closed.",
+      "Most businesses quietly bleed money from leads that slip through the cracks. We build custom pipelines and automations that catch every inquiry, follow up in seconds, and drag more deals over the line without you lifting a finger. Nothing gets forgotten, nothing gets lost, everything gets closed.",
     features: [
       "Custom sales pipelines",
       "Instant lead capture",
@@ -1473,7 +1473,7 @@ export function ServicesSection() {
 
           {/* Trust chips */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-near-white/60 md:text-sm">
-            {["Free 20 min call", "No contracts", "No obligations"].map((t) => (
+            {["Free 30 min call", "No contracts", "No obligations"].map((t) => (
               <span key={t} className="flex items-center gap-1.5">
                 <Check className="size-4 text-cyan" />
                 {t}

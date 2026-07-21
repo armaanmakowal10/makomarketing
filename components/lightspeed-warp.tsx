@@ -19,9 +19,9 @@ const Z_NEAR = 1
 const Z_FAR = 1400
 const DRIFT_SPEED = 30 // z-units/sec — calm starfield drifts behind the held logo
 const PEAK_SPEED = 2600 // z-units/sec — full radial streaks
-const DRIFT_MS = 480 // gentle lead-in so the warp grows out of the logo
-const JUMP_MS = 1350 // cinematic but snappy acceleration
-const FLASH_MS = 520
+const DRIFT_MS = 750 // gentle lead-in so the warp grows out of the logo
+const JUMP_MS = 2900 // longer, cinematic acceleration deep into hyperspace
+const BLOOM_MS = 1000 // soft cyan light-bloom climax (replaces the white flash)
 const CANVAS_FADE_MS = 480 // starfield materialises behind the logo (no pop)
 const LOGO_SCALE_TO = 1.15
 const STREAK_JITTER = 0.35
@@ -146,7 +146,11 @@ export function LightspeedWarp({
         pyArr[i] = sy
       }
 
-      flash!.style.opacity = String(state.flash)
+      // The climax is a soft cyan bloom swelling out of the vanishing point:
+      // brighten (opacity) and grow (scale) together as the field maxes out.
+      const f = state.flash
+      flash!.style.opacity = String(f)
+      flash!.style.transform = `translate(-50%, -50%) scale(${0.5 + f * 1.15})`
     }
 
     let raf = 0
@@ -202,10 +206,11 @@ export function LightspeedWarp({
         accelTl.to(logo, { opacity: 0, duration: ACCEL_S * 0.6, ease: "sine.in" }, ACCEL_S * 0.4)
       }
 
-      // Flash — a smooth bell rounding off at the peak as speed maxes out; the
-      // white-out then dissipates via the overlay's crossfade exit (IntroOverlay).
-      accelTl.to(state, { flash: 1, duration: FLASH_MS / 1000, ease: "power2.out" }, ACCEL_S - 0.12)
-      accelTl.to({}, { duration: 0.12 }) // brief hold at white before handoff
+      // Climax — a soft cyan light-bloom swells out of the vanishing point as
+      // the streaks max out, then dissipates via the overlay's crossfade exit
+      // (IntroOverlay). A gentle inOut swell reads as light, not a camera flash.
+      accelTl.to(state, { flash: 1, duration: BLOOM_MS / 1000, ease: "power2.inOut" }, ACCEL_S - 0.45)
+      accelTl.to({}, { duration: 0.18 }) // brief hold at full bloom before handoff
     }
 
     return () => {
@@ -233,14 +238,22 @@ export function LightspeedWarp({
         className="absolute inset-0 block"
         style={{ zIndex: 0 }}
       />
+      {/* Cyan light-bloom climax — a centered, soft-edged glow that swells out
+          of the vanishing point (scaled from the render loop). Transparent edges
+          keep it a bloom of light rather than a hard white-out. */}
       <div
         ref={flashRef}
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute left-1/2 top-1/2"
         style={{
           zIndex: 20,
           opacity: 0,
+          width: "175vmax",
+          height: "175vmax",
+          borderRadius: "50%",
+          transform: "translate(-50%, -50%) scale(0.5)",
           background:
-            "radial-gradient(circle at center, rgba(235,253,255,1) 0%, rgba(154,243,255,1) 38%, rgba(20,228,254,1) 100%)",
+            "radial-gradient(circle at center, rgba(226,252,255,0.95) 0%, rgba(92,240,255,0.72) 24%, rgba(20,228,254,0.34) 48%, rgba(20,228,254,0.08) 66%, transparent 76%)",
+          filter: "blur(3px)",
         }}
       />
     </>

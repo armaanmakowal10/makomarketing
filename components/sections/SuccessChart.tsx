@@ -56,15 +56,8 @@ export function SuccessChart() {
   )
 
   return (
-    <div className="mt-40 md:mt-56">
-      <div className="mx-auto max-w-xl text-center">
-        <h3 className="text-display text-[clamp(1.6rem,3.6vw,2.5rem)] leading-tight text-near-white">
-          What Could Your Ad Spend{" "}
-          <span className="text-cyan-gradient">Return?</span>
-        </h3>
-      </div>
-
-      <div className="mt-8 rounded-2xl border border-line bg-surface-1/30 p-4 sm:p-6 md:p-8">
+    <div className="mt-24 md:mt-32">
+      <div className="rounded-2xl border border-line bg-surface-1/30 p-4 sm:p-6 md:p-8">
         {/* ── Live results ── */}
         <p className="text-display mb-5 text-center text-2xl font-bold uppercase tracking-wide text-near-white/65 sm:text-3xl">
           Your Projected Results at {fmtSpend(spend)}/mo in Ad Spend

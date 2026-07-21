@@ -22,12 +22,8 @@ const STATIC_BG_ROUTES = new Set(["/privacy-policy", "/terms"])
 const SLOW_BG_ROUTES = new Set(["/services"])
 const SLOW_FACTOR = 0.35
 
-// Subtle layered glow used behind the static pages — soft cyan from the top,
-// a faint lift at the bottom, over pure black.
-const SUBTLE_BG =
-  "radial-gradient(75% 55% at 50% 12%, rgba(20,228,254,0.09), transparent 70%)," +
-  "radial-gradient(100% 80% at 50% 112%, rgba(20,228,254,0.05), transparent 65%)," +
-  "#000"
+// Static pages sit on pure black — no ambient glow.
+const SUBTLE_BG = "#000"
 
 // Deterministic PRNG so the frozen starfield is identical on server and client
 // (no Math.random → no hydration mismatch).
@@ -109,10 +105,7 @@ export function AnimatedBackground() {
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(60% 50% at 50% 30%, rgba(20,228,254,0.10), transparent 70%), #000",
-        }}
+        style={{ background: "#000" }}
       />
     )
   }
@@ -121,12 +114,9 @@ export function AnimatedBackground() {
     <div
       aria-hidden
       className="pointer-events-none fixed inset-0 -z-10"
-      // Base gradient shows instantly and underneath, so there's never a black
+      // Pure black base shows instantly and underneath, so there's never a
       // flash while the WebGL chunk streams in.
-      style={{
-        background:
-          "radial-gradient(60% 50% at 50% 30%, rgba(20,228,254,0.10), transparent 70%), #000",
-      }}
+      style={{ background: "#000" }}
     >
       <WebGLBackground speed={speed} lite={lite} />
     </div>

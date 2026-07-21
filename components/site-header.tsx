@@ -13,6 +13,7 @@ const PHONE_TEL = "tel:9052605457"
 
 const menuLinks = [
   { href: "/", label: "Home" },
+  { href: "/our-success", label: "Our Success" },
   { href: "/services", label: "Services" },
   { href: "/process", label: "Our Process" },
   { href: "/blog", label: "Blog" },
